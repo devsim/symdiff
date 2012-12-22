@@ -1,0 +1,254 @@
+/***
+Copyright 2012 Devsim LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+***/
+
+#include "TclSymdiffCommands.hh"
+
+#include "EquationFunctions.hh"
+#include "Context.hh"
+#include "SubExpr.hh"
+#include "ProcessModelOrder.hh"
+
+#include <sstream>
+#include <tcl.h>
+
+///// TODO: ClientData for command name
+namespace dsTcl {
+
+/**
+Takes one argument, which is the command to evaluate
+*/
+int 
+symdiffCmd(ClientData clientData, Tcl_Interp *interp,
+          int objc, Tcl_Obj *CONST objv[])
+{
+  int error = TCL_OK;
+
+  std::string errorString;
+  dsHelper::ret_pair result = std::make_pair(false, errorString);
+
+  if (objc == 2)
+  {
+    const std::string &expr = Tcl_GetStringFromObj(objv[1], NULL);
+    result = dsHelper::SymdiffEval(expr);
+
+    if (!result.first)
+    {
+      errorString += result.second;
+    }
+
+  }
+  else
+  {
+    errorString += "Command takes only 1 argument.";
+  }
+
+
+  if (!errorString.empty())
+  {
+    std::ostringstream os;
+    os << "While calling symdiff interpreter\n";
+    errorString = os.str() + errorString;
+    error = TCL_ERROR;
+    Tcl_SetResult(interp, const_cast<char *>(errorString.c_str()), TCL_VOLATILE);
+  }
+  else
+  {
+    Tcl_SetResult(interp, const_cast<char *>(result.second.c_str()), TCL_VOLATILE);
+  }
+
+  return error;
+}
+
+
+int
+modelListCmd(ClientData clientData, Tcl_Interp *interp,
+          int objc, Tcl_Obj *CONST objv[])
+{
+  int error = TCL_OK;
+
+  std::string errorString;
+  dsHelper::ret_pair result = std::make_pair(false, errorString);
+
+  if (objc == 1)
+  {
+    Tcl_Obj *obj = Tcl_NewObj();
+    const ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+    for (ModelMap_t::const_iterator it = model_list.begin(); it != model_list.end(); ++it)
+    {
+      const std::string &model_name = (it->first);
+      Tcl_Obj *subobj = Tcl_NewStringObj(model_name.c_str(), -1);
+      Tcl_ListObjAppendElement(interp, obj, subobj);
+    }
+    Tcl_SetObjResult(interp, obj);
+  }
+  else
+  {
+    errorString += "Command takes no arguments.";
+  }
+
+
+  if (!errorString.empty())
+  {
+    std::ostringstream os;
+    os << "While calling symdiff interpreter\n";
+    errorString = os.str() + errorString;
+    error = TCL_ERROR;
+    Tcl_SetResult(interp, const_cast<char *>(errorString.c_str()), TCL_VOLATILE);
+  }
+
+  return error;
+}
+
+int
+subexpressionCmd(ClientData clientData, Tcl_Interp *interp,
+          int objc, Tcl_Obj *CONST objv[])
+{
+  int error = TCL_OK;
+
+  std::string errorString;
+  dsHelper::ret_pair result = std::make_pair(false, errorString);
+
+  if (objc == 1)
+  {
+    SubExpr subexpr;
+    ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+    subexpr.CreateSubexpressions(model_list);
+    errorString = subexpr.GetErrorString();
+#if  0
+    if (errorString.empty())
+    {
+      subexpr.RemoveZeros(model_list);
+    }
+#endif
+  }
+  else
+  {
+    errorString += "Command takes no arguments.";
+  }
+
+
+  if (!errorString.empty())
+  {
+    std::ostringstream os;
+    os << "While calling symdiff interpreter\n";
+    errorString = os.str() + errorString;
+    error = TCL_ERROR;
+    Tcl_SetResult(interp, const_cast<char *>(errorString.c_str()), TCL_VOLATILE);
+  }
+
+  return error;
+}
+
+int
+removeZerosCmd(ClientData clientData, Tcl_Interp *interp,
+          int objc, Tcl_Obj *CONST objv[])
+{
+  int error = TCL_OK;
+
+  std::string errorString;
+  dsHelper::ret_pair result = std::make_pair(false, errorString);
+
+  if (objc == 1)
+  {
+    SubExpr subexpr;
+    ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+    subexpr.RemoveZeros(model_list);
+  }
+  else
+  {
+    errorString += "Command takes no arguments.";
+  }
+
+
+  if (!errorString.empty())
+  {
+    std::ostringstream os;
+    os << "While calling symdiff interpreter\n";
+    errorString = os.str() + errorString;
+    error = TCL_ERROR;
+    Tcl_SetResult(interp, const_cast<char *>(errorString.c_str()), TCL_VOLATILE);
+  }
+
+  return error;
+}
+
+int
+orderedListCmd(ClientData clientData, Tcl_Interp *interp,
+          int objc, Tcl_Obj *CONST objv[])
+{
+  int error = TCL_OK;
+
+  std::string errorString;
+
+  if (objc > 1)
+  {
+    ModelNameVector_t model_vector_in(objc - 1);
+
+    for (size_t i = 1; i < static_cast<size_t>(objc); ++i)
+    {
+      const std::string &model_name = Tcl_GetStringFromObj(objv[i], NULL);
+      model_vector_in[i-1] = model_name;
+    }
+
+    ProcessModelOrder process;
+    const ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+
+    const ModelNameVector_t &model_vector_out = process.GetModelVector(model_list, model_vector_in);
+
+    errorString = process.GetErrorString();
+
+    if (errorString.empty())
+    {
+      Tcl_Obj *obj = Tcl_NewObj();
+      for (ModelNameVector_t::const_iterator it = model_vector_out.begin(); it != model_vector_out.end(); ++it)
+      {
+        const std::string &model_name = *it;
+        Tcl_Obj *subobj = Tcl_NewStringObj(model_name.c_str(), -1);
+        Tcl_ListObjAppendElement(interp, obj, subobj);
+      }
+      Tcl_SetObjResult(interp, obj);
+    }
+  }
+  else
+  {
+    errorString += "Command takes at least one argument.";
+  }
+
+
+  if (!errorString.empty())
+  {
+    std::ostringstream os;
+    os << "While calling symdiff interpreter\n";
+    errorString = os.str() + errorString;
+    error = TCL_ERROR;
+    Tcl_SetResult(interp, const_cast<char *>(errorString.c_str()), TCL_VOLATILE);
+  }
+
+  return error;
+}
+
+Commands TclSymdiffCommands[] = {
+    {"symdiff",    symdiffCmd},
+    {"model_list", modelListCmd},
+    {"subexpression", subexpressionCmd},
+    {"ordered_list", orderedListCmd},
+    {"remove_zeros", removeZerosCmd},
+    {NULL, NULL}
+};
+
+}
+
+
