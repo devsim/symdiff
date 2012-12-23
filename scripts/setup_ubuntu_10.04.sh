@@ -6,8 +6,8 @@ CC="/usr/bin/gcc"
 TCL_ARCHIVE="/usr/lib/libtclstub.a"
 TCL_INCLUDE="/usr/include/tcl8.5"
 TCL_BIN="/usr/bin/tclsh8.5"
-PYTHON_ARCHIVE="/usr/lib/libpython2.7.so"
-PYTHON_INCLUDE="/usr/include/python2.7"
+PYTHON_ARCHIVE="/usr/lib/libpython2.6.so"
+PYTHON_INCLUDE="/usr/include/python2.6"
 PYTHON_BIN="/usr/bin/python"
 for TYPE in debug release; do
 ARCH=`uname -m`

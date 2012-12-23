@@ -2,29 +2,47 @@ Build packages required:
 cmake g++ flex bison python tcl
 
 C++ requirements:
-The compiler needs to support the TR1 extensions (e.g. shared_ptr<>).  This program compiles successfully with g++ 4.2.1 on Mac OS X.  Older compilers may need the appropriate boost implementations from http://www.boost.org.
+The compiler needs to support the TR1 extensions (e.g. shared_ptr<>).  
+This program compiles successfully with g++ 4.2.1 on Mac OS X.  Older 
+compilers may need the appropriate boost implementations from 
+http://www.boost.org.
 
 Python Requirements:
-A version of Python 2.7.3 is recommended.  However, this software should compile and link against previous versions of this software.  This tool has not been tested on Python 3.  Due to Python API inconsitencies, please compile Symdiff for your specific system.  Currently tests are written for Python 2.6, but may use Python 2.7.3 language features.
+A version of Python 2.7.3 is recommended.  However, this software 
+should compile and link against previous versions of this software.  
+This tool has not been tested on Python 3.  Due to Python API 
+inconsistencies, please compile Symdiff for your specific system.  
+Currently tests are written for Python 2.6, but may use Python 2.7.3 
+language features in the future.
 
 Tcl Requirements:
-Any version of Tcl of 8.4 and above should work.  In principle, Symdiff libraries may be used across Tcl versions, because of the consistent API.  Currently tests are written for Tcl 8.5.
+Any version of Tcl of 8.4 and above should work.  In principle, Symdiff 
+libraries may be used across Tcl versions, because of the consistent 
+API.  Currently tests are written for Tcl 8.5.
 
 Mac OS X:
 Mac OS X developer tools are required.
-Modify scripts/setup_apple.sh as necessary for your configuration and run from the base directory of this project.
+Modify scripts/setup_apple.sh as necessary for your configuration and 
+run from the base directory of this project.
+The file scripts/setup_osx_10.6.8.sh is also available for OS X version 
+10.6.8.  Use "sw_vers -productVersion" to determine your OS X version.
 cd osx_release
 make -j2
 
 Linux:
-Modify scripts/setup_linux.sh as necessary for your configuration and run from the base directory of this project.
+Modify scripts/setup_linux.sh as necessary for your configuration and 
+run from the base directory of this project.  Ubuntu scripts are 
+available for the last two LTS releases:
+scripts/setup_ubuntu_10.04.sh
+scripts/setup_ubuntu_12.04.sh
 
 Then go into the appropriate directory to build:
 cd linux_x86_64_release
 make -j2
 
 Windows:
-Windows is not set up for the new cmake configuration.  In principle it should work.
+Windows is not set up for the new cmake configuration, so modifications 
+will need to be made to get this to work.
 
 Running the tests:
 make test
@@ -33,9 +51,11 @@ To run on your scripts go into the bin directory
 symdiff for python
 symdiff_tcl for tclsh
 
-These set up the appropriate environment for loading SYMDIFF into your intepreter.
+These set up the appropriate environment for loading SYMDIFF into your 
+intepreter.
 
-Documentation is in the doc directory.  Examples are in the examples and testing directory.
+Documentation is in the doc directory.  Examples are in the examples 
+and testing directory.
 
 
 
