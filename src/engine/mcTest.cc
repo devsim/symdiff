@@ -36,11 +36,6 @@ using std::ostringstream;
 using std::ofstream;
 using std::string;
 
-enum {EQNNUMBER = 0, ISGROUND, SOLUTION, MODEL, RHSEVAL, DERIV, MATRIX};
-
-namespace {
-std::list<std::string> TotalNodeList;
-}
 void dsAssert_(bool x, const std::string &msg)
 {
     if (!x)

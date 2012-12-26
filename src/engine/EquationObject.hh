@@ -213,6 +213,12 @@ EqUnaryFuncPtr getUnaryFuncPtr(std::string);
 /// Print help
 EqObjPtr printHelp();
 
+/// how we print things
+inline std::ostream & operator<< (std::ostream &os, EqObjPtr foo)
+{
+   os << foo->stringValue();
+   return os;
+}
 
 
 }/* end namespace Eqo */

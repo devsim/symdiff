@@ -195,13 +195,6 @@ inline EqObjPtr reciprocal_sqrt(EqObjPtr x)
     return EqObjPtr(pow(x, con(-0.5)));
 }
 
-/// how we print things
-inline std::ostream & operator<< (std::ostream &os, EqObjPtr foo)
-{
-   os << foo->stringValue();
-   return os;
-}
-
 /// keeps simplifying expression until string value doesn't change
 inline EqObjPtr Simplify(EqObjPtr x)
 {

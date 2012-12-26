@@ -24,13 +24,13 @@ ENDIF (WIN32)
 
 ENABLE_TESTING()
 
-SET (TCLTESTS symdiff1 symdiff2 symdiff3 symdiff4 arrhenius_tcl units)
+SET (TCLTESTS parsetest_tcl symdiff1 symdiff2 symdiff3 symdiff4 arrhenius_tcl units)
 FOREACH(I ${TCLTESTS})
 ADD_TEST("${I}" ${RUNDIFFTEST} "${TCLCOMP} < ${RUNDIR}/${I}.tcl" ${GOLDENDIR} ${I}.out ${RUNDIR} ${OUTPUTDIR})
 ENDFOREACH(I)
 
 SET (EXAMPLES_DIR ${PROJECT_SOURCE_DIR}/examples)
-SET (PYTHONTESTS arrhenius modellist1 ordered remove1 subexpression1 undefined1 utf8)
+SET (PYTHONTESTS parsetest deftest arrhenius modellist1 ordered remove1 subexpression1 undefined1 utf8)
 FOREACH(I ${PYTHONTESTS})
 ADD_TEST("${I}_py" ${RUNDIFFTEST} "${PYTHONCOMP} < ${EXAMPLES_DIR}/${I}.py" ${GOLDENDIR} ${I}_py.out ${EXAMPLES_DIR} ${OUTPUTDIR})
 ENDFOREACH(I)

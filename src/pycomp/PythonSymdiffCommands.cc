@@ -26,6 +26,10 @@ limitations under the License.
 #include <string>
 #include <sstream>
 
+namespace {
+  PyObject *symdiff_exception = NULL;
+};
+
 /// Visual C++ does not allow c++ return values in extern "C"
 /// There will be a python error unless there is only 1 argument
 static dsHelper::ret_pair GetStringArgument(PyObject *args)
@@ -106,7 +110,7 @@ static void SetErrorString(const std::string &errorString)
     std::ostringstream os;
     os << "While calling symdiff interpreter\n";
     std::string temp_string = os.str() + errorString;
-    PyErr_SetString(PyExc_SystemError, temp_string.c_str());
+    PyErr_SetString(symdiff_exception, temp_string.c_str());
   }
 }
 
@@ -259,10 +263,17 @@ static struct PyMethodDef symdiff_methods[] = {
 
 
 
-
+//http://docs.python.org/2/extending/extending.html
 void DLL_PUBLIC initsymdiff()
 {
-  Py_InitModule("symdiff", symdiff_methods);
+  PyObject *m = Py_InitModule("symdiff", symdiff_methods);
+  if (m == NULL)
+  {
+    return;
+  }
+  symdiff_exception = PyErr_NewException(const_cast<char *>("symdiff.SymdiffError"), NULL, NULL);
+  Py_INCREF(symdiff_exception);
+  PyModule_AddObject(m, "SymdiffError", symdiff_exception);
 }
 
 #if 0
@@ -272,40 +283,6 @@ static struct _inittab symdiffinittab[] =
   {(char *)NULL, NULL}
 };
 #endif
-
-}; // extern "C"
-
-#if 0
-int main(int argc, char **argv)
-{
-  Py_Initialize();
-  //// This needs to be unicode aware
-  //// Should be fixed in Python 3.2
-#if 0
-  PyObject *decoded = PyUnicode_DecodeUTF8(symdiffBanner, strlen(symdiffBanner), NULL);
-  FILE *sout = PySys_GetFile((char *)"stdout", stdout);
-  PyObject_Print(decoded, sout, Py_PRINT_RAW);
-  PyObject *f_stdout = PySys_GetObject((char *)"stdout");
-  PyObject     *text = PyUnicode_DecodeUTF8((char*)symdiffBanner, strlen(symdiffBanner), "strict");
-  PyFile_WriteObject(text, f_stdout, Py_PRINT_RAW);
-#else
-#endif
-
-  std::string errors;
-
-  initsymdiff();
-  PyRun_SimpleString("from symdiff import *");
-  Py_Main(argc, argv);
-/*
-  PyObject* main_module =
-     PyImport_AddModule("__main__");
-  PyObject* main_dict =
-     PyModule_GetDict(main_module);
-*/
-
-
-  Py_Finalize();
-  return 0;
 }
-#endif
+
 
