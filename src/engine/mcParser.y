@@ -34,7 +34,7 @@ int mcerror(const char *msg);
 
 %token EOL 
 %token <dval> INT FLOAT
-%token <str> VAR UNARYFUNC BINARYFUNC MODELNAME SUBST DEFUSERFUNC DECUSERFUNC DECMODEL DEFMODEL USERFUNC CLEARUSERFUNC MACRO
+%token <str> VAR UNARYFUNC BINARYFUNC MODELNAME SUBST DEFUSERFUNC DECUSERFUNC DECMODEL DEFMODEL CLEARMODEL USERFUNC CLEARUSERFUNC MACRO
 %token <str> MODEL_VALUE_CMD
 %token <str> LT GT EQ NEQ LTE GTE NOT AND OR IF IFELSE
 %type  <eqptr> expression_list number variable expression userfunc macro macrodef errors modelptr modelcmd
@@ -171,7 +171,6 @@ modelcmd : DECMODEL '(' VAR ')' {
            DECMODEL '(' MODELNAME ')' {
             $$ = DeclareModel($3);
           } |
-
            DEFMODEL '(' VAR ',' expression ')' {
             $$ = DefineModel($3, $5);
           } |
@@ -180,6 +179,12 @@ modelcmd : DECMODEL '(' VAR ')' {
           } |
             MODEL_VALUE_CMD '(' MODELNAME ')' {
             $$ = GetModelValue($3);
+          } |
+           CLEARMODEL '(' VAR ')' {
+            $$ = ClearModel($3);
+          } |
+           CLEARMODEL '(' MODELNAME ')' {
+            $$ = ClearModel($3);
           }
           ;
 

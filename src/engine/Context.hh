@@ -56,6 +56,7 @@ class DLL_PUBLIC Context {
     void          SetModelListCallBack(inModelListCallback_ptr);
     ModelMap_t  &GetModelMap();
 
+    void          ClearModel(const std::string &);
     void          DeclareModel(const std::string &);
     void          DefineModel(const std::string &, Eqo::EqObjPtr);
     

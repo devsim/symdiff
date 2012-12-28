@@ -30,7 +30,7 @@ ADD_TEST("${I}" ${RUNDIFFTEST} "${TCLCOMP} < ${RUNDIR}/${I}.tcl" ${GOLDENDIR} ${
 ENDFOREACH(I)
 
 SET (EXAMPLES_DIR ${PROJECT_SOURCE_DIR}/examples)
-SET (PYTHONTESTS parsetest deftest arrhenius modellist1 ordered remove1 subexpression1 undefined1 utf8)
+SET (PYTHONTESTS parsetest deftest arrhenius modellist1 ordered remove1 subexpression1 undefined1 utf8 models1)
 FOREACH(I ${PYTHONTESTS})
 ADD_TEST("${I}_py" ${RUNDIFFTEST} "${PYTHONCOMP} < ${EXAMPLES_DIR}/${I}.py" ${GOLDENDIR} ${I}_py.out ${EXAMPLES_DIR} ${OUTPUTDIR})
 ENDFOREACH(I)

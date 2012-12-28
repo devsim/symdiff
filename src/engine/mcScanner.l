@@ -74,6 +74,8 @@ model_value   {mclval.str=yytext; return MODEL_VALUE_CMD;/*Should this return a 
 
 define_model   {mclval.str=yytext; return DEFMODEL;}
 
+clear_model   {mclval.str=yytext; return CLEARMODEL;}
+
 clear   {mclval.str=yytext; return CLEARUSERFUNC;}
 
 \$_	       {mclval.str = yytext; return MACRO;}

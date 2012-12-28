@@ -18,6 +18,8 @@ limitations under the License.
 #define MC_MODEL_COMPILER_HH
 #include "EquationObject.hh"
 #include <string>
+Eqo::EqObjPtr ClearModel(const std::string &);
+
 Eqo::EqObjPtr DeclareModel(const std::string &);
 
 Eqo::EqObjPtr GetModelValue(const std::string &);

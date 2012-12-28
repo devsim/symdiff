@@ -25,6 +25,12 @@ limitations under the License.
 #include "mcModel.hh"
 #include "Context.hh"
 
+Eqo::EqObjPtr ClearModel(const std::string &s)
+{
+  Context &context = Context::GetInstance();
+  context.ClearModel(s);
+  return Eqo::con(0.0);
+}
 
 Eqo::EqObjPtr DeclareModel(const std::string &s)
 {
