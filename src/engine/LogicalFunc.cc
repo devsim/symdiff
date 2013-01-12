@@ -27,7 +27,7 @@ UnaryLogical::UnaryLogical(const std::string &op, EqObjPtr x) : EquationObject(U
 {
 }
 
-std::string UnaryLogical::createStringValue()
+std::string UnaryLogical::createStringValue() const
 {
     std::ostringstream os;
     os << "("
@@ -129,7 +129,7 @@ BinaryLogical::BinaryLogical(const std::string &op, EqObjPtr x, EqObjPtr y) : Eq
 {
 }
 
-std::string BinaryLogical::createStringValue()
+std::string BinaryLogical::createStringValue() const
 {
     std::ostringstream os;
     os << "(" << arg1->stringValue()

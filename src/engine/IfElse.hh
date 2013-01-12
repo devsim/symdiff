@@ -54,8 +54,13 @@ class IfObj : public EquationObject
 
         std::set<std::string> getReferencedType(Eqo::EqObjType rt);
 
+        std::string getName() const
+        {
+          return "if";
+        }
+
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         IfObj(const IfObj &);
         IfObj operator=(const IfObj &);
@@ -99,8 +104,12 @@ class IfElseObj : public EquationObject
 
         std::set<std::string> getReferencedType(Eqo::EqObjType rt);
 
+        std::string getName() const
+        {
+          return "ifelse";
+        }
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         IfElseObj(const IfElseObj &);
         IfElseObj operator=(const IfElseObj &);

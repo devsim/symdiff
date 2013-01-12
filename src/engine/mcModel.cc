@@ -68,7 +68,7 @@ Model::Model(std::string var) : EquationObject(MODEL_OBJ), value(var)
 {
 }
 
-std::string Model::createStringValue()
+std::string Model::createStringValue() const
 {
     return value;
 }

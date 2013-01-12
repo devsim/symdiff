@@ -44,7 +44,7 @@ Variable::Variable(std::string var) : EquationObject(VARIABLE_OBJ), value(var)
 {
 }
 
-std::string Variable::createStringValue()
+std::string Variable::createStringValue() const
 {
     return value;
 }

@@ -34,7 +34,7 @@ Product::Product(std::vector<EqObjPtr> one) : EquationObject(PRODUCT_OBJ)
    SortEqVector(values);
 }
 
-std::string Product::createStringValue()
+std::string Product::createStringValue() const
 {
     const size_t len = values.size();
     std::ostringstream os;

@@ -86,5 +86,8 @@ bool DLL_PUBLIC isUnaryFunction(const std::string &str);
 
 EqBinaryFuncPtr DLL_PUBLIC getBinaryFuncPtr(const std::string &);
 EqUnaryFuncPtr DLL_PUBLIC getUnaryFuncPtr(const std::string &);
+
+std::string DLL_PUBLIC getName(Eqo::EqObjPtr x);
+std::string DLL_PUBLIC getType(Eqo::EqObjPtr x);
 }
 #endif

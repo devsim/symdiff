@@ -44,7 +44,7 @@ class Model : public EquationObject {
         EqObjPtr expand();
 
         std::vector<EqObjPtr> getArgs() {
-          return createArgs(this->clone());
+          return std::vector<EqObjPtr>();
         }
 
         bool hasReciprocal() {return false;}
@@ -54,8 +54,13 @@ class Model : public EquationObject {
             return CreateSetIfThisType(rt);
         }
 
+        std::string getName() const
+        {
+          return value;
+        }
+
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Model(const Model &);
         Model operator=(const Model &);

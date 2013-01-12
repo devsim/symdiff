@@ -42,7 +42,7 @@ Constant::Constant(double x) : EquationObject(CONST_OBJ), dvalue(x)
 {
 }
 
-std::string Constant::createStringValue()
+std::string Constant::createStringValue() const
 {
     std::ostringstream os;
     if (dvalue != floor(dvalue))

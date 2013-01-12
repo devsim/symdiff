@@ -68,15 +68,16 @@ class EquationObject : public std::tr1::enable_shared_from_this<EquationObject>
 
       virtual std::vector<EqObjPtr> getArgs() = 0;
 
-
       EqObjType getType() {return eqtype;}
       virtual ~EquationObject() {};
 
       virtual EqObjPtr Derivative(EqObjPtr)=0;
       virtual EqObjPtr Simplify()=0;
 
-      const std::string &stringValue();
+      const std::string &stringValue() const;
       /// Right now for name only
+      virtual std::string getName() const = 0;
+
       virtual std::set<std::string> getReferencedType(Eqo::EqObjType)=0;
 
       // Both of these should be for std::vector<EqObjPtr>
@@ -124,7 +125,7 @@ class EquationObject : public std::tr1::enable_shared_from_this<EquationObject>
       /// hasAnnhilater
       /// hasCombiner
    protected:
-      virtual std::string createStringValue()=0;
+      virtual std::string createStringValue() const=0;
 
       EquationObject(EqObjType foo) : eqtype(foo) {}
 
@@ -171,7 +172,7 @@ class EquationObject : public std::tr1::enable_shared_from_this<EquationObject>
       //EquationObject operator=(const EquationObject &);
 
       EqObjType   eqtype;
-      std::string stringValue_;
+      mutable std::string stringValue_;
 };
 
 

@@ -21,8 +21,13 @@ limitations under the License.
 namespace Eqo {
 class Variable : public EquationObject {
     public:
-        const std::string &getVariableName() {
+        const std::string &getVariableName() const {
           return value;
+        }
+
+        std::string getName() const
+        {
+          return getVariableName();
         }
 
         Variable(std::string);
@@ -48,7 +53,7 @@ class Variable : public EquationObject {
         EqObjPtr expand();
 
         std::vector<EqObjPtr> getArgs() {
-          return createArgs(shared_from_this());
+          return std::vector<EqObjPtr>();
         }
 
         bool hasReciprocal() {return false;}
@@ -58,7 +63,7 @@ class Variable : public EquationObject {
         }
 
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Variable(const Variable &);
         Variable operator=(const Variable &);

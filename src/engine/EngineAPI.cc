@@ -179,5 +179,18 @@ EqUnaryFuncPtr DLL_PUBLIC getUnaryFuncPtr(const std::string &str)
   return Eqo::getUnaryFuncPtr(str);
 }
 
+std::string DLL_PUBLIC getName(Eqo::EqObjPtr x)
+{
+  std::string ret;
+  return x->getName();
+  return ret;
+}
+
+std::string DLL_PUBLIC getType(Eqo::EqObjPtr x)
+{
+  std::string ret;
+  ret = Eqo::EqObjNames[x->getType()];
+  return ret;
+}
 }
 

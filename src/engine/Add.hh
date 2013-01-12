@@ -56,8 +56,12 @@ class Add : public EquationObject {
           return createArgs(values);
         }
 
+        std::string getName() const
+        {
+          return "+";
+        }
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Add(const Add &);
         Add operator=(const Add &);

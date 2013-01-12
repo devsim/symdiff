@@ -21,6 +21,8 @@ limitations under the License.
 #include "Context.hh"
 #include "SubExpr.hh"
 #include "ProcessModelOrder.hh"
+#include "ProcessOrderedTable.hh"
+#include "EngineAPI.hh"
 
 #include <vector>
 #include <string>
@@ -34,17 +36,17 @@ namespace {
 /// There will be a python error unless there is only 1 argument
 static dsHelper::ret_pair GetStringArgument(PyObject *args)
 {
-  dsHelper::ret_pair result = std::make_pair(false, std::string());
+  dsHelper::ret_pair result;
+  result.first = false;
   const char *fromPython;
   if (PyArg_Parse(args, "(s)", &fromPython))
   {
     result.first  = true;
-    result.second = fromPython;
+    result.second.string_ = fromPython;
   }
   else
   {
     result.first  = false;
-//    result.second = fromPython;
   }
   return result;
 }
@@ -73,7 +75,24 @@ static PyObject *returnNone()
 static PyObject *returnString(const std::string &s)
 {
   return Py_BuildValue("s", s.c_str());
-//  return PyUnicode_DecodeUTF8(s.c_str(), s.length(), NULL);
+}
+
+static PyObject *returnLong(size_t i)
+{
+  return PyLong_FromSsize_t(i);
+}
+
+static PyObject *returnTupleLong(const std::vector<size_t> &index)
+{
+  PyObject *returnObj = PyTuple_New(index.size());
+  PyObject *subobj;
+  for (size_t i = 0; i < index.size(); ++i)
+  {
+    subobj = returnLong(index[i]);
+    PyTuple_SET_ITEM(returnObj, i, subobj);
+    Py_INCREF(subobj);
+  }
+  return returnObj;
 }
 
 
@@ -129,15 +148,90 @@ symdiffCmd(PyObject *, PyObject *args)
   
   if (tret.first)
   {
-    dsHelper::ret_pair result = std::make_pair(false, errorString);
-    result = dsHelper::SymdiffEval(tret.second);
+    dsHelper::ret_pair result;
+    result.first = false;
+    result = dsHelper::SymdiffEval(tret.second.string_);
     if (!result.first)
     {
-      errorString += result.second;
+      errorString += result.second.string_;
     }
     else
     {
-      returnObj = returnString(result.second);
+      returnObj = returnString(result.second.string_);
+    }
+  }
+
+  SetErrorString(errorString);
+
+  return returnObj;
+}
+
+static PyObject *
+symdiffTableCmd(PyObject *, PyObject *args)
+{
+  PyObject *returnObj = NULL;
+  std::string errorString;
+
+  dsHelper::ret_pair tret  = GetStringArgument(args);
+  
+  if (tret.first)
+  {
+    dsHelper::ret_pair result;
+    result.first = false;
+    result = dsHelper::SymdiffEval(tret.second.string_);
+    if (!result.first)
+    {
+      errorString += result.second.string_;
+    }
+    else
+    {
+      ProcessOrderedTable pot;
+      pot.run(result.second.eqptr_);
+//      returnObj = returnString(result.second.string_);
+      OrderedTable_t table = pot.GetOrderedTable();
+      if (table.empty())
+      {
+        returnObj = returnNone();
+      }
+      else
+      {
+        returnObj = PyTuple_New(table.size());
+        for (size_t i = 0; i < table.size(); ++i)
+        {
+          const OrderedTableData &data = table[i];
+          PyObject *rowobj = PyTuple_New(5);
+
+          const std::string &name = EngineAPI::getName(data.ptr_);
+          const std::string &type = EngineAPI::getType(data.ptr_);
+          const std::string &value = data.value_;
+          const std::vector<size_t> &indexes = data.indexes_;
+          const std::vector<size_t> &references = data.references_;
+
+          PyObject *subobj;
+          subobj = returnString(name);
+          Py_INCREF(subobj);
+          PyTuple_SET_ITEM(rowobj, 0, subobj);
+
+          subobj = returnString(type);
+          Py_INCREF(subobj);
+          PyTuple_SET_ITEM(rowobj, 1, subobj);
+
+          subobj = returnTupleLong(indexes);
+          Py_INCREF(subobj);
+          PyTuple_SET_ITEM(rowobj, 2, subobj);
+
+          subobj = returnTupleLong(references);
+          Py_INCREF(subobj);
+          PyTuple_SET_ITEM(rowobj, 3, subobj);
+
+          subobj = returnString(value);
+          Py_INCREF(subobj);
+          PyTuple_SET_ITEM(rowobj, 4, subobj);
+
+          Py_INCREF(rowobj);
+          PyTuple_SET_ITEM(returnObj, i, rowobj);
+        }
+      }
     }
   }
 
@@ -181,7 +275,8 @@ subexpressionCmd(PyObject *, PyObject *args)
 {
   PyObject *returnObj = NULL;
   std::string errorString;
-  dsHelper::ret_pair result = std::make_pair(false, errorString);
+  dsHelper::ret_pair result;
+  result.first = false;
 
   if (HasZeroArguments(args))
   {
@@ -254,6 +349,7 @@ orderedListCmd(PyObject *, PyObject *args)
 
 static struct PyMethodDef symdiff_methods[] = {
   {"symdiff",       symdiffCmd,       METH_VARARGS},
+  {"symdiff_table", symdiffTableCmd,  METH_VARARGS},
   {"model_list",    modelListCmd,     METH_VARARGS},
   {"subexpression", subexpressionCmd, METH_VARARGS},
   {"remove_zeros",  removeZerosCmd,   METH_VARARGS},

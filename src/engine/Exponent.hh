@@ -54,9 +54,14 @@ class Exponent : public EquationObject {
           return createArgs(value);
         }
 
+        std::string getName() const
+        {
+          return "exp";
+        }
+
         friend class Log;
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Exponent(const Exponent &);
         Exponent operator=(const Exponent &);

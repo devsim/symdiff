@@ -27,7 +27,7 @@ Pow::Pow(EqObjPtr b, EqObjPtr e) : EquationObject(POW_OBJ),
 {
 }
 
-std::string Pow::createStringValue()
+std::string Pow::createStringValue() const
 {
     std::ostringstream os;
     // need to control the choice between printing behavior

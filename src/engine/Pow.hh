@@ -55,8 +55,13 @@ class Pow : public EquationObject {
         std::vector<EqObjPtr> getArgs() {
           return createArgs(base, exponent);
         }
+
+        std::string getName() const
+        {
+          return "pow";
+        }
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Pow(const Pow &);
         Pow operator=(const Pow &);

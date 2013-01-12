@@ -42,7 +42,7 @@ IfObj::IfObj(EqObjPtr t, EqObjPtr a) : EquationObject(IF_OBJ), test(t), arg(a)
 {
 }
 
-std::string IfObj::createStringValue()
+std::string IfObj::createStringValue() const
 {
     std::ostringstream os;
     os << "(if ("
@@ -137,7 +137,7 @@ IfElseObj::IfElseObj(EqObjPtr t, EqObjPtr a1, EqObjPtr a2) : EquationObject(IFEL
 {
 }
 
-std::string IfElseObj::createStringValue()
+std::string IfElseObj::createStringValue() const
 {
     std::ostringstream os;
     os << "(ifelse ("

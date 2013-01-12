@@ -55,8 +55,13 @@ class Log : public EquationObject {
           return createArgs(value);
         }
 
+        std::string getName() const
+        {
+          return "log";
+        }
+
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Log(const Log &);
         Log operator=(const Log &);

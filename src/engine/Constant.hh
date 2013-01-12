@@ -54,16 +54,6 @@ class Constant : public EquationObject {
           return con(1.0/dvalue);
         }
 
-
-
-
-
-
-
-
-
-
-
         double getDoubleValue()
         {
           return dvalue;
@@ -77,10 +67,15 @@ class Constant : public EquationObject {
         friend class Product;
 
         std::vector<EqObjPtr> getArgs() {
-          return createArgs(this->shared_from_this());
+          return std::vector<EqObjPtr>();
+        }
+
+        std::string getName() const
+        {
+          return EquationObject::stringValue();
         }
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Constant(const Constant &);
         Constant operator=(const Constant &);

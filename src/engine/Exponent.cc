@@ -24,7 +24,7 @@ Exponent::Exponent(EqObjPtr var) : EquationObject(EXPONENT_OBJ), value(var)
 {
 }
 
-std::string Exponent::createStringValue()
+std::string Exponent::createStringValue() const
 {
     std::ostringstream os;
     os << "exp(" << value << ")";

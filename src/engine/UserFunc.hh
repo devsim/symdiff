@@ -36,8 +36,7 @@ class UserFunc : public EquationObject {
     public:
         UserFunc(std::string, std::vector<EqObjPtr> &);
 
-        //Special to this function
-        const std::string &getName() const
+        std::string getName() const
         {
             return name;
         }
@@ -72,7 +71,7 @@ class UserFunc : public EquationObject {
 
         std::set<std::string> getReferencedType(Eqo::EqObjType rt);
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         UserFunc(const UserFunc &);
         UserFunc operator=(const UserFunc &);

@@ -30,6 +30,7 @@ SET (CXX_SRCS
     Variable.cc
     Functions.cc
     Utility.cc
+    ProcessOrderedTable.cc
 )
 
 INCLUDE_DIRECTORIES (

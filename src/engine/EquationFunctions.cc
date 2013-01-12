@@ -23,10 +23,6 @@ limitations under the License.
 namespace dsHelper {
 
 
-/**
- * This is awful, but we need this to prototype
- */
-/** here we assume that node models can only reference local models */
 bool inModelList(const std::string &x)
 {
 
@@ -35,26 +31,10 @@ bool inModelList(const std::string &x)
   return inlist;
 }
 
-#if 0
-bool alwaysInModelList(const std::string &)
-{
-  return true;
-}
-#endif
-
-#if 0
-bool neverInModelList(const std::string &)
-{
-  return false;
-}
-#endif
-
-
-
 ret_pair SymdiffEval(const std::string &expr)
 {
   bool ret = false;
-  std::string retstring;
+  ret_data data;
 
   EvalExpr::error_t terrors;
 
@@ -72,15 +52,16 @@ ret_pair SymdiffEval(const std::string &expr)
       os << *it << "\n";
     }
     ret = false;
-    retstring = os.str();
+    data.string_ = os.str();
   }
   else
   {
-    retstring = testeq->stringValue();
+    data.string_ = testeq->stringValue();
+    data.eqptr_  = testeq;
     ret = true;
   }
 
-  return std::make_pair(ret, retstring);
+  return std::make_pair(ret, data);
 }
 
 }

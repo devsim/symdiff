@@ -27,7 +27,12 @@ typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
 }
 
 namespace dsHelper {
-typedef std::pair<bool, std::string> ret_pair;
+struct ret_data {
+  std::string   string_;
+  Eqo::EqObjPtr eqptr_;
+};
+
+typedef std::pair<bool, ret_data> ret_pair;
 DLL_PUBLIC ret_pair SymdiffEval(const std::string &);
 }
 

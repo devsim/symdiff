@@ -33,7 +33,7 @@ typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
 std::map<std::string, EqObjPtr> variableMap;
 
 
-const std::string &EquationObject::stringValue()
+const std::string &EquationObject::stringValue() const
 {
   if (stringValue_.empty())
   {

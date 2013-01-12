@@ -80,8 +80,7 @@ UserFunc::UserFunc(std::string nm, std::vector<EqObjPtr> &a) : EquationObject(US
     args = a; // assume that I own this data
 }
 
-// This is messed up
-std::string UserFunc::createStringValue()
+std::string UserFunc::createStringValue() const
 {
    const size_t len = args.size();
 

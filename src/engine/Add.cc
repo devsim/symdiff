@@ -34,7 +34,7 @@ Add::Add(std::vector<EqObjPtr> one) : EquationObject(ADD_OBJ)
    SortEqVector(values);
 }
 
-std::string Add::createStringValue()
+std::string Add::createStringValue() const
 {
    const size_t len = values.size();
    std::ostringstream os;

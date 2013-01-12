@@ -24,7 +24,7 @@ Log::Log(EqObjPtr var) : EquationObject(LOG_OBJ), value(var)
 {
 }
 
-std::string Log::createStringValue()
+std::string Log::createStringValue() const
 {
     std::ostringstream os;
     os << "log(" << value << ")";

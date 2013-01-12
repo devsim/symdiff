@@ -58,8 +58,13 @@ class Product : public EquationObject {
           return createArgs(values);
         }
 
+        std::string getName() const
+        {
+          return "*";
+        }
+
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         Product(const Product &);
         Product operator=(const Product &);

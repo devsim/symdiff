@@ -56,9 +56,14 @@ class UnaryLogical : public EquationObject
           return createArgs(arg);
         }
 
-        const std::string &getOperator()
+        const std::string &getOperator() const
         {
           return unaryOperator;
+        }
+
+        std::string getName() const
+        {
+          return getOperator();
         }
 
         bool hasReciprocal() {return false;}
@@ -69,7 +74,7 @@ class UnaryLogical : public EquationObject
         }
 
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         UnaryLogical(const UnaryLogical &);
         UnaryLogical operator=(const UnaryLogical &);
@@ -108,9 +113,14 @@ class BinaryLogical : public EquationObject
           return createArgs(arg1, arg2);
         }
 
-        const std::string &getOperator()
+        const std::string &getOperator() const
         {
           return binaryOperator;
+        }
+
+        std::string getName() const
+        {
+          return getOperator();
         }
 
         bool hasReciprocal() {return false;}
@@ -121,7 +131,7 @@ class BinaryLogical : public EquationObject
         }
 
     private:
-        std::string createStringValue();
+        std::string createStringValue() const;
 
         BinaryLogical(const BinaryLogical &);
         BinaryLogical operator=(const BinaryLogical &);

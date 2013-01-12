@@ -20,24 +20,36 @@ limitations under the License.
 #include "Context.hh"
 #include "SubExpr.hh"
 #include "ProcessModelOrder.hh"
+#include "ProcessOrderedTable.hh"
+#include "EngineAPI.hh"
 
 #include <sstream>
 #include <tcl.h>
 
-///// TODO: ClientData for command name
 namespace dsTcl {
+
+static Tcl_Obj *returnList(Tcl_Interp *interp, const std::vector<size_t> &index)
+{
+  Tcl_Obj *obj = Tcl_NewObj();
+  for (size_t i = 0; i < index.size(); ++i)
+  {
+    Tcl_ListObjAppendElement(interp, obj, Tcl_NewIntObj(index[i]));
+  }
+  return obj;
+}
 
 /**
 Takes one argument, which is the command to evaluate
 */
-int 
+static int 
 symdiffCmd(ClientData clientData, Tcl_Interp *interp,
           int objc, Tcl_Obj *CONST objv[])
 {
   int error = TCL_OK;
 
   std::string errorString;
-  dsHelper::ret_pair result = std::make_pair(false, errorString);
+  dsHelper::ret_pair result;
+  result.first = false;
 
   if (objc == 2)
   {
@@ -46,7 +58,7 @@ symdiffCmd(ClientData clientData, Tcl_Interp *interp,
 
     if (!result.first)
     {
-      errorString += result.second;
+      errorString += result.second.string_;
     }
 
   }
@@ -66,21 +78,96 @@ symdiffCmd(ClientData clientData, Tcl_Interp *interp,
   }
   else
   {
-    Tcl_SetResult(interp, const_cast<char *>(result.second.c_str()), TCL_VOLATILE);
+    Tcl_SetResult(interp, const_cast<char *>(result.second.string_.c_str()), TCL_VOLATILE);
+  }
+
+  return error;
+}
+
+static int 
+symdiffTableCmd(ClientData clientData, Tcl_Interp *interp,
+          int objc, Tcl_Obj *CONST objv[])
+{
+  int error = TCL_OK;
+
+  std::string errorString;
+  dsHelper::ret_pair result;
+  result.first = false;
+
+  if (objc == 2)
+  {
+    const std::string &expr = Tcl_GetStringFromObj(objv[1], NULL);
+    result = dsHelper::SymdiffEval(expr);
+
+    if (!result.first)
+    {
+      errorString += result.second.string_;
+    }
+
+  }
+  else
+  {
+    errorString += "Command takes only 1 argument.";
+  }
+
+
+  if (!errorString.empty())
+  {
+    std::ostringstream os;
+    os << "While calling symdiff interpreter\n";
+    errorString = os.str() + errorString;
+    error = TCL_ERROR;
+    Tcl_SetResult(interp, const_cast<char *>(errorString.c_str()), TCL_VOLATILE);
+  }
+  else
+  {
+      ProcessOrderedTable pot;
+      pot.run(result.second.eqptr_);
+      OrderedTable_t table = pot.GetOrderedTable();
+      Tcl_Obj *obj = Tcl_NewObj();
+
+      if (!table.empty())
+      {
+        for (size_t i = 0; i < table.size(); ++i)
+        {
+          const OrderedTableData &data = table[i];
+          const std::string &name = EngineAPI::getName(data.ptr_);
+          const std::string &type = EngineAPI::getType(data.ptr_);
+          const std::string &value = data.value_;
+          const std::vector<size_t> &indexes = data.indexes_;
+          const std::vector<size_t> &references = data.references_;
+
+          Tcl_Obj *rowobj = Tcl_NewObj();
+          Tcl_Obj *subobj = NULL;
+          subobj = Tcl_NewStringObj(name.c_str(), -1);
+          Tcl_ListObjAppendElement(interp, rowobj, subobj);
+          subobj = Tcl_NewStringObj(type.c_str(), -1);
+          Tcl_ListObjAppendElement(interp, rowobj, subobj);
+          subobj = returnList(interp, indexes);
+          Tcl_ListObjAppendElement(interp, rowobj, subobj);
+          subobj = returnList(interp, references);
+          Tcl_ListObjAppendElement(interp, rowobj, subobj);
+          subobj = Tcl_NewStringObj(value.c_str(), -1);
+          Tcl_ListObjAppendElement(interp, rowobj, subobj);
+          Tcl_ListObjAppendElement(interp, obj, rowobj);
+        }
+      }
+      Tcl_SetObjResult(interp, obj);
   }
 
   return error;
 }
 
 
-int
+static int
 modelListCmd(ClientData clientData, Tcl_Interp *interp,
           int objc, Tcl_Obj *CONST objv[])
 {
   int error = TCL_OK;
 
   std::string errorString;
-  dsHelper::ret_pair result = std::make_pair(false, errorString);
+  dsHelper::ret_pair result;
+  result.first = false;
 
   if (objc == 1)
   {
@@ -112,14 +199,15 @@ modelListCmd(ClientData clientData, Tcl_Interp *interp,
   return error;
 }
 
-int
+static int
 subexpressionCmd(ClientData clientData, Tcl_Interp *interp,
           int objc, Tcl_Obj *CONST objv[])
 {
   int error = TCL_OK;
 
   std::string errorString;
-  dsHelper::ret_pair result = std::make_pair(false, errorString);
+  dsHelper::ret_pair result;
+  result.first = false;
 
   if (objc == 1)
   {
@@ -152,14 +240,15 @@ subexpressionCmd(ClientData clientData, Tcl_Interp *interp,
   return error;
 }
 
-int
+static int
 removeZerosCmd(ClientData clientData, Tcl_Interp *interp,
           int objc, Tcl_Obj *CONST objv[])
 {
   int error = TCL_OK;
 
   std::string errorString;
-  dsHelper::ret_pair result = std::make_pair(false, errorString);
+  dsHelper::ret_pair result;
+  result.first = false;
 
   if (objc == 1)
   {
@@ -185,7 +274,7 @@ removeZerosCmd(ClientData clientData, Tcl_Interp *interp,
   return error;
 }
 
-int
+static int
 orderedListCmd(ClientData clientData, Tcl_Interp *interp,
           int objc, Tcl_Obj *CONST objv[])
 {
@@ -242,6 +331,7 @@ orderedListCmd(ClientData clientData, Tcl_Interp *interp,
 
 Commands TclSymdiffCommands[] = {
     {"symdiff",    symdiffCmd},
+    {"symdiff_table",    symdiffTableCmd},
     {"model_list", modelListCmd},
     {"subexpression", subexpressionCmd},
     {"ordered_list", orderedListCmd},
