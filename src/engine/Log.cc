@@ -16,7 +16,6 @@ limitations under the License.
 
 #include "Log.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 
 namespace Eqo {

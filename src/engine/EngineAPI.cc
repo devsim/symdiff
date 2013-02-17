@@ -17,6 +17,8 @@ limitations under the License.
 #include "LogicalFunc.hh"
 #include "IfElse.hh"
 #include "Functions.hh"
+#include "Context.hh"
+#include "mcModel.hh"
 
 namespace EngineAPI {
 Eqo::EqObjPtr createUnaryLogical(const std::string &unaryOp, Eqo::EqObjPtr arg)
@@ -85,6 +87,16 @@ Eqo::EqObjPtr diff(Eqo::EqObjPtr x, Eqo::EqObjPtr y)
 Eqo::EqObjPtr con(double x)
 {
   return Eqo::con(x);
+}
+
+Eqo::EqObjPtr mod(const char *x)
+{
+  return Eqo::mod(x);
+}
+
+Eqo::EqObjPtr mod(const std::string &x)
+{
+  return Eqo::mod(x);
 }
 
 Eqo::EqObjPtr var(const char *x)
@@ -191,6 +203,46 @@ std::string DLL_PUBLIC getType(Eqo::EqObjPtr x)
   std::string ret;
   ret = Eqo::EqObjNames[x->getType()];
   return ret;
+}
+
+EqObjType DLL_PUBLIC getEnumeratedType(Eqo::EqObjPtr x)
+{
+  return EqObjType(x->getType());
+}
+
+std::string DLL_PUBLIC getStringValue(Eqo::EqObjPtr x)
+{
+  std::string ret;
+  return x->stringValue();
+  return ret;
+}
+
+double DLL_PUBLIC getDoubleValue(Eqo::EqObjPtr x)
+{
+  assert(x->getType() == Eqo::CONST_OBJ);
+  return dynamic_cast<Eqo::Constant *>(x.get())->getDoubleValue();
+}
+
+std::set<std::string> DLL_PUBLIC getReferencedType(Eqo::EqObjPtr x, EqObjType t)
+{
+  return x->getReferencedType(Eqo::EqObjType(t));
+}
+
+std::vector<Eqo::EqObjPtr> DLL_PUBLIC getArgs(Eqo::EqObjPtr x)
+{
+  return x->getArgs();
+}
+
+void DLL_PUBLIC SetModelListCallBack(inModelListCallback_ptr x)
+{
+  Context &context = Context::GetInstance();
+  context.SetModelListCallBack(x);
+}
+
+void DLL_PUBLIC SetDerivativeRule(modelDerivativeRule_ptr x)
+{
+  Context &context = Context::GetInstance();
+  context.SetDerivativeRule(x);
 }
 }
 

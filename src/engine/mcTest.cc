@@ -20,7 +20,6 @@ limitations under the License.
 #include "EquationObject.hh"
 #include "UserFunc.hh"
 #include "mcModel.hh"
-#include "dsAssert.hh"
 #include "Context.hh"
 
 #include <iostream>
@@ -35,15 +34,6 @@ using std::endl;
 using std::ostringstream;
 using std::ofstream;
 using std::string;
-
-void dsAssert_(bool x, const std::string &msg)
-{
-    if (!x)
-    {
-       std::cerr << msg << std::endl;
-        exit(-1);
-    }
-}
 
 void print_hh (ofstream &);
 void print_cc(ofstream &, const string &);

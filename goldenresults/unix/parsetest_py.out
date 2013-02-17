@@ -121,7 +121,7 @@ a++-+a
 
 a+*+a
 While calling symdiff interpreter
-While evaluating expression "a+*+a;"
+While evaluating expression "a+*+a"
 syntax error
 
 
@@ -226,12 +226,12 @@ simplify(-8*a*x^2 -3*b*c^2)
 
 simplify(x,y)
 While calling symdiff interpreter
-While evaluating expression "simplify(x,y);"
+While evaluating expression "simplify(x,y)"
 Function "simplify" expects 1 argument and you provided 2: "x", "y"
 
 
 subst(y)
 While calling symdiff interpreter
-While evaluating expression "subst(y);"
+While evaluating expression "subst(y)"
 Function "subst" expects 3 arguments and you provided 1: "y"
 

@@ -3,7 +3,7 @@ package require symdifftcl
 # http://creativecommons.org/publicdomain/zero/1.0/
 
 proc callSymdiff {arg} {
-puts [format "\"%s\"\n\"%s\"\n\"%s\"\n\n" $arg [symdiff "$arg;"] [symdiff "diff($arg,x);"]]
+puts [format "\"%s\"\n\"%s\"\n\"%s\"\n\n" $arg [symdiff "$arg"] [symdiff "diff($arg,x)"]]
 }
 
 callSymdiff "exp(0)"

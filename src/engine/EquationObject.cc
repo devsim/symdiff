@@ -15,7 +15,6 @@ limitations under the License.
 ***/
 
 #include "EquationObject.hh"
-#include "dsAssert.hh"
 #include <string>
 #include <sstream>
 #include <iostream>

@@ -34,7 +34,7 @@ typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
  be faster than using dynamic_cast.  This is passed in the constructor
  of the derived class to the base class.
 */
-enum EqObjType {CONST_OBJ=0, VARIABLE_OBJ, ADD_OBJ, PRODUCT_OBJ, EXPONENT_OBJ, POW_OBJ, LOG_OBJ, MODEL_OBJ, USERFUNC_OBJ, BLOGICAL_OBJ, ULOGICAL_OBJ, IF_OBJ, IFELSE_OBJ};
+enum EqObjType {CONST_OBJ=0, VARIABLE_OBJ, ADD_OBJ, PRODUCT_OBJ, EXPONENT_OBJ, POW_OBJ, LOG_OBJ, MODEL_OBJ, USERFUNC_OBJ, BLOGICAL_OBJ, ULOGICAL_OBJ, IF_OBJ, IFELSE_OBJ, NUM_TYPES};
 
 const char * const EqObjNames[] = {
     "constant",

@@ -16,7 +16,6 @@ limitations under the License.
 
 #include "IfElse.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 
 namespace Eqo {

@@ -47,13 +47,20 @@ void Context::SetModelListCallBack(inModelListCallback_ptr foo)
  */
 bool Context::IsInModelList(const std::string &str)
 {
-   ModelMap_t::iterator it, end=context_data_.model_list_.end();
-   for (it=context_data_.model_list_.begin(); it != end; ++it)
-   {
-      if ((*it).first == str)
-         return true;
-   }
-   return false;
+  if (context_data_.callback_func_ptr_)
+  {
+    return context_data_.callback_func_ptr_(str);
+  }
+  else
+  {
+     ModelMap_t::iterator it, end=context_data_.model_list_.end();
+     for (it=context_data_.model_list_.begin(); it != end; ++it)
+     {
+        if ((*it).first == str)
+           return true;
+     }
+  }
+ return false;
 }
 
 /*
@@ -94,4 +101,15 @@ void Context::DefineModel(const std::string &s, Eqo::EqObjPtr e)
 {
   GetModelMap()[s] = e;
 }
+
+Eqo::EqObjPtr Context::EvaluateModelDerivative(Eqo::EqObjPtr x, Eqo::EqObjPtr y)
+{
+  return context_data_.model_derivative_rule_ptr_(x, y);
+}
+
+void Context::SetDerivativeRule(modelDerivativeRule_ptr x)
+{
+  context_data_.model_derivative_rule_ptr_ = x;
+}
+
 

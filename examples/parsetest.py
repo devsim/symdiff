@@ -6,7 +6,7 @@ def maptest(arg):
   print
   print arg;
   try:
-    out = symdiff(arg + ';')
+    out = symdiff(arg)
   except SymdiffError as x:
     out = x
   print out

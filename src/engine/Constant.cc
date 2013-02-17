@@ -15,7 +15,6 @@ limitations under the License.
 ***/
 #include "Constant.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 #include <iomanip>
 #include <cmath>

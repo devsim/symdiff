@@ -17,8 +17,6 @@ limitations under the License.
 #include "UserFunc.hh"
 #include "Functions.hh"
 
-#include "dsAssert.hh"
-
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -37,7 +35,6 @@ std::map<std::string, UserDiffInfoVec> UserFuncMap;
 // Used for implicitly declared functions
 void CreateUserFunc(std::string nm, size_t nar)
 {
-    dsAssert(UserFuncMap.count(nm) == 0, "UNEXPECTED");
     UserFuncMap[nm].resize(nar);
 }
 
@@ -49,9 +46,7 @@ void SetUserFuncDiffs(std::string nm, UserDiffInfoVec &dif)
     {
         // \todo error handling
         // must be the same exact size
-        dsAssert(dif.size() == UserFuncMap[nm].size(), "UNEXPECTED");
     }
-    dsAssert(dif.size() > 0, "UNEXPECTED");
 
     UserFuncMap[nm] = dif; // assume that I own this data
 #if 0
@@ -67,12 +62,7 @@ void SetUserFuncDiffs(std::string nm, UserDiffInfoVec &dif)
 
 UserFunc::UserFunc(std::string nm, std::vector<EqObjPtr> &a) : EquationObject(USERFUNC_OBJ), name(nm)
 {
-    if (UserFuncMap.count(nm))
-    {
-        // \todo error handling
-        dsAssert(a.size() == UserFuncMap[nm].size(), "UNEXPECTED");
-    }
-    else
+    if (!UserFuncMap.count(nm))
     {
         UserFuncMap[nm].resize(a.size());
     }
@@ -85,8 +75,6 @@ std::string UserFunc::createStringValue() const
    const size_t len = args.size();
 
    // \todo need to set special error handling
-
-   dsAssert(len > 0, "UNEXPECTED");
    std::ostringstream os;
    os << name << "(";
    for (size_t i=0; i < len; ++i)
@@ -119,10 +107,6 @@ EqObjPtr UserFunc::subst(const std::string &str, EqObjPtr eqo)
 // \todo optimize
 EqObjPtr UserFunc::Derivative(EqObjPtr foo)
 {
-    // for now assume defined
-    dsAssert(UserFuncMap.count(name) != 0, "UNEXPECTED");
-    dsAssert(args.size() == UserFuncMap[name].size(), "UNEXPECTED");
-
     std::vector<EqObjPtr> der;
     for (size_t i = 0; i < args.size(); ++i)
     {
@@ -154,7 +138,6 @@ EqObjPtr UserFunc::Derivative(EqObjPtr foo)
         }
         der.push_back(x);
     }
-    dsAssert(der.size() != 0, "UNEXPECTED");
     if (der.size() == 1)
         return der[0];
     else
@@ -185,7 +168,6 @@ bool UserFunc::isOne()
 EqObjPtr UserFunc::clone()
 {
     const size_t len = args.size();
-    dsAssert(len != 0, "UNEXPECTED");
     std::vector<EqObjPtr> tmp(len);
     for (size_t i = 0; i < len; ++i)
     {

@@ -23,23 +23,12 @@ limitations under the License.
 namespace dsHelper {
 
 
-bool inModelList(const std::string &x)
-{
-
-  Context &context = Context::GetInstance();
-  bool inlist = context.IsInModelList(x);
-  return inlist;
-}
-
 ret_pair SymdiffEval(const std::string &expr)
 {
   bool ret = false;
   ret_data data;
 
   EvalExpr::error_t terrors;
-
-  Context &context = Context::GetInstance();
-  context.SetModelListCallBack(inModelList);
 
   Eqo::EqObjPtr testeq = EvalExpr::evaluateExpression(expr, terrors);
 

@@ -17,7 +17,6 @@ limitations under the License.
 #include "Add.hh"
 #include "Utility.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 
 namespace Eqo {
@@ -268,7 +267,6 @@ EqObjPtr Add::CombineAdd(std::vector<EqObjPtr> y)
 EqObjPtr Add::clone()
 {
     const size_t len = values.size();
-    dsAssert(len != 0, "UNEXPECTED");
     std::vector<EqObjPtr> tmp(len);
     for (size_t i = 0; i < len; ++i)
     {
@@ -326,7 +324,6 @@ EqObjPtr Add::getUnsignedValue()
 EqObjPtr Add::expand()
 {
     const size_t len = values.size();
-    dsAssert(len != 0, "UNEXPECTED");
     std::vector<EqObjPtr> tmp(len);
     for (size_t i = 0; i < len; ++i)
     {

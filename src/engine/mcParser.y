@@ -57,9 +57,11 @@ all : expression_list {$$ = $1->stringValue();}
 	| {$$ = ""; Eqo::variableMap["$_"] = EngineAPI::con(0.0);}
     ;
 
-expression_list : expression_list expression EOL {$$=$2; Eqo::variableMap["$_"] = $$; /*cout << $2 << endl;*/} |
-    expression EOL {$$=$1; Eqo::variableMap["$_"] = $$; /*cout << $1 << endl;*/ }
+expression_list : expression_list expression end_of_line {$$=$2; Eqo::variableMap["$_"] = $$; /*cout << $2 << endl;*/} |
+    expression end_of_line {$$=$1; Eqo::variableMap["$_"] = $$; /*cout << $1 << endl;*/ }
     ;
+
+end_of_line : EOL | end_of_line EOL;
 
 expression :
 	   IF '(' varobj ')' {

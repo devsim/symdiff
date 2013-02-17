@@ -16,7 +16,6 @@ limitations under the License.
 
 #include "Product.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 
 namespace Eqo {
@@ -405,7 +404,6 @@ bool Product::isOne()
 //  /todo would be to factor for arbitrary type
 EqObjPtr Product::getScale()
 {
-   dsAssert(!values.empty(), "UNEXPECTED");
    const size_t len = values.size();
    std::vector<EqObjPtr> tmp;
    tmp.reserve(len+1);
@@ -462,17 +460,6 @@ double Product::getSign()
         }
     }
     return foundSign;
-#if 0
-    double sign = 1.0;
-    EqObjPtr val = this->getScale();
-    Constant *foo = dynamic_cast<Constant *>(val.get());
-    dsAssert(foo, "UNEXPECTED");
-    if (foo)
-    {
-        sign = (foo->value < 0.0) ? -1.0 : 1.0;
-    }
-    return sign;
-#endif
 }
 
 EqObjPtr Product::getUnsignedValue()
@@ -490,7 +477,6 @@ EqObjPtr Product::getUnsignedValue()
         if (unscaled->getType() == CONST_OBJ)
         {
             Constant *c = dynamic_cast<Constant *>(unscaled.get());
-            dsAssert(c != 0, "UNEXPECTED"); // this must be true
             // We expect the value to be signed
                 if (c->dvalue < 0.0)
                 {
@@ -505,10 +491,7 @@ EqObjPtr Product::getUnsignedValue()
         {
             EqObjPtr scaled = this->getScale();
             Constant *s = dynamic_cast<Constant *>(scaled.get());
-            dsAssert(s != 0, "UNEXPECTED"); // this must be true
             const double val = s->getDoubleValue();
-
-            dsAssert(val < 0.0, "UNEXPECTED");
 
             EqObjPtr negval;
                 negval = con(-(s->dvalue));
@@ -552,7 +535,6 @@ EqObjPtr Product::getUnsignedValue()
 EqObjPtr Product::clone()
 {
     const size_t len = values.size();
-    dsAssert(len != 0, "UNEXPECTED");
     std::vector<EqObjPtr> tmp(len);
     for (size_t i = 0; i < len; ++i)
     {
@@ -587,7 +569,6 @@ EqObjPtr Product::subst(const std::string &str, EqObjPtr eqo)
 EqObjPtr Product::expand()
 {
     const size_t len = values.size();
-    dsAssert(len != 0, "UNEXPECTED");
     std::vector<EqObjPtr> tmp;
     tmp.reserve(len);
     std::vector<EqObjPtr> adds;
@@ -614,7 +595,6 @@ EqObjPtr Product::expand()
     EqObjPtr out;
     if (adds.empty())
     {
-        dsAssert(!tmp.empty(), "UNEXPECTED");
         out = scale;
     }
     else

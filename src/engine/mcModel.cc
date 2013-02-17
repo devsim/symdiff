@@ -16,7 +16,6 @@ limitations under the License.
 
 #include "mcModel.hh"
 #include "mcModelCompiler.hh"
-#include "dsAssert.hh"
 #include "Functions.hh"
 #include "Context.hh"
 
@@ -73,12 +72,10 @@ std::string Model::createStringValue() const
     return value;
 }
 
-/// Should make it possible to specify derivative
-EqObjPtr Model::Derivative(EqObjPtr foo)
+extern Eqo::EqObjPtr DLL_PUBLIC default_derivative_rule(Eqo::EqObjPtr self, Eqo::EqObjPtr foo)
 {
     Context &context = Context::GetInstance();
-
-    dsAssert(context.IsInModelList(value), "UNEXPECTED");
+    const std::string &value = self->stringValue();
 
     if (foo->stringValue() == value)
     {
@@ -98,13 +95,6 @@ EqObjPtr Model::Derivative(EqObjPtr foo)
 
     EqObjPtr ret;
 
-#if 0
-    if (dval && dval->isZero())
-    {
-      ret = con(0.0);
-    }
-    else
-#endif
     {
       std::string bar(value);
       bar += "__"; 
@@ -123,6 +113,12 @@ EqObjPtr Model::Derivative(EqObjPtr foo)
     }
 
     return ret;
+}
+
+EqObjPtr Model::Derivative(EqObjPtr foo)
+{
+  Context &context = Context::GetInstance();
+  return context.EvaluateModelDerivative(shared_from_this(), foo);
 }
 
 EqObjPtr Model::Simplify()

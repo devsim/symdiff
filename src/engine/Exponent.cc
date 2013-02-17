@@ -16,7 +16,6 @@ limitations under the License.
 
 #include "Exponent.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 
 namespace Eqo {
@@ -68,7 +67,6 @@ EqObjPtr Exponent::CombineProduct(std::vector<EqObjPtr> y)
    for (size_t i=0; i < len; ++i)
    {
       Exponent *Y = dynamic_cast<Exponent *>(y[i].get());
-      dsAssert(Y!=NULL, "UNEXPECTED");
       tmp.push_back(Y->value);
    }
    return EqObjPtr(new Exponent(EqObjPtr(new Add(tmp))));

@@ -5,7 +5,7 @@ package require symdifftcl
 proc maptest {myvar} {
    puts ""
    puts $myvar;
-   catch {set out [symdiff "$myvar;"]} out
+   catch {set out [symdiff "$myvar"]} out
    puts $out
 }
 
@@ -38,9 +38,9 @@ maptest "simplify(a*a+a*a)"
 maptest "simplify(a+a+a*a)"
 maptest "simplify(a+a+a+a*a)"
 
-maptest "simplify(y*pow(x,(-1)) * pow(x,y))";
-maptest "simplify(pow(x,(-1)) * pow(x,y)*y)";
-maptest "simplify(pow(x,(-1)) * pow(x,y)*x)";
+maptest "simplify(y*pow(x,(-1)) * pow(x,y))"
+maptest "simplify(pow(x,(-1)) * pow(x,y)*y)"
+maptest "simplify(pow(x,(-1)) * pow(x,y)*x)"
 
 maptest "unscaledval(2*x)"
 maptest "scale(2*x)"
@@ -56,20 +56,20 @@ maptest "simplify(a - b)"
 maptest "-simplify(a - b)"
 maptest "simplify(-simplify(a - b))"
 
-maptest "(-1*3*4*-3*x)";
-maptest "simplify(-1*3*4*-3*x)";
+maptest "(-1*3*4*-3*x)"
+maptest "simplify(-1*3*4*-3*x)"
 
-maptest "-a";
+maptest "-a"
 maptest "a++-+a"
-maptest "a+*+a";
-maptest "diff(-1*3*4*(-3)*x,x)";
-maptest "diff(simplify(-1*3*4*(-3)*x),x)";
-maptest "diff((-1*3*4*(-3)*x),x)";
+maptest "a+*+a"
+maptest "diff(-1*3*4*(-3)*x,x)"
+maptest "diff(simplify(-1*3*4*(-3)*x),x)"
+maptest "diff((-1*3*4*(-3)*x),x)"
 
-maptest "(a *(-a))";
-maptest "(a * -a)";
-maptest "(a * (+a))";
-maptest "(a * +a)";
+maptest "(a *(-a))"
+maptest "(a * -a)"
+maptest "(a * (+a))"
+maptest "(a * +a)"
 
 maptest "expand((a)*(c+d))"
 maptest "expand((a + b)*(c+d))"

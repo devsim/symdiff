@@ -28,10 +28,14 @@ void clearVariableMap() {
 /// error list should be empty on entry
 Eqo::EqObjPtr evaluateExpression(const std::string &x, error_t &errors)
 {
+    std::string y;
+    y.reserve(x.size() + 1);
+    y += x;
+    y += ";";
     lerrors = &errors;
     YY_BUFFER_STATE yyb = NULL;
 //    clearVariableMap();
-    yyb = mc_scan_string(x.c_str());
+    yyb = mc_scan_string(y.c_str());
     int retval = 0;
     retval = mcparse();
     if (yyb != NULL)

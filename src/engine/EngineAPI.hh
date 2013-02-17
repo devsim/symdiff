@@ -20,12 +20,15 @@ limitations under the License.
 #include "import.hh"
 #include <string>
 #include <vector>
+#include <set>
 namespace Eqo {
 class EquationObject;
 typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
 }
 
 namespace EngineAPI {
+enum EqObjType {CONST_OBJ=0, VARIABLE_OBJ, ADD_OBJ, PRODUCT_OBJ, EXPONENT_OBJ, POW_OBJ, LOG_OBJ, MODEL_OBJ, USERFUNC_OBJ, BLOGICAL_OBJ, ULOGICAL_OBJ, IF_OBJ, IFELSE_OBJ, NUM_TYPES};
+
 typedef Eqo::EqObjPtr (*EqUnaryFuncPtr) (Eqo::EqObjPtr);
 typedef Eqo::EqObjPtr (*EqBinaryFuncPtr) (Eqo::EqObjPtr, Eqo::EqObjPtr);
 
@@ -49,6 +52,10 @@ Eqo::EqObjPtr DLL_PUBLIC log (Eqo::EqObjPtr x);
 Eqo::EqObjPtr DLL_PUBLIC diff(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
 
 Eqo::EqObjPtr DLL_PUBLIC con(double x);
+
+Eqo::EqObjPtr DLL_PUBLIC mod(const char *x);
+
+Eqo::EqObjPtr DLL_PUBLIC mod(const std::string &x);
 
 Eqo::EqObjPtr DLL_PUBLIC var(const char *x);
 
@@ -89,5 +96,16 @@ EqUnaryFuncPtr DLL_PUBLIC getUnaryFuncPtr(const std::string &);
 
 std::string DLL_PUBLIC getName(Eqo::EqObjPtr x);
 std::string DLL_PUBLIC getType(Eqo::EqObjPtr x);
+std::set<std::string> DLL_PUBLIC getReferencedType(Eqo::EqObjPtr x, EqObjType t);
+double DLL_PUBLIC getDoubleValue(Eqo::EqObjPtr x);
+std::string DLL_PUBLIC getStringValue(Eqo::EqObjPtr x);
+EqObjType DLL_PUBLIC getEnumeratedType(Eqo::EqObjPtr x);
+std::vector<Eqo::EqObjPtr> DLL_PUBLIC getArgs(Eqo::EqObjPtr x);
+
+typedef bool (*inModelListCallback_ptr)(const std::string &);
+void DLL_PUBLIC SetModelListCallBack(inModelListCallback_ptr);
+
+typedef Eqo::EqObjPtr (*modelDerivativeRule_ptr)(Eqo::EqObjPtr, Eqo::EqObjPtr);
+void DLL_PUBLIC SetDerivativeRule(modelDerivativeRule_ptr);
 }
 #endif

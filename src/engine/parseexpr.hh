@@ -16,6 +16,7 @@ limitations under the License.
 
 #ifndef PARSEEXPR_HH
 #define PARSEEXPR_HH
+#include "import.hh"
 #include "dsmemory.hh"
 #include <list>
 #include <string>
@@ -31,7 +32,7 @@ typedef std::list<std::string> error_t;
 /// We are using the parser for a new purpose
 void clearVariableMap();
 
-Eqo::EqObjPtr evaluateExpression(const std::string &, error_t &);
+Eqo::EqObjPtr DLL_PUBLIC evaluateExpression(const std::string &, error_t &);
 }
 
 #endif

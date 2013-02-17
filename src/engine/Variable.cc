@@ -16,7 +16,6 @@ limitations under the License.
 
 #include "Variable.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 namespace Eqo {
 EqObjPtr Variable::getScale()

@@ -16,7 +16,6 @@ limitations under the License.
 
 #include "Pow.hh"
 #include "Functions.hh"
-#include "dsAssert.hh"
 #include <sstream>
 #include <cmath>
 #include <cstdlib>
