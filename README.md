@@ -2,7 +2,7 @@
 It is licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html), meaning it is available for use in your own software.
 
 ### Software Features:
-* [Documentation](http://github.com/devsim/symdiff/blob/master/doc/symdiff.pdf)
+* [Documentation](https://github.com/devsim/symdiff/blob/master/doc/symdiff.pdf?raw=true)
 * Expression parser
 * Symbolic differentiation of expressions with respect to arbitrary number of variables.
 * User defined differentiation rules for arbitrary functions
