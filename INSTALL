@@ -1,5 +1,5 @@
 Build packages required:
-cmake g++ flex bison python tcl
+cmake g++ flex bison python tcl tcl-dev python-dev
 
 C++ requirements:
 The compiler needs to support the TR1 extensions (e.g. shared_ptr<>).  
