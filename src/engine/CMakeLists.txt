@@ -21,7 +21,6 @@ SET (CXX_SRCS
     LogicalFunc.cc
     Add.cc
     Constant.cc
-    EquationObject.cc
     Exponent.cc
     IfElse.cc
     Log.cc

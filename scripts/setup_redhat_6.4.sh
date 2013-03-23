@@ -3,11 +3,11 @@
 CMAKE="/usr/bin/cmake"
 CXX="/usr/bin/g++"
 CC="/usr/bin/gcc"
-TCL_ARCHIVE="/usr/lib/libtclstub.a"
-TCL_INCLUDE="/usr/include/tcl8.5"
+TCL_ARCHIVE="/usr/lib64/libtclstub8.5.a"
+TCL_INCLUDE="/usr/include"
 TCL_BIN="/usr/bin/tclsh8.5"
-PYTHON_ARCHIVE="/usr/lib/libpython2.7.so"
-PYTHON_INCLUDE="/usr/include/python2.7"
+PYTHON_ARCHIVE="/usr/lib64/libpython2.6.so.1.0"
+PYTHON_INCLUDE="/usr/include/python2.6"
 PYTHON_BIN="/usr/bin/python"
 for TYPE in debug release; do
 ARCH=`uname -m`
