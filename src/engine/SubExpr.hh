@@ -16,7 +16,7 @@ limitations under the License.
 
 #ifndef SUBEXPR_HH
 #define SUBEXPR_HH
-#include "dsmemory.hh"
+#include <memory>
 #include "import.hh"
 
 #include <string>
@@ -28,7 +28,7 @@ limitations under the License.
 namespace Eqo
 {
 class EquationObject;
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 }
 
 typedef std::vector<std::string> ModelNameVector_t;

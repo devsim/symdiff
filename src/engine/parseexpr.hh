@@ -17,13 +17,13 @@ limitations under the License.
 #ifndef PARSEEXPR_HH
 #define PARSEEXPR_HH
 #include "import.hh"
-#include "dsmemory.hh"
+#include <memory>
 #include <list>
 #include <string>
 
 namespace Eqo {
     class EquationObject;
-    typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+    typedef std::shared_ptr<EquationObject> EqObjPtr;
 };
 
 namespace EvalExpr {

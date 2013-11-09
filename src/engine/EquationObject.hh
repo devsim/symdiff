@@ -17,7 +17,7 @@ limitations under the License.
 #ifndef EQUATIONOBJECT_H
 #define EQUATIONOBJECT_H
 
-#include "dsmemory.hh"
+#include <memory>
 #include "import.hh"
 #include <cassert>
 #include <iostream>
@@ -28,7 +28,7 @@ limitations under the License.
 
 namespace Eqo {
 class EquationObject;
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 /**
  Enumerated type quickly tells what type the derived class is.  May
  be faster than using dynamic_cast.  This is passed in the constructor
@@ -54,17 +54,17 @@ const char * const EqObjNames[] = {
 
 EqObjPtr con(double x);
 
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 std::set<std::string> UniteReferencedType(EqObjType, const std::vector<EqObjPtr> &x);
 std::set<std::string> UniteReferencedType(EqObjType, const EqObjPtr &op1, const EqObjPtr &op2);
 
 /**
    This is the abstract base class which provides the interface for all objects.
 */
-class EquationObject : public std::tr1::enable_shared_from_this<EquationObject>
+class EquationObject : public std::enable_shared_from_this<EquationObject>
 {
    public:
-      typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+      typedef std::shared_ptr<EquationObject> EqObjPtr;
 
       virtual std::vector<EqObjPtr> getArgs() = 0;
 

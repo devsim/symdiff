@@ -27,7 +27,7 @@ limitations under the License.
 
 
 namespace Eqo {
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 
 std::map<std::string, EqObjPtr> variableMap;
 

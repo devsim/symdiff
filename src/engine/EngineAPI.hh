@@ -16,14 +16,14 @@ limitations under the License.
 
 #ifndef ENGINEAPI_HH
 #define ENGINEAPI_HH
-#include "dsmemory.hh"
+#include <memory>
 #include "import.hh"
 #include <string>
 #include <vector>
 #include <set>
 namespace Eqo {
 class EquationObject;
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 }
 
 namespace EngineAPI {

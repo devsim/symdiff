@@ -24,8 +24,8 @@ Mac OS X:
 Mac OS X developer tools are required.
 Modify scripts/setup_apple.sh as necessary for your configuration and 
 run from the base directory of this project.
-The file scripts/setup_osx_10.6.8.sh is also available for OS X version 
-10.6.8.  Use "sw_vers -productVersion" to determine your OS X version.
+The file scripts/setup_osx_10.9.sh is also available for OS X version 
+10.9.  Use "sw_vers -productVersion" to determine your OS X version.
 cd osx_release
 make -j2
 

@@ -21,14 +21,14 @@ limitations under the License.
 #include <vector>
 #include <list>
 
-#include "dsmemory.hh"
+#include <memory>
 #include "import.hh"
 
 
 namespace Eqo
 {
 class EquationObject;
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 }
 
 typedef std::map<std::string, Eqo::EqObjPtr > ModelMap_t;

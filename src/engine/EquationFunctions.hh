@@ -16,14 +16,14 @@ limitations under the License.
 
 #ifndef EQUATION_FUNCTIONS_HH
 #define EQUATION_FUNCTIONS_HH
-#include "dsmemory.hh"
+#include <memory>
 #include "import.hh"
 #include <string>
 #include <utility>
 
 namespace Eqo {
 class EquationObject;
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 }
 
 namespace dsHelper {

@@ -18,13 +18,13 @@ limitations under the License.
 #define MC_CONTEXT_HH
 #include <map>
 #include <string>
-#include "dsmemory.hh"
+#include <memory>
 #include "import.hh"
 
 namespace Eqo
 {
 class EquationObject;
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 }
 
 typedef std::map<std::string, Eqo::EqObjPtr > ModelMap_t;

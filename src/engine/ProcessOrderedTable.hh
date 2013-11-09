@@ -18,7 +18,7 @@ limitations under the License.
 #define ORDEREDTABLE_H
 
 
-#include "dsmemory.hh"
+#include <memory>
 #include "import.hh"
 #include <vector>
 #include <map>
@@ -29,7 +29,7 @@ Get a table representation of an existing expression
 namespace Eqo
 {
 class EquationObject;
-typedef std::tr1::shared_ptr<EquationObject> EqObjPtr;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
 }
 
 struct OrderedTableData {
