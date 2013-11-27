@@ -83,7 +83,7 @@ void SubExpr::scanSubexpression(Eqo::EqObjPtr &eq)
   }
   else
   {
-    SubExprMap.insert(std::make_pair(eqstring, te));
+    SubExprMap.insert(std::make_pair(eqstring, SubExprData(te)));
     SubExprOrdered.push_back(eqstring);
   }
   //// Since this is the first time, we will look for temporaries which may be shared as well
