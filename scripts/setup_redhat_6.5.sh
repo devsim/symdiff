@@ -1,6 +1,7 @@
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
 CMAKE="/usr/bin/cmake"
+CMAKE_CXX_FLAGS="-std=c++0x"
 CXX="/usr/bin/g++"
 CC="/usr/bin/gcc"
 TCL_ARCHIVE="/usr/lib64/libtclstub8.5.a"
@@ -14,7 +15,18 @@ ARCH=`uname -m`
 #  for ARCH in i386 x86_64; do
     NAME=linux_${ARCH}_${TYPE}
     mkdir ${NAME}
-    (cd $NAME; ${CMAKE} -DCMAKE_OSX_ARCHITECTURES="i386;x86_64" -DCMAKE_BUILD_TYPE=${TYPE} -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_C_COMPILER=${CC} -DPYTHON_INCLUDE=${PYTHON_INCLUDE} -DPYTHON_ARCHIVE=${PYTHON_ARCHIVE} -DPYTHON_BIN=${PYTHON_BIN} -DTCL_INCLUDE=${TCL_INCLUDE} -DTCL_ARCHIVE=${TCL_ARCHIVE} -DTCL_BIN=${TCL_BIN}  ..)
+    (cd $NAME; ${CMAKE} \
+        -DCMAKE_CXX_FLAGS:STRING="${CMAKE_CXX_FLAGS}" \
+        -DCMAKE_BUILD_TYPE=${TYPE} \
+        -DCMAKE_CXX_COMPILER=${CXX} \
+        -DCMAKE_C_COMPILER=${CC} \
+        -DPYTHON_INCLUDE=${PYTHON_INCLUDE} \
+        -DPYTHON_ARCHIVE=${PYTHON_ARCHIVE} \
+        -DPYTHON_BIN=${PYTHON_BIN} \
+        -DTCL_INCLUDE=${TCL_INCLUDE} \
+        -DTCL_ARCHIVE=${TCL_ARCHIVE} \
+        -DTCL_BIN=${TCL_BIN} \
+        ..)
 #  done
 done
 mkdir -p bin
