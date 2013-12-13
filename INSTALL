@@ -22,7 +22,7 @@ API.  Currently tests are written for Tcl 8.5.
 
 Mac OS X:
 Mac OS X developer tools are required.
-Modify scripts/setup_apple.sh as necessary for your configuration and 
+Modify scripts/setup_osx_10.9.sh as necessary for your configuration and 
 run from the base directory of this project.
 The file scripts/setup_osx_10.9.sh is also available for OS X version 
 10.9.  Use "sw_vers -productVersion" to determine your OS X version.
@@ -33,8 +33,8 @@ Linux:
 Modify scripts/setup_linux.sh as necessary for your configuration and 
 run from the base directory of this project.  Ubuntu scripts are 
 available for the last two LTS releases:
-scripts/setup_ubuntu_10.04.sh
 scripts/setup_ubuntu_12.04.sh
+scripts/setup_redhate_6.5.sh
 
 Then go into the appropriate directory to build:
 cd linux_x86_64_release
