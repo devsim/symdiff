@@ -1,6 +1,7 @@
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
 CMAKE="/usr/bin/cmake"
+CMAKE_CXX_FLAGS="-std=c++11"
 CXX="/usr/bin/g++-4.7"
 CC="/usr/bin/gcc-4.7"
 TCL_ARCHIVE="/usr/lib/libtclstub.a"
