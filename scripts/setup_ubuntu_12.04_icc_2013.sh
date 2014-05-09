@@ -1,7 +1,8 @@
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
 CMAKE="/usr/bin/cmake"
-CMAKE_CXX_FLAGS="-std=c++11"
+CMAKE_C_FLAGS="-fp-model precise -fp-model source"
+CMAKE_CXX_FLAGS="-std=c++0x ${CMAKE_C_FLAGS}"
 CXX=icpc
 CC=icc
 TCL_ARCHIVE="/usr/lib/libtclstub.a"
@@ -16,6 +17,7 @@ ARCH=`uname -m`
     NAME=linux_${ARCH}_${TYPE}
     mkdir ${NAME}
     (cd $NAME; ${CMAKE} \
+        -DCMAKE_C_FLAGS:STRING="${CMAKE_C_FLAGS}" \
         -DCMAKE_CXX_FLAGS:STRING="${CMAKE_CXX_FLAGS}" \
         -DCMAKE_BUILD_TYPE=${TYPE} \
         -DCMAKE_CXX_COMPILER=${CXX} \
