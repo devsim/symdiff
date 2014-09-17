@@ -17,7 +17,7 @@ limitations under the License.
 #define IMPORT_HH
 #if defined _WIN32
 #define DLL_PUBLIC __declspec(dllexport) // Note: actually gcc seems to also supports this syntax.
-#define DLL_PUBLIC __attribute__((dllimport))
+#define DLL_LOCAL __declspec(dllimport)
 #else
 #define DLL_PUBLIC __attribute__ ((visibility("default")))
 #define DLL_LOCAL  __attribute__ ((visibility("hidden")))

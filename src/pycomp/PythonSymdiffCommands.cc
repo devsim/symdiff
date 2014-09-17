@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ***/
 
+/* removes Python_d.lib from any contention */
+//#undef _DEBUG
 #include "Python.h"
 #include "import.h"
 
@@ -51,7 +53,6 @@ static dsHelper::ret_pair GetStringArgument(PyObject *args)
   return result;
 }
 
-extern "C" {
 typedef std::vector<std::string> StringVector_t;
 
 static bool HasZeroArguments(PyObject *args)
@@ -359,6 +360,7 @@ static struct PyMethodDef symdiff_methods[] = {
 
 
 
+extern "C" {
 //http://docs.python.org/2/extending/extending.html
 void DLL_PUBLIC initsymdiff()
 {
@@ -371,6 +373,7 @@ void DLL_PUBLIC initsymdiff()
   Py_INCREF(symdiff_exception);
   PyModule_AddObject(m, "SymdiffError", symdiff_exception);
 }
+}
 
 #if 0
 static struct _inittab symdiffinittab[] =
@@ -379,6 +382,5 @@ static struct _inittab symdiffinittab[] =
   {(char *)NULL, NULL}
 };
 #endif
-}
 
 
