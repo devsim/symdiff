@@ -10,11 +10,11 @@ TCL_BIN="/usr/bin/tclsh"
 PYTHON_ARCHIVE="/usr/lib/libpython2.7.dylib"
 PYTHON_INCLUDE="/usr/include/python2.7"
 PYTHON_BIN="/usr/bin/python"
+#-DCMAKE_OSX_ARCHITECTURES="i386;x86_64" \
 for TYPE in debug release; do
     NAME=osx_${TYPE}
     mkdir ${NAME}
     (cd $NAME; ${CMAKE} \
-        -DCMAKE_OSX_ARCHITECTURES="i386;x86_64" \
         -DCMAKE_CXX_FLAGS:STRING="${CMAKE_CXX_FLAGS}" \
         -DCMAKE_BUILD_TYPE=${TYPE}  \
         -DCMAKE_CXX_COMPILER=${CXX}  \
