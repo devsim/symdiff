@@ -43,7 +43,7 @@ class Pow : public EquationObject {
         EqObjPtr expand();
 
         bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal() {assert(false); return con(0);}
+        EqObjPtr getReciprocal();
         std::set<std::string> getReferencedType(Eqo::EqObjType rt)
         {
             return UniteReferencedType(rt, base, exponent);

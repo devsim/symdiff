@@ -286,5 +286,10 @@ EqObjPtr Pow::expand()
     return out;
 }
 
+EqObjPtr Pow::getReciprocal() {
+  assert(false);
+  return con(0);
+}
+
 }
 

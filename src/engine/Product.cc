@@ -633,4 +633,10 @@ EqObjPtr Product::expand()
     return out;
 }
 
+EqObjPtr Product::getReciprocal()
+{
+  assert(false);
+  return con(0);
+}
+
 }

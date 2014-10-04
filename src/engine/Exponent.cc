@@ -129,5 +129,11 @@ EqObjPtr Exponent::expand()
 {
     return exp(value->expand());
 }
+
+EqObjPtr Exponent::getReciprocal()
+{
+  assert(false);
+  return con(0);
+}
 }
 

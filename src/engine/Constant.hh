@@ -49,10 +49,7 @@ class Constant : public EquationObject {
           return !(this->isZero());
         }
 
-        EqObjPtr getReciprocal()
-        {
-          return con(1.0/dvalue);
-        }
+        EqObjPtr getReciprocal();
 
         double getDoubleValue()
         {

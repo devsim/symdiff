@@ -17,6 +17,7 @@ limitations under the License.
 #include "SubExpr.hh"
 #include "EquationObject.hh"
 #include "mcModel.hh"
+#include "Functions.hh"
 
 #include <iostream>
 #include <sstream>

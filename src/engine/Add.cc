@@ -333,5 +333,11 @@ EqObjPtr Add::expand()
     return EqObjPtr(n);
 }
 
+EqObjPtr Add::getReciprocal()
+{
+  assert(false);
+  return con(0);
+}
+
 }
 

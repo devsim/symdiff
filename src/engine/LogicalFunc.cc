@@ -125,6 +125,12 @@ EqObjPtr UnaryLogical::subst(const std::string &str, EqObjPtr eqo)
   }
 }
 
+EqObjPtr UnaryLogical::getReciprocal()
+{
+  assert(false);
+  return con(0);
+}
+
 BinaryLogical::BinaryLogical(const std::string &op, EqObjPtr x, EqObjPtr y) : EquationObject(BLOGICAL_OBJ), binaryOperator(op), arg1(x), arg2(y)
 {
 }
@@ -225,6 +231,12 @@ EqObjPtr BinaryLogical::subst(const std::string &str, EqObjPtr eqo)
   {
     return EqObjPtr(new BinaryLogical(binaryOperator, arg1->subst(str,eqo), arg2->subst(str,eqo)));
   }
+}
+
+EqObjPtr BinaryLogical::getReciprocal()
+{
+  assert(false);
+  return con(0);
 }
 
 }

@@ -21,6 +21,7 @@ limitations under the License.
 #include "UserFunc.hh"
 #include "mcModel.hh"
 #include "Context.hh"
+#include "Functions.hh"
 
 #include <iostream>
 #include <list>

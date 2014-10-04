@@ -50,7 +50,7 @@ class IfObj : public EquationObject
         }
 
         bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal() {assert(false); return con(0);}
+        EqObjPtr getReciprocal();
 
         std::set<std::string> getReferencedType(Eqo::EqObjType rt);
 
@@ -100,7 +100,7 @@ class IfElseObj : public EquationObject
         }
 
         bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal() {assert(false); return con(0);}
+        EqObjPtr getReciprocal();
 
         std::set<std::string> getReferencedType(Eqo::EqObjType rt);
 

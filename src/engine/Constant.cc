@@ -126,5 +126,15 @@ EqObjPtr Constant::expand()
 {
     return shared_from_this();
 }
+
+EqObjPtr Constant::getScale()
+{
+   return shared_from_this();
+}
+
+EqObjPtr Constant::getReciprocal()
+{
+  return con(1.0/dvalue);
+}
 }
 

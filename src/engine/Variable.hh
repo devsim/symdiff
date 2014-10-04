@@ -57,7 +57,7 @@ class Variable : public EquationObject {
         }
 
         bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal() {assert(false); return con(0);}
+        EqObjPtr getReciprocal();
         std::set<std::string> getReferencedType(Eqo::EqObjType rt) {
             return CreateSetIfThisType(rt);
         }

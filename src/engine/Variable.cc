@@ -112,8 +112,10 @@ EqObjPtr Variable::expand()
     return shared_from_this();
 }
 
-EqObjPtr Constant::getScale()
+EqObjPtr Variable::getReciprocal()
 {
-   return shared_from_this();
+  assert(false);
+  return con(0);
 }
 }
+

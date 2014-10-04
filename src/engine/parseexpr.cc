@@ -16,6 +16,7 @@ limitations under the License.
 
 #include "parseexpr.hh"
 #include "mcTest.hh"
+#include "Functions.hh"
 #include <sstream>
 namespace EvalExpr {
 static error_t *lerrors;

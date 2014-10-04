@@ -158,5 +158,10 @@ bool Model::isOne()
    return false;
 }
 
+EqObjPtr Model::getReciprocal()
+{
+  assert(false);
+  return con(0);
+}
 }
 

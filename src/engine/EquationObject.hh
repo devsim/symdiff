@@ -52,8 +52,6 @@ const char * const EqObjNames[] = {
     "ifelse"
 };
 
-EqObjPtr con(double x);
-
 typedef std::shared_ptr<EquationObject> EqObjPtr;
 std::set<std::string> UniteReferencedType(EqObjType, const std::vector<EqObjPtr> &x);
 std::set<std::string> UniteReferencedType(EqObjType, const EqObjPtr &op1, const EqObjPtr &op2);

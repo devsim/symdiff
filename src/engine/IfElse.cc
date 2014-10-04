@@ -132,6 +132,12 @@ EqObjPtr IfObj::subst(const std::string &str, EqObjPtr eqo)
     }
 }
 
+EqObjPtr IfObj::getReciprocal()
+{
+  assert(false);
+  return con(0);
+}
+
 IfElseObj::IfElseObj(EqObjPtr t, EqObjPtr a1, EqObjPtr a2) : EquationObject(IFELSE_OBJ), test(t), arg1(a1), arg2(a2)
 {
 }
@@ -226,6 +232,12 @@ EqObjPtr IfElseObj::subst(const std::string &str, EqObjPtr eqo)
   {
     return EqObjPtr(new IfElseObj(test->subst(str, eqo), arg1->subst(str,eqo), arg2->subst(str,eqo)));
   }
+}
+
+EqObjPtr IfElseObj::getReciprocal()
+{
+  assert(false);
+  return con(0);
 }
 
 }

@@ -67,7 +67,7 @@ class UnaryLogical : public EquationObject
         }
 
         bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal() {assert(false); return con(0);}
+        EqObjPtr getReciprocal();
 
         std::set<std::string> getReferencedType(Eqo::EqObjType rt) {
             return arg->getReferencedType(rt);
@@ -124,7 +124,7 @@ class BinaryLogical : public EquationObject
         }
 
         bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal() {assert(false); return con(0);}
+        EqObjPtr getReciprocal();
 
         std::set<std::string> getReferencedType(Eqo::EqObjType rt) {
             return UniteReferencedType(rt, arg1, arg2);

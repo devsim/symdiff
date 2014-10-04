@@ -144,5 +144,11 @@ EqObjPtr Log::expand()
 {
     return log(value->expand());
 }
+
+EqObjPtr Log::getReciprocal()
+{
+  assert(false);
+  return con(0);
+}
 }
 

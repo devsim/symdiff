@@ -26,6 +26,11 @@ limitations under the License.
 #include "Variable.hh"
 namespace Eqo {
 /// Non member functions for intuitive math operations
+inline EqObjPtr con(double x)
+{
+   return EqObjPtr(new Constant(x));
+}
+
 inline EqObjPtr operator* (EqObjPtr x, EqObjPtr y)
 {
   EqObjPtr ret;
@@ -168,11 +173,6 @@ inline EqObjPtr log (EqObjPtr x)
 inline EqObjPtr diff(EqObjPtr x, EqObjPtr y)
 {
    return x->Derivative(y);
-}
-
-inline EqObjPtr con(double x)
-{
-   return EqObjPtr(new Constant(x));
 }
 
 inline EqObjPtr var(const char *x)
