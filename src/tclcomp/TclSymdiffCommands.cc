@@ -33,7 +33,7 @@ static Tcl_Obj *returnList(Tcl_Interp *interp, const std::vector<size_t> &index)
   Tcl_Obj *obj = Tcl_NewObj();
   for (size_t i = 0; i < index.size(); ++i)
   {
-    Tcl_ListObjAppendElement(interp, obj, Tcl_NewIntObj(index[i]));
+    Tcl_ListObjAppendElement(interp, obj, Tcl_NewIntObj(static_cast<int>(index[i])));
   }
   return obj;
 }
