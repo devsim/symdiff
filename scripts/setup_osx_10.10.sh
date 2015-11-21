@@ -1,6 +1,6 @@
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
-CMAKE="/usr/bin/cmake"
+CMAKE="cmake"
 CMAKE_CXX_FLAGS=""
 CXX="/usr/bin/g++"
 CC="/usr/bin/gcc"
