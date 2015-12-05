@@ -22,7 +22,7 @@ limitations under the License.
 #include "mcParser.hh"
 #include "EngineAPI.hh"
 // For isatty
-#ifdef WIN32
+#ifdef _WIN32
 #include <io.h>
 #define YY_NO_UNISTD_H
 #else
