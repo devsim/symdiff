@@ -1,0 +1,25 @@
+
+language: cpp
+
+os:
+  - linux
+  - osx
+
+branches:
+  only:
+    - master
+
+before_install:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+    sudo apt-get install tcl8.5 tcl8.5-dev tcl-dev python2.7 python2.7-dev;
+    fi
+
+script:
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+    (bash scripts/setup_ubuntu_12.04.sh && cd linux_x86_64_release && make -j2 && make test);
+    fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+    (bash scripts/setup_osx_10.10.sh && cd osx_release && make -j2 && make test);
+    fi
+
+
