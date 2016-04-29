@@ -24,10 +24,12 @@ ENDIF (WIN32)
 
 ENABLE_TESTING()
 
+IF(TCLMAIN)
 SET (TCLTESTS parsetest_tcl symdiff1 symdiff2 symdiff3 symdiff4 arrhenius_tcl units table)
 FOREACH(I ${TCLTESTS})
 ADD_TEST("${I}" ${RUNDIFFTEST} "${TCLCOMP} < ${RUNDIR}/${I}.tcl" ${GOLDENDIR} ${I}.out ${RUNDIR} ${OUTPUTDIR})
 ENDFOREACH(I)
+ENDIF(TCLMAIN)
 
 SET (EXAMPLES_DIR ${PROJECT_SOURCE_DIR}/examples)
 SET (PYTHONTESTS parsetest deftest arrhenius modellist1 ordered remove1 subexpression1 undefined1 utf8 models1 table)

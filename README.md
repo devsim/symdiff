@@ -1,3 +1,9 @@
+
+[![Build Status](https://travis-ci.org/devsim/symdiff.svg?branch=master)](https://travis-ci.org/devsim/symdiff)
+[![Build status](https://ci.appveyor.com/api/projects/status/github/devsim/symdiff?branch=master&svg=true)](https://ci.appveyor.com/project/devsim/symdiff)
+
+
+
 **SYMDIFF** is a tool for symbolic differentiation.  The source code is provided by Devsim LLC ([http://www.devsim.com](http://www.devsim.com)).
 It is licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.html), meaning it is available for use in your own software.
 

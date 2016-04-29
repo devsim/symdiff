@@ -1,5 +1,7 @@
 PROJECT (SYMDIFF)
 
+OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
+
 SET (SUBDIRS
     src
     testing
@@ -9,6 +11,7 @@ SET (SUBDIRS
 SITE_NAME(HOSTNAME)
 MESSAGE("Hostname: ${HOSTNAME}")
 ADD_DEFINITIONS(-DSYMDIFF_VERSION_STRING="\\"0.00\\""  -DSYMDIFF_COPYRIGHT_YEAR="\\"2010\\"")
+OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
 
 
 set(PROJECT_BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
