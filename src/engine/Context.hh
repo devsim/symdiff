@@ -65,6 +65,7 @@ class DLL_PUBLIC Context {
     void          SetDerivativeRule(modelDerivativeRule_ptr);
     ModelMap_t  &GetModelMap();
 
+    void          ClearAllModels();
     void          ClearModel(const std::string &);
     void          DeclareModel(const std::string &);
     void          DefineModel(const std::string &, Eqo::EqObjPtr);

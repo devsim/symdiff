@@ -180,6 +180,8 @@ Eqo::EqObjPtr processSubstFunction(const std::string &function, const std::vecto
 Eqo::EqObjPtr processClearFunction()
 {
    Eqo::UserFuncMap.clear();
+   Context &context = Context::GetInstance();
+   context.ClearAllModels();
    return Eqo::con(0);
 }
 

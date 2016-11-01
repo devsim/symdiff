@@ -79,6 +79,11 @@ Eqo::EqObjPtr Context::FindInModelList(const std::string &str)
   return ret;
 }
 
+void Context::ClearAllModels()
+{
+  context_data_.model_list_.clear();
+}
+
 void Context::ClearModel(const std::string &str)
 {
   ModelMap_t::iterator it = context_data_.model_list_.find(str);
