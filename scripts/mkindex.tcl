@@ -1,1 +1,1 @@
- pkg_mkIndex -lazy . 
+pkg_mkIndex . libsymdifftcl.dylib 
