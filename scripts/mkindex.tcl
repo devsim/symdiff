@@ -1,1 +1,2 @@
-pkg_mkIndex . libsymdifftcl.dylib 
+set ext [info sharedlibextension]
+pkg_mkIndex . libsymdifftcl${ext} 
