@@ -33,7 +33,7 @@ skip_tags: true
 #---------------------------------#
 
 # Operating system (build VM template)
-os: Visual Studio 2015
+os: Visual Studio 2017
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -110,6 +110,7 @@ install:
   # by default, all script lines are interpreted as batch
   - appveyor DownloadFile http://downloads.activestate.com/ActiveTcl/releases/8.5.18.0/ActiveTcl8.5.18.0.298892-win32-x86_64-threaded.exe
   - ActiveTcl8.5.18.0.298892-win32-x86_64-threaded.exe --directory C:\Tcl
+  - appveyor DownloadFile https://cygwin.com/setup-x86.exe
   - C:\cygwin\setup-x86.exe -qnNdO -R C:/cygwin -s http://cygwin.mirror.constant.com -l C:/cygwin/var/cache/setup -P flex
   - C:\cygwin\bin\bash.exe scripts/setup_appveyor.sh
 
