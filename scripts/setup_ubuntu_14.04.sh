@@ -9,7 +9,7 @@ TCL_INCLUDE="/usr/include/tcl"
 TCL_BIN="/usr/bin/tclsh"
 PYTHON_ARCHIVE="/usr/lib/x86_64-linux-gnu/libpython2.7.so"
 PYTHON_INCLUDE="/usr/include/python2.7"
-PYTHON_BIN="/usr/bin/python"
+PYTHON_BIN="/usr/bin/python2.7"
 for TYPE in debug release; do
 ARCH=`uname -m`
 #  for ARCH in i386 x86_64; do
