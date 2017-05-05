@@ -34,7 +34,7 @@ cat << EOF > bin/symdiff
 set -e
 progname="\$0"
 curdir=\`dirname "\$progname"\`
-export DYLD_LIBRARY_PATH=\${curdir}/../lib:${HOME}/anaconda/lib
+export DYLD_LIBRARY_PATH=\${curdir}/../lib
 export PYTHONPATH=\${curdir}/../lib
 ${PYTHON_BIN} \$*
 EOF
