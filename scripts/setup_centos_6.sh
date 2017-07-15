@@ -1,9 +1,9 @@
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
-CMAKE="/usr/bin/cmake"
-CMAKE_CXX_FLAGS="-std=c++0x"
-CXX="/usr/bin/g++"
-CC="/usr/bin/gcc"
+CMAKE="/usr/bin/cmake3"
+CMAKE_CXX_FLAGS=""
+CXX="/opt/rh/devtoolset-6/root/usr/bin/g++"
+CC="/opt/rh/devtoolset-6/root/usr/bin/gcc"
 TCL_ARCHIVE="$HOME/anaconda/lib/libtclstub8.5.a"
 TCL_INCLUDE="$HOME/anaconda/include"
 TCL_BIN="$HOME/anaconda/bin/tclsh8.5"

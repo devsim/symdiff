@@ -2,6 +2,8 @@ PROJECT (SYMDIFF)
 
 OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
 
+set (CMAKE_CXX_STANDARD 11)
+
 SET (SUBDIRS
     src
     testing

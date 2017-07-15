@@ -2,7 +2,7 @@
 # http://creativecommons.org/publicdomain/zero/1.0/
 
 # Note: run this file using bash
-CMAKE=/cygdrive/C/Program\ Files\ \(x86\)/CMake/bin/cmake.exe
+CMAKE=/cygdrive/C/Program\ Files/CMake/bin/cmake.exe
 SYMDIFF_CONFIG="appveyor"
 
 #/usr/bin/mkdir -p win32
