@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
 CMAKE="/usr/bin/cmake3"
@@ -7,9 +9,10 @@ CC="/usr/bin/gcc"
 TCL_ARCHIVE="/usr/lib64/libtclstub8.6.a"
 TCL_INCLUDE="/usr/include"
 TCL_BIN="/usr/bin/tclsh8.6"
-PYTHON_ARCHIVE="$HOME/anaconda/lib/libpython2.7.so"
-PYTHON_INCLUDE="$HOME/anaconda/include/python2.7"
-PYTHON_BIN="$HOME/anaconda/bin/python"
+
+PYTHON_ARCHIVE="-lpython2.7"
+PYTHON_INCLUDE="/usr/include/python2.7"
+PYTHON_BIN="/usr/bin/python2.7"
 for TYPE in debug release; do
 ARCH=`uname -m`
 #  for ARCH in i386 x86_64; do
