@@ -33,6 +33,8 @@ limitations under the License.
 //#include "FunctionTables.hh"
 #include "Context.hh"
 #define YY_NO_UNPUT
+// remove clang compiler warning about deprecated keyword
+#define register
 %}
 %option noyywrap
 %option nounput

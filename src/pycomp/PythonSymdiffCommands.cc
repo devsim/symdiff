@@ -17,7 +17,7 @@ limitations under the License.
 /* removes Python_d.lib from any contention */
 //#undef _DEBUG
 #ifdef _WIN32
-/* annoying warning on windows for function we don't use */
+/* remove warning on windows for function we do not use */
 #define HAVE_ROUND
 #endif
 #include "Python.h"
