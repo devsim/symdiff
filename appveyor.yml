@@ -215,7 +215,7 @@ build_script:
 # to run your custom scripts instead of automatic tests
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
-  - SET PATH=c:\Miniconda-x64;%PATH%
+  - SET PATH=c:\Miniconda-x64;c:\Miniconda-x64\Library\bin;%PATH%
   #- SET PATH=c:\Tcl\bin;c:\Miniconda-x64;%PATH%
   #- bin\symdiff_tcl.bat %APPVEYOR_BUILD_FOLDER%\testing\arrhenius_tcl.tcl 
   #- bin\symdiff.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
