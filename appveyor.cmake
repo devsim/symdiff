@@ -6,7 +6,7 @@
 #SET(TCL_INCLUDE "c:/Tcl/include")
 #SET(TCL_ARCHIVE "c:/Tcl/lib/tclstub85.lib")
 SET(TCL_INCLUDE "c:/Miniconda-x64/Library/include")
-SET(TCL_ARCHIVE "c:/Miniconda-x64/Library/lib/tcl86t.lib")
+SET(TCL_ARCHIVE "c:/Miniconda-x64/Library/lib/tclstub86.lib")
 SET(TCL_BIN     "c:/Miniconda-x64/Library/bin/tclsh.exe")
 SET (PYTHON_ARCHIVE C:/Miniconda-x64/libs/python27.lib)
 SET (PYTHON_INCLUDE C:/Miniconda-x64/include)
