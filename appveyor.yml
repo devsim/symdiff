@@ -15,10 +15,10 @@ version: 1.{build}
 # version: 1.0.{build}-{branch}
 
 # branches to build
-branches:
-  # whitelist
-  only:
-    - master
+#branches:
+#  # whitelist
+#  only:
+#    - master
 
 # Do not build on tags (GitHub only)
 skip_tags: true
