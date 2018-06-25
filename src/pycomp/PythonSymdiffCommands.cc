@@ -406,8 +406,7 @@ static struct PyModuleDef moduledef = {
 
 #define INITERROR return NULL
 
-DLL_PUBLIC PyMODINIT_FUNC
-PyInit_symdiff_py3(void)
+DLL_PUBLIC PyObject *PyInit_symdiff_py3(void)
 #else
 #define INITERROR return
 void DLL_PUBLIC initsymdiff_py2()
