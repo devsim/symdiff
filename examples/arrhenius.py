@@ -20,5 +20,5 @@ remove_zeros()
 mylist = ordered_list('omega_dot_H', 'omega_dot_H__T', 'omega_dot_H__H', 'omega_dot_H__HCN', 'omega_dot_H__AR', 'omega_dot_H__CN')
 for i in mylist:
   mv = symdiff("model_value(%s);" % i)
-  print "%s, %s" % (i, mv)
+  print("%s, %s" % (i, mv))
 

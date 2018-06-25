@@ -5,4 +5,4 @@ from symdiff import *
 symdiff('define_model(x, 0)')
 symdiff('define_model(y, x + z)')
 remove_zeros()
-print('%s' % symdiff('model_value(y)'))
+print(('%s' % symdiff('model_value(y)')))

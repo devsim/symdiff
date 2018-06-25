@@ -38,6 +38,20 @@ namespace {
   PyObject *symdiff_exception = NULL;
 };
 
+namespace {
+struct module_state {
+  module_state() : error(nullptr) {};
+  PyObject *error;
+};
+
+#if PY_MAJOR_VERSION >= 3
+#define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
+#else
+#define GETSTATE(m) (&_state)
+static struct module_state _state;
+#endif
+}
+
 /// Visual C++ does not allow c++ return values in extern "C"
 /// There will be a python error unless there is only 1 argument
 static dsHelper::ret_pair GetStringArgument(PyObject *args)
@@ -366,16 +380,55 @@ static struct PyMethodDef symdiff_methods[] = {
 
 extern "C" {
 //http://docs.python.org/2/extending/extending.html
-void DLL_PUBLIC initsymdiff()
+#if PY_MAJOR_VERSION >= 3
+static int symdiff_traverse(PyObject *m, visitproc visit, void *arg) {
+    Py_VISIT(GETSTATE(m)->error);
+    return 0;
+}
+
+static int symdiff_clear(PyObject *m) {
+    Py_CLEAR(GETSTATE(m)->error);
+    return 0;
+}
+
+
+static struct PyModuleDef moduledef = {
+        PyModuleDef_HEAD_INIT,
+        "symdiff_py3",
+        NULL,
+        sizeof(struct module_state),
+        symdiff_methods,
+        NULL,
+        symdiff_traverse,
+        symdiff_clear,
+        NULL
+};
+
+#define INITERROR return NULL
+
+DLL_PUBLIC PyMODINIT_FUNC
+PyInit_symdiff_py3(void)
+#else
+#define INITERROR return
+void DLL_PUBLIC initsymdiff_py2()
+#endif
 {
-  PyObject *m = Py_InitModule("symdiff", symdiff_methods);
+#if PY_MAJOR_VERSION >= 3
+  PyObject *m = PyModule_Create(&moduledef);
+#else
+  PyObject *m = Py_InitModule("symdiff_py2", symdiff_methods);
+#endif
   if (m == NULL)
   {
-    return;
+    INITERROR;
   }
   symdiff_exception = PyErr_NewException(const_cast<char *>("symdiff.SymdiffError"), NULL, NULL);
   Py_INCREF(symdiff_exception);
   PyModule_AddObject(m, "SymdiffError", symdiff_exception);
+
+#if PY_MAJOR_VERSION >=3
+  return m;
+#endif
 }
 }
 

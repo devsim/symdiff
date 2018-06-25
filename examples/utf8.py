@@ -4,7 +4,7 @@ from symdiff import *
 # http://creativecommons.org/publicdomain/zero/1.0/
 
 alpha = 'α'
-print alpha
+print(alpha)
 x = symdiff('%s' % alpha);
 x = symdiff('diff(%s^2, %s)' % (alpha, alpha));
-print x
+print(x)
