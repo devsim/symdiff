@@ -225,7 +225,7 @@ test_script:
   #- SET PATH=c:\Tcl\bin;c:\Miniconda-x64;%PATH%
   #- bin\symdiff_tcl.bat %APPVEYOR_BUILD_FOLDER%\testing\arrhenius_tcl.tcl 
   #- bin\symdiff.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
-  - bin\symdiff_py3.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
+  #- bin\symdiff_py3.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
   - cd %APPVEYOR_BUILD_FOLDER%\win64
   #- ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ctest
