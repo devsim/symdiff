@@ -220,7 +220,7 @@ test_script:
   #- DIR %APPVEYOR_BUILD_FOLDER%\lib\symdiff
   # needed for windows path issues
   # symdiff_py2.pyd and symdiff_py3.pyd are already there
-  COPY %APPVEYOR_BUILD_FOLDER%\lib\symdiff.dll %APPVEYOR_BUILD_FOLDER%\lib\symdiff\
+  - COPY %APPVEYOR_BUILD_FOLDER%\lib\symdiff.dll %APPVEYOR_BUILD_FOLDER%\lib\symdiff\
   #- SET PATH=c:\Tcl\bin;c:\Miniconda-x64;%PATH%
   - bin\symdiff_tcl.bat %APPVEYOR_BUILD_FOLDER%\testing\arrhenius_tcl.tcl 
   - bin\symdiff.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
