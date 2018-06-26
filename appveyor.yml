@@ -37,6 +37,7 @@ os: Visual Studio 2017
 
 # scripts that are called at very beginning, before repo cloning
 init:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - git config --global core.autocrlf input
 
 # clone directory
@@ -215,7 +216,7 @@ build_script:
 # to run your custom scripts instead of automatic tests
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
-  - SET PATH=c:\Miniconda-x64;c:\Miniconda-x64\Library\bin;%PATH%
+  #- SET PATH=c:\Miniconda-x64;c:\Miniconda-x64\Library\bin;%PATH%
   #- DIR %APPVEYOR_BUILD_FOLDER%\lib
   #- DIR %APPVEYOR_BUILD_FOLDER%\lib\symdiff
   # needed for windows path issues
@@ -223,8 +224,8 @@ test_script:
   - COPY %APPVEYOR_BUILD_FOLDER%\lib\symdiff.dll %APPVEYOR_BUILD_FOLDER%\lib\symdiff\
   #- SET PATH=c:\Tcl\bin;c:\Miniconda-x64;%PATH%
   #- bin\symdiff_tcl.bat %APPVEYOR_BUILD_FOLDER%\testing\arrhenius_tcl.tcl 
-  - bin\symdiff.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
-  - bin\symdiff_py3.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
+  #- bin\symdiff.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
+  #- bin\symdiff_py3.bat %APPVEYOR_BUILD_FOLDER%\examples\arrhenius.py
   - cd %APPVEYOR_BUILD_FOLDER%\win64
   - ctest
 
