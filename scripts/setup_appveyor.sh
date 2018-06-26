@@ -13,15 +13,26 @@ SYMDIFF_CONFIG="appveyor"
 #(cd win64; "$CMAKE" -G "Visual Studio 14 Win64" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON ..)
 
 libpath=`/usr/bin/cygpath -w $PWD/lib`
+
+python2path=`/usr/bin/cygpath -w c:\\Miniconda-x64\\python`
 #echo $libpath
 /usr/bin/mkdir -p bin
 /usr/bin/cat << EOF > bin/symdiff.bat
 @setlocal
 @echo off
-SET PYTHONPATH=$libpath;%PYTHONPATH%
-python %*
+SET PYTHONPATH=$libpath
+$python2path %*
 EOF
 /usr/bin/chmod +x bin/symdiff.bat
+
+python3path=`/usr/bin/cygpath -w c:\\Miniconda3-x64\\python`
+/usr/bin/cat << EOF > bin/symdiff_py3.bat
+@setlocal
+@echo off
+SET PYTHONPATH=$libpath
+$python3path %*
+EOF
+/usr/bin/chmod +x bin/symdiff_py3.bat
 
 # TCLLIBPATH must always use forward slashes
 libpath=`/usr/bin/cygpath -m $PWD/lib`
