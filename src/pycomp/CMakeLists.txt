@@ -10,7 +10,7 @@ SET (PYTHON_SRCS
 #SET(PYVERSION symdiff_py2)
 
 FUNCTION(build_python_version arg1)
-ADD_LIBRARY (${arg1} SHARED ${PYTHON_SRCS})
+ADD_LIBRARY (${arg1} SHARED ${PYTHON_SRCS} $<TARGET_OBJECTS:symdiff_objects>)
 IF(WIN32)
 SET_TARGET_PROPERTIES(${arg1} PROPERTIES SUFFIX ".pyd" OUTPUT_NAME "${arg1}")
 ELSE(WIN32)
@@ -36,13 +36,11 @@ ENDFUNCTION(build_python_version arg1)
 build_python_version(symdiff_py2)
 TARGET_INCLUDE_DIRECTORIES (symdiff_py2 PUBLIC ${PYTHON_INCLUDE})
 TARGET_LINK_LIBRARIES (symdiff_py2 symdiff ${PYTHON_ARCHIVE})
-#TARGET_LINK_LIBRARIES (symdiff_py2 $<TARGET_OBJECTS:symdiff_objects> ${PYTHON_ARCHIVE})
 
 IF (PYTHON3)
 build_python_version(symdiff_py3)
 TARGET_INCLUDE_DIRECTORIES (symdiff_py3 PUBLIC ${PYTHON3_INCLUDE})
 TARGET_LINK_LIBRARIES (symdiff_py3 symdiff ${PYTHON3_ARCHIVE})
-#TARGET_LINK_LIBRARIES (symdiff_py3 $<TARGET_OBJECTS:symdiff_objects> ${PYTHON3_ARCHIVE})
 ENDIF (PYTHON3)
 
 

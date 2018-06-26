@@ -41,7 +41,6 @@ cat << EOF > bin/symdiff
 set -e
 progname="\$0"
 curdir=\`dirname "\$progname"\`
-export DYLD_LIBRARY_PATH=\${curdir}/../lib
 export PYTHONPATH=\${curdir}/../lib
 ${PYTHON_BIN} \$*
 EOF
@@ -52,7 +51,6 @@ cat << EOF > bin/symdiff_py3
 set -e
 progname="\$0"
 curdir=\`dirname "\$progname"\`
-export DYLD_LIBRARY_PATH=\${curdir}/../lib
 export PYTHONPATH=\${curdir}/../lib
 ${PYTHON3_BIN} \$*
 EOF
@@ -63,7 +61,6 @@ cat << EOF > bin/symdiff_tcl
 set -e
 progname="\$0"
 curdir=\`dirname "\$progname"\`
-export DYLD_LIBRARY_PATH=\${curdir}/../lib
 export TCLLIBPATH=\${curdir}/../lib
 ${TCL_BIN} \$*
 EOF
