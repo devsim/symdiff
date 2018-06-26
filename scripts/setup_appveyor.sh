@@ -20,6 +20,7 @@ python2path='c:\Miniconda-x64\python'
 /usr/bin/cat << EOF > bin/symdiff.bat
 @setlocal
 @echo off
+SET PATH=c:\\Miniconda-x64;c:\\Miniconda-x64\\Library\\bin;%PATH%
 SET PYTHONPATH=$libpath
 $python2path %*
 EOF
@@ -29,6 +30,7 @@ python3path='c:\Miniconda3-x64\python'
 /usr/bin/cat << EOF > bin/symdiff_py3.bat
 @setlocal
 @echo off
+SET PATH=c:\\Miniconda-x64;c:\\Miniconda3-x64\\Library\\bin;%PATH%
 SET PYTHONPATH=$libpath
 $python3path %*
 EOF
@@ -39,6 +41,7 @@ libpath=`/usr/bin/cygpath -m $PWD/lib`
 /usr/bin/cat << EOF > bin/symdiff_tcl.bat
 @setlocal
 @echo off
+SET PATH=c:\\Miniconda-x64;c:\\Miniconda-x64\\Library\\bin;%PATH%
 SET TCLLIBPATH="$libpath" %TCLLIBPATH%
 tclsh %*
 EOF
