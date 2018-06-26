@@ -30,7 +30,7 @@ python3path='c:\Miniconda3-x64\python'
 /usr/bin/cat << EOF > bin/symdiff_py3.bat
 @setlocal
 @echo off
-SET PATH=c:\\Miniconda-x64;c:\\Miniconda3-x64\\Library\\bin;%PATH%
+SET PATH=c:\\Miniconda3-x64;c:\\Miniconda3-x64\\Library\\bin;%PATH%
 SET PYTHONPATH=$libpath
 $python3path %*
 EOF
