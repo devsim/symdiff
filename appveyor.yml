@@ -216,6 +216,7 @@ build_script:
 # to run your custom scripts instead of automatic tests
 test_script:
   - cd %APPVEYOR_BUILD_FOLDER%
+  - SET CTEST_OUTPUT_ON_FAILURE 1
   #- SET PATH=c:\Miniconda-x64;c:\Miniconda-x64\Library\bin;%PATH%
   #- DIR %APPVEYOR_BUILD_FOLDER%\lib
   #- DIR %APPVEYOR_BUILD_FOLDER%\lib\symdiff
