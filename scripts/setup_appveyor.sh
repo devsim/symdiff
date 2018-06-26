@@ -31,6 +31,7 @@ python3path='c:\Miniconda3-x64\python'
 @setlocal
 @echo off
 SET PATH=c:\\Miniconda3-x64;c:\\Miniconda3-x64\\Library\\bin;%PATH%
+SET PYTHONIOENCODING=utf-8
 SET PYTHONPATH=$libpath
 $python3path %*
 EOF
