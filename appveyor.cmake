@@ -10,6 +10,8 @@ SET(TCL_ARCHIVE "c:/Miniconda-x64/Library/lib/tclstub86.lib")
 SET(TCL_BIN     "c:/Miniconda-x64/Library/bin/tclsh.exe")
 SET (PYTHON_ARCHIVE C:/Miniconda-x64/libs/python27.lib)
 SET (PYTHON_INCLUDE C:/Miniconda-x64/include)
+SET (PYTHON3_ARCHIVE C:/Miniconda3-x64/libs/python36.lib)
+SET (PYTHON3_INCLUDE C:/Miniconda3-x64/include)
 
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:strict /EHsc")
 SET (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SAFESEH:NO")
