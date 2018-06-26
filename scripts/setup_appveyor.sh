@@ -14,7 +14,7 @@ SYMDIFF_CONFIG="appveyor"
 
 libpath=`/usr/bin/cygpath -w $PWD/lib`
 
-python2path=`/usr/bin/cygpath -w c:\\Miniconda-x64\\python`
+python2path='c:\Miniconda-x64\python'
 #echo $libpath
 /usr/bin/mkdir -p bin
 /usr/bin/cat << EOF > bin/symdiff.bat
@@ -25,7 +25,7 @@ $python2path %*
 EOF
 /usr/bin/chmod +x bin/symdiff.bat
 
-python3path=`/usr/bin/cygpath -w c:\\Miniconda3-x64\\python`
+python3path='c:\Miniconda3-x64\python'
 /usr/bin/cat << EOF > bin/symdiff_py3.bat
 @setlocal
 @echo off
