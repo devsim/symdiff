@@ -56,7 +56,7 @@ and to expand out an expression
 A semicolon ``;``  is used to send multiple commands to the interpreter, but it is not recommended, as it makes debugging more difficult.
 
 Script Mode
-~~~~~~~~~~~
+^^^^^^^^^^^
 
 With its built-in |python|  interpreter, |symdiff| will execute a script and can be invoked on the command line of your terminal program as:
 
@@ -69,7 +69,7 @@ where ``myfile.py`` is the name of your input file.
 .. _sec__unicode:
 
 Unicode
-~~~~~~~
+^^^^^^^
 
 The |python| interpreter, by default, only allows ASCII characters.  In order to enable |unicode| in your |python| scripts, the following line on the first or second line of the script should contain:
 
@@ -80,7 +80,7 @@ The |python| interpreter, by default, only allows ASCII characters.  In order to
 This assumes that the source file is written using \utfeight.  In interactive mode, using |unicode| is not recommended, based on issues in setting the environment properly for the |python| interpreter.
 
 Tcl version
------------
+~~~~~~~~~~~
 
 A |tcl| interface to |symdiff| is also available by starting ``symdiff_tcl``.  In order to use |symdiff| in the |tcl| intepreter, the following line is required:
 
