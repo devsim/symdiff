@@ -42,6 +42,7 @@ IF (PYTHON3)
 build_python_version(symdiff_py3)
 TARGET_INCLUDE_DIRECTORIES (symdiff_py3 PUBLIC ${PYTHON3_INCLUDE})
 TARGET_LINK_LIBRARIES (symdiff_py3 ${PYTHON3_ARCHIVE})
+target_compile_definitions(symdiff_py3 PRIVATE -DPy_LIMITED_API=0x03030000)
 #TARGET_LINK_LIBRARIES (symdiff_py3 symdiff ${PYTHON3_ARCHIVE})
 ENDIF (PYTHON3)
 
