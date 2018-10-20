@@ -108,7 +108,7 @@ static PyObject *returnTupleLong(const std::vector<size_t> &index)
   for (size_t i = 0; i < index.size(); ++i)
   {
     subobj = returnLong(index[i]);
-    PyTuple_SET_ITEM(returnObj, i, subobj);
+    PyTuple_SetItem(returnObj, i, subobj);
     Py_INCREF(subobj);
   }
   return returnObj;
@@ -123,7 +123,7 @@ static bool GetStringArguments(PyObject *args, StringVector_t &result)
   result.reserve(len);
   for (Py_ssize_t i = 0; i < len; ++i)
   {
-    PyObject *item = PyTuple_GET_ITEM(args, i);
+    PyObject *item = PyTuple_GetItem(args, i);
     const char *fromPython;
     if (PyArg_Parse(item, "s", &fromPython))
     {
@@ -229,26 +229,26 @@ symdiffTableCmd(PyObject *, PyObject *args)
           PyObject *subobj;
           subobj = returnString(name);
           Py_INCREF(subobj);
-          PyTuple_SET_ITEM(rowobj, 0, subobj);
+          PyTuple_SetItem(rowobj, 0, subobj);
 
           subobj = returnString(type);
           Py_INCREF(subobj);
-          PyTuple_SET_ITEM(rowobj, 1, subobj);
+          PyTuple_SetItem(rowobj, 1, subobj);
 
           subobj = returnTupleLong(indexes);
           Py_INCREF(subobj);
-          PyTuple_SET_ITEM(rowobj, 2, subobj);
+          PyTuple_SetItem(rowobj, 2, subobj);
 
           subobj = returnTupleLong(references);
           Py_INCREF(subobj);
-          PyTuple_SET_ITEM(rowobj, 3, subobj);
+          PyTuple_SetItem(rowobj, 3, subobj);
 
           subobj = returnString(value);
           Py_INCREF(subobj);
-          PyTuple_SET_ITEM(rowobj, 4, subobj);
+          PyTuple_SetItem(rowobj, 4, subobj);
 
           Py_INCREF(rowobj);
-          PyTuple_SET_ITEM(returnObj, i, rowobj);
+          PyTuple_SetItem(returnObj, i, rowobj);
         }
       }
     }
@@ -280,7 +280,7 @@ modelListCmd(PyObject *, PyObject *args)
         const std::string &model_name = (it->first);
         PyObject *subobj = returnString(model_name);
         Py_INCREF(subobj);
-        PyTuple_SET_ITEM(returnObj, i, subobj);
+        PyTuple_SetItem(returnObj, i, subobj);
         ++i;
       }
     }
@@ -350,7 +350,7 @@ orderedListCmd(PyObject *, PyObject *args)
           const std::string &model_name = *it;
           PyObject *subobj = returnString(model_name);
           Py_INCREF(subobj);
-          PyTuple_SET_ITEM(returnObj, i, subobj);
+          PyTuple_SetItem(returnObj, i, subobj);
           ++i;
         }
       }
