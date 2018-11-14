@@ -4,8 +4,6 @@ INCLUDE_DIRECTORIES (
 # pass linker so order important
 
 IF (WIN32)
-SET (DIFF C:/cygwin/bin/diff.exe)
-SET (PERL C:/cygwin/bin/perl.exe)
 SET (RUNDIFFTEST ${PERL} ${PROJECT_SOURCE_DIR}/testing/rundifftest.pl)
 SET (GOLDENDIR   ${PROJECT_SOURCE_DIR}/goldenresults/unix)
 SET (RUNDIR      ${PROJECT_SOURCE_DIR}/testing)
@@ -14,7 +12,6 @@ SET (TCLCOMP     ${PROJECT_BIN_DIR}/symdiff_tcl.bat)
 SET (PYTHONCOMP   ${PROJECT_BIN_DIR}/symdiff.bat)
 SET (PYTHON3COMP  ${PROJECT_BIN_DIR}/symdiff_py3.bat)
 ELSE (WIN32)
-SET (DIFF diff)
 SET (RUNDIFFTEST ${PROJECT_SOURCE_DIR}/testing/rundifftest.pl)
 SET (GOLDENDIR   ${PROJECT_SOURCE_DIR}/goldenresults/unix)
 SET (RUNDIR      ${PROJECT_SOURCE_DIR}/testing)

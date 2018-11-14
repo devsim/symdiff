@@ -1,4 +1,4 @@
-PROJECT (SYMDIFF)
+PROJECT (SYMDIFF CXX)
 
 OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
 #Python 2 version is always build
@@ -23,6 +23,7 @@ set(PROJECT_SCRIPTS_DIR ${PROJECT_SOURCE_DIR}/scripts)
 set(PROJECT_LIBRARY_DIR ${PROJECT_SOURCE_DIR}/lib)
 set(PROJECT_INCLUDE_DIR ${PROJECT_SOURCE_DIR}/include)
 
+#TODO: put these in the individual setup scripts
 IF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 ADD_DEFINITIONS(-Wall -DTCL_THREADS -DUSE_TCL_STUBS -fvisibility=hidden)
 #SET(CMAKE_SKIP_BUILD_RPATH TRUE)
@@ -33,21 +34,10 @@ ADD_DEFINITIONS(-Wall -DTCL_THREADS -DUSE_TCL_STUBS -fvisibility=hidden)
 #SET (CMAKE_INSTALL_NAME_DIR "@rpath")
 SET(CMAKE_SKIP_BUILD_RPATH TRUE)
 ENDIF(APPLE)
-IF (WIN32)
-ADD_DEFINITIONS(-DTCL_THREADS -DUSE_TCL_STUBS)
-ADD_DEFINITIONS(-DSTATIC_BUILD -D_USE_MATH_DEFINES)
-SET (CMAKE_CXX_WARNING_LEVEL 4)
-SET (FLEX "C:/cygwin/bin/flex.exe")
-SET (BISON "C:/cygwin/bin/bison.exe")
-# warning C4251 for dll exports
-# warning C4005 concerning macro redefines in stdint.h
-# warning C4996: 'isatty': The POSIX name for this item is deprecated
-SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /fp:strict /wd4251 /wd4005 /wd4996")
-SET (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} /fp:strict /wd4251 /wd4005 /wd4996")
-ELSE (WIN32)
+
 SET (FLEX flex)
+SET (DIFF diff)
 SET (BISON bison)
-ENDIF (WIN32)
 
 INCLUDE(${SYMDIFF_CONFIG}.cmake OPTIONAL)
 

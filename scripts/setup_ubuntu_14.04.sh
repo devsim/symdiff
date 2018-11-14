@@ -3,7 +3,6 @@
 CMAKE="/usr/bin/cmake"
 CMAKE_CXX_FLAGS="-std=c++0x"
 CXX="/usr/bin/g++"
-CC="/usr/bin/gcc"
 TCL_ARCHIVE="/usr/lib/x86_64-linux-gnu/libtclstub.a"
 TCL_INCLUDE="/usr/include/tcl"
 TCL_BIN="/usr/bin/tclsh"
@@ -22,7 +21,6 @@ ARCH=`uname -m`
         -DCMAKE_CXX_FLAGS:STRING="${CMAKE_CXX_FLAGS}" \
         -DCMAKE_BUILD_TYPE=${TYPE} \
         -DCMAKE_CXX_COMPILER=${CXX} \
-        -DCMAKE_C_COMPILER=${CC} \
         -DPYTHON_INCLUDE=${PYTHON_INCLUDE} \
         -DPYTHON_ARCHIVE=${PYTHON_ARCHIVE} \
         -DPYTHON_BIN=${PYTHON_BIN} \

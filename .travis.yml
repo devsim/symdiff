@@ -5,9 +5,9 @@ os:
   - linux
   - osx
 
-branches:
-  only:
-    - master
+#branches:
+#  only:
+#    - master
 
 # please see this if you have issues in docker with utf8_py3.out
 #https://stackoverflow.com/questions/29740662/python3-utf8-codecs-not-decoding-as-expected-in-docker-ubuntutrusty
