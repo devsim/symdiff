@@ -4,7 +4,7 @@ OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
 #Python 2 version is always build
 OPTION(PYTHON3      "Build Python 3 Interpreter" OFF)
 
-set (CMAKE_CXX_STANDARD 11)
+set (CMAKE_CXX_STANDARD 14)
 
 SET (SUBDIRS
     src
