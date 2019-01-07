@@ -29,7 +29,7 @@ extern "C" {
 int DLL_PUBLIC
 Symdifftcl_Init(Tcl_Interp *interp)
 {
-  if (Tcl_InitStubs(interp, TCL_VERSION, 0) == NULL) {
+  if (Tcl_InitStubs(interp, TCL_VERSION, 0) == nullptr) {
     return TCL_ERROR;
   }
   if (Tcl_PkgProvide(interp, "symdifftcl", "1.0") == TCL_ERROR) {
@@ -40,8 +40,8 @@ Symdifftcl_Init(Tcl_Interp *interp)
 }
 
 DLL_PUBLIC Tcl_PackageInitProc *Symdifftcl_SafeInit = Symdifftcl_Init;
-DLL_PUBLIC Tcl_PackageUnloadProc *Symdifftcl_SafeUnload = NULL;
-DLL_PUBLIC Tcl_PackageUnloadProc *Symdifftcl_Unload = NULL;
+DLL_PUBLIC Tcl_PackageUnloadProc *Symdifftcl_SafeUnload = nullptr;
+DLL_PUBLIC Tcl_PackageUnloadProc *Symdifftcl_Unload = nullptr;
 
 
 }

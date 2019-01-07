@@ -35,7 +35,7 @@ limitations under the License.
 #include <sstream>
 
 namespace {
-  PyObject *symdiff_exception = NULL;
+  PyObject *symdiff_exception = nullptr;
 };
 
 namespace {
@@ -160,7 +160,7 @@ Takes one argument, which is the command to evaluate
 static PyObject *
 symdiffCmd(PyObject *, PyObject *args)
 {
-  PyObject *returnObj = NULL;
+  PyObject *returnObj = nullptr;
   std::string errorString;
 
   dsHelper::ret_pair tret  = GetStringArgument(args);
@@ -188,7 +188,7 @@ symdiffCmd(PyObject *, PyObject *args)
 static PyObject *
 symdiffTableCmd(PyObject *, PyObject *args)
 {
-  PyObject *returnObj = NULL;
+  PyObject *returnObj = nullptr;
   std::string errorString;
 
   dsHelper::ret_pair tret  = GetStringArgument(args);
@@ -262,7 +262,7 @@ symdiffTableCmd(PyObject *, PyObject *args)
 static PyObject *
 modelListCmd(PyObject *, PyObject *args)
 {
-  PyObject *returnObj = NULL;
+  PyObject *returnObj = nullptr;
   if (HasZeroArguments(args))
   {
     const ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
@@ -292,7 +292,7 @@ modelListCmd(PyObject *, PyObject *args)
 static PyObject *
 subexpressionCmd(PyObject *, PyObject *args)
 {
-  PyObject *returnObj = NULL;
+  PyObject *returnObj = nullptr;
   std::string errorString;
   dsHelper::ret_pair result;
   result.first = false;
@@ -314,7 +314,7 @@ subexpressionCmd(PyObject *, PyObject *args)
 static PyObject *
 removeZerosCmd(PyObject *, PyObject *args)
 {
-  PyObject *returnObj = NULL;
+  PyObject *returnObj = nullptr;
   if (HasZeroArguments(args))
   {
     SubExpr subexpr;
@@ -329,7 +329,7 @@ static PyObject *
 orderedListCmd(PyObject *, PyObject *args)
 {
   std::string errorString;
-  PyObject *returnObj = NULL;
+  PyObject *returnObj = nullptr;
   StringVector_t model_vector_in;
   if (GetStringArguments(args, model_vector_in))
   {
@@ -373,7 +373,7 @@ static struct PyMethodDef symdiff_methods[] = {
   {"subexpression", subexpressionCmd, METH_VARARGS},
   {"remove_zeros",  removeZerosCmd,   METH_VARARGS},
   {"ordered_list",  orderedListCmd,   METH_VARARGS},
-  {NULL, NULL, 0}
+  {nullptr, nullptr, 0}
 };
 
 
@@ -395,16 +395,16 @@ static int symdiff_clear(PyObject *m) {
 static struct PyModuleDef moduledef = {
         PyModuleDef_HEAD_INIT,
         "symdiff_py3",
-        NULL,
+        nullptr,
         sizeof(struct module_state),
         symdiff_methods,
-        NULL,
+        nullptr,
         symdiff_traverse,
         symdiff_clear,
-        NULL
+        nullptr
 };
 
-#define INITERROR return NULL
+#define INITERROR return nullptr
 
 DLL_PUBLIC PyObject *PyInit_symdiff_py3(void)
 #else
@@ -417,11 +417,11 @@ void DLL_PUBLIC initsymdiff_py2()
 #else
   PyObject *m = Py_InitModule("symdiff_py2", symdiff_methods);
 #endif
-  if (m == NULL)
+  if (m == nullptr)
   {
     INITERROR;
   }
-  symdiff_exception = PyErr_NewException(const_cast<char *>("symdiff.SymdiffError"), NULL, NULL);
+  symdiff_exception = PyErr_NewException(const_cast<char *>("symdiff.SymdiffError"), nullptr, nullptr);
   Py_INCREF(symdiff_exception);
   PyModule_AddObject(m, "SymdiffError", symdiff_exception);
 
@@ -435,7 +435,7 @@ void DLL_PUBLIC initsymdiff_py2()
 static struct _inittab symdiffinittab[] =
 {
   {(char *)"symdiff", initsymdiff},
-  {(char *)NULL, NULL}
+  {(char *)nullptr, nullptr}
 };
 #endif
 

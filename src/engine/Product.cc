@@ -191,7 +191,7 @@ void Product::ProductVecSimplify(std::vector<EqObjPtr> &tvals)
       for (size_t i = 0; i < len; ++i) 
       {
          Product *foo = dynamic_cast<Product *>(tvals[i].get());
-         if (foo == NULL)
+         if (foo == nullptr)
          {
             tmp.push_back(tvals[i]);
          }

@@ -27,35 +27,35 @@ UnaryTblEntry UnaryTable[] = {
     {"scale",       getConstantFactor,"scale(obj)            -- Get constant factor"},
     {"unsignedval", getUnsignedValue, "unsignedval(obj)      -- Get unsigned value"},
     {"sign",        getSign,          "sign(obj)             -- Get sign as 1 or -1"},
-    {NULL, NULL, NULL}
+    {nullptr, nullptr, nullptr}
 };
 
 BinaryTblEntry BinaryTable[] = {
     {"pow",  pow,  "pow(obj1, obj2)       -- Raise obj1 to the power of obj2"},
     {"diff", diff, "diff(obj1, obj2)      -- Take derivative  of obj1 with respect to obj2"},
-    {NULL, NULL, NULL}
+    {nullptr, nullptr, nullptr}
 };
 
 EqUnaryFuncPtr getUnaryFuncPtr(std::string x) {
     size_t i=0; 
-    while (UnaryTable[i].name != NULL)
+    while (UnaryTable[i].name != nullptr)
     {
         if (x == UnaryTable[i].name)
             return UnaryTable[i].func;
         ++i;
     }
-    return NULL;
+    return nullptr;
 }
 
 EqBinaryFuncPtr getBinaryFuncPtr(std::string x) {
     size_t i=0; 
-    while (BinaryTable[i].name != NULL)
+    while (BinaryTable[i].name != nullptr)
     {
         if (x == BinaryTable[i].name)
             return BinaryTable[i].func;
         ++i;
     }
-    return NULL;
+    return nullptr;
 }
 }
 

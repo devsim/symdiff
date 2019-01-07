@@ -53,7 +53,7 @@ symdiffCmd(ClientData clientData, Tcl_Interp *interp,
 
   if (objc == 2)
   {
-    const std::string &expr = Tcl_GetStringFromObj(objv[1], NULL);
+    const std::string &expr = Tcl_GetStringFromObj(objv[1], nullptr);
     result = dsHelper::SymdiffEval(expr);
 
     if (!result.first)
@@ -96,7 +96,7 @@ symdiffTableCmd(ClientData clientData, Tcl_Interp *interp,
 
   if (objc == 2)
   {
-    const std::string &expr = Tcl_GetStringFromObj(objv[1], NULL);
+    const std::string &expr = Tcl_GetStringFromObj(objv[1], nullptr);
     result = dsHelper::SymdiffEval(expr);
 
     if (!result.first)
@@ -138,7 +138,7 @@ symdiffTableCmd(ClientData clientData, Tcl_Interp *interp,
           const std::vector<size_t> &references = data.references_;
 
           Tcl_Obj *rowobj = Tcl_NewObj();
-          Tcl_Obj *subobj = NULL;
+          Tcl_Obj *subobj = nullptr;
           subobj = Tcl_NewStringObj(name.c_str(), -1);
           Tcl_ListObjAppendElement(interp, rowobj, subobj);
           subobj = Tcl_NewStringObj(type.c_str(), -1);
@@ -288,7 +288,7 @@ orderedListCmd(ClientData clientData, Tcl_Interp *interp,
 
     for (size_t i = 1; i < static_cast<size_t>(objc); ++i)
     {
-      const std::string &model_name = Tcl_GetStringFromObj(objv[i], NULL);
+      const std::string &model_name = Tcl_GetStringFromObj(objv[i], nullptr);
       model_vector_in[i-1] = model_name;
     }
 
@@ -336,7 +336,7 @@ Commands TclSymdiffCommands[] = {
     {"subexpression", subexpressionCmd},
     {"ordered_list", orderedListCmd},
     {"remove_zeros", removeZerosCmd},
-    {NULL, NULL}
+    {nullptr, nullptr}
 };
 
 }

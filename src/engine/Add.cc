@@ -147,7 +147,7 @@ EqObjPtr Add::Simplify()
       for (size_t i = 0; i < len; ++i) 
       {
          Add *foo = dynamic_cast<Add *>(tvals[i].get());
-         if (foo == NULL)
+         if (foo == nullptr)
          {
             tmp.push_back(tvals[i]);
          }

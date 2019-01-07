@@ -174,12 +174,12 @@ Eqo::EqObjPtr getNegation(Eqo::EqObjPtr x)
 
 bool isBinaryFunction(const std::string &str)
 {
-  return Eqo::getBinaryFuncPtr(str) != NULL;
+  return Eqo::getBinaryFuncPtr(str) != nullptr;
 }
 
 bool isUnaryFunction(const std::string &str)
 {
-  return Eqo::getUnaryFuncPtr(str) != NULL;
+  return Eqo::getUnaryFuncPtr(str) != nullptr;
 }
 EqBinaryFuncPtr getBinaryFuncPtr(const std::string &str)
 {

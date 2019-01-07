@@ -39,7 +39,7 @@ extern Eqo::EqObjPtr DLL_PUBLIC default_derivative_rule(Eqo::EqObjPtr, Eqo::EqOb
 //// Be able to store rules in the future.
 class ContextData {
   public:
-    ContextData() : callback_func_ptr_(NULL), model_derivative_rule_ptr_(Eqo::default_derivative_rule)
+    ContextData() : callback_func_ptr_(nullptr), model_derivative_rule_ptr_(Eqo::default_derivative_rule)
     {
     }
 

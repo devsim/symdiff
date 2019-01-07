@@ -53,7 +53,7 @@ CmdDispatch(ClientData clientData, Tcl_Interp *interp,
 
 void AddCommands(Tcl_Interp *interp, Commands *clist)
 {
-  for ( ; (clist->name) != NULL; ++clist)
+  for ( ; (clist->name) != nullptr; ++clist)
   {
     void *cdata = dsClientData::CreateData(clist->name, clist->command);
 

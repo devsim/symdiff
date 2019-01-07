@@ -34,12 +34,12 @@ Eqo::EqObjPtr evaluateExpression(const std::string &x, error_t &errors)
     y += x;
     y += ";";
     lerrors = &errors;
-    YY_BUFFER_STATE yyb = NULL;
+    YY_BUFFER_STATE yyb = nullptr;
 //    clearVariableMap();
     yyb = mc_scan_string(y.c_str());
     int retval = 0;
     retval = mcparse();
-    if (yyb != NULL)
+    if (yyb != nullptr)
     {
         mc_delete_buffer(yyb);
     }
@@ -52,7 +52,7 @@ Eqo::EqObjPtr evaluateExpression(const std::string &x, error_t &errors)
     {
         result = Eqo::con(0.0);
     }
-    lerrors=NULL;
+    lerrors=nullptr;
     return result;
 }
 }
