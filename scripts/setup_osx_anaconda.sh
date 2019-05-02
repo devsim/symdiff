@@ -10,9 +10,9 @@ TCL_BIN="${HOME}/anaconda/bin/tclsh8.6"
 PYTHON_ARCHIVE="${HOME}/anaconda/lib/libpython2.7.dylib"
 PYTHON_INCLUDE="${HOME}/anaconda/include/python2.7"
 PYTHON_BIN="${HOME}/anaconda/bin/python"
-PYTHON3_ARCHIVE="${HOME}/anaconda/envs/python3/lib/libpython3.6m.dylib"
-PYTHON3_INCLUDE="${HOME}/anaconda/envs/python3/include/python3.6m"
-PYTHON3_BIN="${HOME}/anaconda/envs/python3/bin/python"
+PYTHON3_ARCHIVE="${HOME}/anaconda/envs/python36/lib/libpython3.6m.dylib"
+PYTHON3_INCLUDE="${HOME}/anaconda/envs/python36/include/python3.6m"
+PYTHON3_BIN="${HOME}/anaconda/envs/python36/bin/python"
 #-DCMAKE_OSX_ARCHITECTURES="i386;x86_64" \
 for TYPE in debug release; do
     NAME=osx_${TYPE}

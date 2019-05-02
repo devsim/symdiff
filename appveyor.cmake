@@ -28,7 +28,7 @@ SET(TCL_ARCHIVE "${MINICONDA2}/Library/lib/tclstub86.lib")
 SET(TCL_BIN     "${MINICONDA2}/Library/bin/tclsh.exe")
 SET (PYTHON_ARCHIVE ${MINICONDA2}/libs/python27.lib)
 SET (PYTHON_INCLUDE ${MINICONDA2}/include)
-SET (PYTHON3_ARCHIVE ${MINICONDA3}/libs/python36.lib)
+SET (PYTHON3_ARCHIVE ${MINICONDA3}/libs/python3.lib)
 SET (PYTHON3_INCLUDE ${MINICONDA3}/include)
 
 SET (PERL  "C:/cygwin/bin/perl.exe")

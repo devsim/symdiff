@@ -2,7 +2,7 @@
 # http://creativecommons.org/publicdomain/zero/1.0/
 CMAKE="cmake"
 CMAKE_CXX_FLAGS=""
-CXX="/usr/local//bin/g++-8"
+CXX="/usr/local/bin/g++-8"
 CC="/usr/local/bin/gcc-8"
 TCL_ARCHIVE="/usr/lib/libtclstub8.5.a"
 TCL_INCLUDE="/usr/include"
