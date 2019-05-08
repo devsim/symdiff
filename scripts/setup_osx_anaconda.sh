@@ -7,12 +7,9 @@ CC="/usr/bin/gcc"
 TCL_ARCHIVE="/usr/lib/libtclstub8.5.a"
 TCL_INCLUDE="/usr/include"
 TCL_BIN="${HOME}/anaconda/bin/tclsh8.6"
-PYTHON_ARCHIVE="${HOME}/anaconda/lib/libpython2.7.dylib"
-PYTHON_INCLUDE="${HOME}/anaconda/include/python2.7"
-PYTHON_BIN="${HOME}/anaconda/bin/python"
-PYTHON3_ARCHIVE="${HOME}/anaconda/envs/python36/lib/libpython3.6m.dylib"
-PYTHON3_INCLUDE="${HOME}/anaconda/envs/python36/include/python3.6m"
-PYTHON3_BIN="${HOME}/anaconda/envs/python36/bin/python"
+PYTHON3_ARCHIVE="${HOME}/anaconda/envs/python37/lib/libpython3.7m.dylib"
+PYTHON3_INCLUDE="${HOME}/anaconda/envs/python37/include/python3.7m"
+PYTHON3_BIN="${HOME}/anaconda/envs/python37/bin/python"
 #-DCMAKE_OSX_ARCHITECTURES="i386;x86_64" \
 for TYPE in debug release; do
     NAME=osx_${TYPE}
@@ -35,16 +32,6 @@ for TYPE in debug release; do
         ..)
 done
 mkdir -p bin
-
-cat << EOF > bin/symdiff
-#!/bin/bash
-set -e
-progname="\$0"
-curdir=\`dirname "\$progname"\`
-export PYTHONPATH=\${curdir}/../lib
-${PYTHON_BIN} \$*
-EOF
-chmod +x bin/symdiff
 
 cat << EOF > bin/symdiff_py3
 #!/bin/bash
