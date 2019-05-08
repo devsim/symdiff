@@ -33,15 +33,6 @@ SET_TARGET_PROPERTIES(${arg1} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup -
 ENDIF (APPLE)
 ENDFUNCTION(build_python_version arg1)
 
-build_python_version(symdiff_py2)
-TARGET_INCLUDE_DIRECTORIES (symdiff_py2 PUBLIC ${PYTHON_INCLUDE})
-IF(WIN32)
-TARGET_LINK_LIBRARIES (symdiff_py2 ${PYTHON_ARCHIVE})
-ELSE(WIN32)
-# macOS and Linux do not need to dynamically link against python
-# this makes the dynamic library more portable
-ENDIF(WIN32)
-
 IF (PYTHON3)
 build_python_version(symdiff_py3)
 TARGET_INCLUDE_DIRECTORIES (symdiff_py3 PUBLIC ${PYTHON3_INCLUDE})

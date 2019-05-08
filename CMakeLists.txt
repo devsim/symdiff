@@ -1,8 +1,7 @@
 PROJECT (SYMDIFF CXX)
 
 OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
-#Python 2 version is always build
-OPTION(PYTHON3      "Build Python 3 Interpreter" OFF)
+OPTION(PYTHON3      "Build Python 3 Interpreter" ON)
 
 set (CMAKE_CXX_STANDARD 14)
 
@@ -14,9 +13,8 @@ SET (SUBDIRS
 # superlu stuff
 SITE_NAME(HOSTNAME)
 MESSAGE("Hostname: ${HOSTNAME}")
-ADD_DEFINITIONS(-DSYMDIFF_VERSION_STRING="\\"0.00\\""  -DSYMDIFF_COPYRIGHT_YEAR="\\"2010\\"")
-OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
-
+ADD_DEFINITIONS(-DSYMDIFF_VERSION_STRING="\\"1.0.0\\"")
+ADD_DEFINITIONS(-DSYMDIFF_COPYRIGHT_YEAR="\\"2010-2019\\"")
 
 set(PROJECT_BIN_DIR ${PROJECT_SOURCE_DIR}/bin)
 set(PROJECT_SCRIPTS_DIR ${PROJECT_SOURCE_DIR}/scripts)
