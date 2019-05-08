@@ -14,4 +14,6 @@ The version number has been updated to having a major revision of ``1``.  We ado
 
 This is the first versioned release of |symdiff|.  Using the stable ABI, the software is able to run newer |pythonthree| releases, without rebuilding the software.
 
+Unlike previous revisions of software, |pythontwoseven|, is removed from the build.
+
 
