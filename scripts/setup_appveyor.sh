@@ -27,6 +27,8 @@ fi
 libpath=`/usr/bin/cygpath -w $PWD/lib`
 
 #echo $libpath
+# TODO: fix to use conda activate
+/usr/bin/mkdir -p bin
 /usr/bin/cat << EOF > bin/symdiff_py3.bat
 @setlocal
 @echo off
