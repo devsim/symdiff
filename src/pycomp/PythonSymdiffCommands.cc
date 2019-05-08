@@ -425,6 +425,9 @@ void DLL_PUBLIC initsymdiff_py2()
   Py_INCREF(symdiff_exception);
   PyModule_AddObject(m, "SymdiffError", symdiff_exception);
 
+  //https://www.python.org/dev/peps/pep-0396/
+  PyDict_SetItemString(PyModule_GetDict(m), "__version__", PyUnicode_FromString(SYMDIFF_VERSION_STRING));
+
 #if PY_MAJOR_VERSION >=3
   return m;
 #endif
