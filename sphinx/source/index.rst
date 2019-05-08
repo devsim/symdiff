@@ -15,6 +15,8 @@ SYMDIFF Manual
 
    frontmatter
 
+   releasenotes
+
    introduction
 
    syntax

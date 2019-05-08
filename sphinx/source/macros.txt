@@ -2,7 +2,7 @@
 .. include:: <isonum.txt>
 
 .. |devsim| replace:: ``DEVSIM``
-.. |mycopyright| replace:: Copyright |copy| 2009--2018 DEVSIM LLC
+.. |mycopyright| replace:: Copyright |copy| 2009--2019 DEVSIM LLC
 
 .. |unicode| replace:: ``unicode``
 .. |anaconda| replace:: ``Anaconda``
@@ -34,6 +34,7 @@
 .. |mswindows| replace:: ``Microsoft Windows``
 .. |mswindowsseven| replace:: ``Windows 7``
 .. |python| replace:: ``Python``
+.. |pythonthree| replace:: ``Python 3``
 .. |pythontwoseven| replace:: ``Python 2.7``
 .. |rhelfive| replace:: ``Red Hat Enterprise Linux 5``
 .. |rhelsix| replace:: ``Red Hat Enterprise Linux 6``
