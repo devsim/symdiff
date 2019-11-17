@@ -1,14 +1,14 @@
 # Any copyright is dedicated to the Public Domain.
 # http://creativecommons.org/publicdomain/zero/1.0/
 CMAKE="/usr/bin/cmake"
-CMAKE_CXX_FLAGS="-std=c++0x"
+CMAKE_CXX_FLAGS=""
 CXX="/usr/bin/g++"
 TCL_ARCHIVE="/usr/lib/x86_64-linux-gnu/libtclstub.a"
 TCL_INCLUDE="/usr/include/tcl"
 TCL_BIN="/usr/bin/tclsh"
-PYTHON3_ARCHIVE="/usr/lib/x86_64-linux-gnu/libpython3.4m.so"
-PYTHON3_INCLUDE="/usr/include/python3.4m"
-PYTHON3_BIN="/usr/bin/python3.4m"
+PYTHON3_ARCHIVE="/usr/lib/x86_64-linux-gnu/libpython3.5m.so"
+PYTHON3_INCLUDE="/usr/include/python3.5m"
+PYTHON3_BIN="/usr/bin/python3.5m"
 for TYPE in debug release; do
 ARCH=`uname -m`
 #  for ARCH in i386 x86_64; do
