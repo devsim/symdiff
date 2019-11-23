@@ -1,5 +1,6 @@
 
 language: cpp
+dist: bionic
 
 os:
   - linux
@@ -27,7 +28,7 @@ before_install:
 
 script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
-    (bash scripts/setup_ubuntu_16.04.sh && cd linux_x86_64_release && make -j2 && make test);
+    (bash scripts/setup_ubuntu_18.sh && cd linux_x86_64_release && make -j2 && make test);
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
     (bash scripts/setup_osx_anaconda.sh && cd osx_release && make -j2 && make test);

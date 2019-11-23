@@ -3,7 +3,7 @@ PROJECT (SYMDIFF CXX)
 OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
 OPTION(PYTHON3      "Build Python 3 Interpreter" ON)
 
-set (CMAKE_CXX_STANDARD 17)
+set (CMAKE_CXX_STANDARD 14)
 
 SET (SUBDIRS
     src

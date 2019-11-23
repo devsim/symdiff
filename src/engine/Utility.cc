@@ -18,6 +18,7 @@ limitations under the License.
 #include "EquationObject.hh"
 
 #include <algorithm>
+#include <functional>
 
 namespace Eqo {
 namespace {

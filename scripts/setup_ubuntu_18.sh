@@ -3,12 +3,12 @@
 CMAKE="/usr/bin/cmake"
 CMAKE_CXX_FLAGS=""
 CXX="/usr/bin/g++"
-TCL_ARCHIVE="/usr/lib/x86_64-linux-gnu/libtclstub.a"
-TCL_INCLUDE="/usr/include/tcl"
-TCL_BIN="/usr/bin/tclsh"
-PYTHON3_ARCHIVE="/usr/lib/x86_64-linux-gnu/libpython3.5m.so"
-PYTHON3_INCLUDE="/usr/include/python3.5m"
-PYTHON3_BIN="/usr/bin/python3.5m"
+TCL_ARCHIVE="/usr/lib/x86_64-linux-gnu/libtclstub8.5.a"
+TCL_INCLUDE="/usr/include/tcl8.5"
+TCL_BIN="/usr/bin/tclsh8.5"
+PYTHON3_ARCHIVE="/usr/lib/x86_64-linux-gnu/libpython3.6m.so"
+PYTHON3_INCLUDE="/usr/include/python3.6m"
+PYTHON3_BIN="/usr/bin/python3.6m"
 for TYPE in debug release; do
 ARCH=`uname -m`
 #  for ARCH in i386 x86_64; do
