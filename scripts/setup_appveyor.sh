@@ -2,27 +2,28 @@
 # http://creativecommons.org/publicdomain/zero/1.0/
 
 # Note: run this file using bash
-CMAKE=/cygdrive/C/Program\ Files\ \(x86\)/CMake/bin/cmake.exe
+set -e
+export PATH="/usr/bin:${PATH}"
+CMAKE=$(cygpath -w $(which cmake) )
+CTEST=$(cygpath -w $(which ctest) )
 SYMDIFF_CONFIG="appveyor"
 
 if [ "$1" = x86 ]; then
-GENERATOR="Visual Studio 15 2017"
+GENERATOR="Visual Studio 16 2019"
+AOPTION="Win32"
 BUILDDIR="win32"
-python3base="c:\\Miniconda37"
-fi
-if [ "$1" = x64 ]; then
-GENERATOR="Visual Studio 15 2017 Win64"
+elif [ "$1" = x64 ]; then
+GENERATOR="Visual Studio 16 2019"
+AOPTION="x64"
 BUILDDIR="win64"
-python3base="c:\\Miniconda37-x64"
+else
+echo "Must specify x86 or x64"
+exit -1
 fi
 
-#/usr/bin/mkdir -p win32
-#(cd win32; "$CMAKE" -G "Visual Studio 14" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} ..)
 
-/usr/bin/mkdir -p ${BUILDDIR}
-#echo "$CMAKE" -G "${GENERATOR}" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON -DPYTHON3=ON ..
-(cd ${BUILDDIR}; "$CMAKE" -G "${GENERATOR}" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON -DPYTHON3=ON ..)
-#(cd win64; "$CMAKE" -G "Visual Studio 14 Win64" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON ..)
+mkdir -p ${BUILDDIR}
+(cd ${BUILDDIR}; "$CMAKE" -G "${GENERATOR}" -A "${AOPTION}" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON -DPYTHON3=ON -DANACONDA_PATH="${CONDA_PREFIX}" ..)
 
 libpath=`/usr/bin/cygpath -w $PWD/lib`
 
@@ -32,7 +33,7 @@ libpath=`/usr/bin/cygpath -w $PWD/lib`
 /usr/bin/cat << EOF > bin/symdiff_py3.bat
 @setlocal
 @echo off
-SET PATH=${python3base};${python3base}\\Library\\bin;%PATH%
+SET PATH=${CONDA_PREFIX};${CONDA_PREFIX}\\Library\\bin;%PATH%
 SET PYTHONIOENCODING=utf-8
 SET PYTHONPATH=$libpath
 python %*
@@ -44,9 +45,14 @@ libpath=`/usr/bin/cygpath -m $PWD/lib`
 /usr/bin/cat << EOF > bin/symdiff_tcl.bat
 @setlocal
 @echo off
-SET PATH=${python3base};${python3base}\\Library\\bin;%PATH%
+SET PATH=${CONDA_PREFIX};${CONDA_PREFIX}\\Library\\bin;%PATH%
 SET TCLLIBPATH="$libpath" %TCLLIBPATH%
 tclsh %*
 EOF
 /usr/bin/chmod +x bin/symdiff_tcl.bat
+
+# The // is so that MSYS does not consider it a path
+(cd $BUILDDIR && $CMAKE --build . --config Release -- //m //nologo //verbosity:minimal)
+
+(cd ${BUILDDIR} && $CTEST --verbose)
 
