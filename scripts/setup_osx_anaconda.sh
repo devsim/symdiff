@@ -19,9 +19,6 @@ for TYPE in debug release; do
         -DCMAKE_BUILD_TYPE=${TYPE}  \
         -DCMAKE_CXX_COMPILER=${CXX}  \
         -DCMAKE_C_COMPILER=${CC}  \
-        -DPYTHON_INCLUDE=${PYTHON_INCLUDE}  \
-        -DPYTHON_ARCHIVE=${PYTHON_ARCHIVE}  \
-        -DPYTHON_BIN=${PYTHON_BIN}  \
         -DPYTHON3_INCLUDE=${PYTHON3_INCLUDE}  \
         -DPYTHON3_ARCHIVE=${PYTHON3_ARCHIVE}  \
         -DPYTHON3_BIN=${PYTHON3_BIN}  \
