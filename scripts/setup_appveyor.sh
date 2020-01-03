@@ -41,6 +41,7 @@ EOF
 chmod +x bin/symdiff_py3.bat
 
 # TCLLIBPATH must always use forward slashes
+libpath=`/usr/bin/cygpath -m $PWD/lib`
 cat << EOF > bin/symdiff_tcl.bat
 @setlocal
 @echo off
