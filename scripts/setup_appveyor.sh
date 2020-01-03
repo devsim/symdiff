@@ -23,14 +23,14 @@ fi
 
 
 mkdir -p ${BUILDDIR}
-(cd ${BUILDDIR}; "$CMAKE" -G "${GENERATOR}" -A "${AOPTION}" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON -DPYTHON3=ON -DANACONDA_PATH="${CONDA_PREFIX}" ..)
+(cd ${BUILDDIR}; "${CMAKE}" -G "${GENERATOR}" -A "${AOPTION}" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON -DPYTHON3=ON -DANACONDA_PATH="${CONDA_PREFIX}" ..)
 
-libpath=`/usr/bin/cygpath -w $PWD/lib`
+libpath=`cygpath -w ${PWD}/lib`
 
 #echo $libpath
 # TODO: fix to use conda activate
-/usr/bin/mkdir -p bin
-/usr/bin/cat << EOF > bin/symdiff_py3.bat
+mkdir -p bin
+cat << EOF > bin/symdiff_py3.bat
 @setlocal
 @echo off
 SET PATH=${CONDA_PREFIX};${CONDA_PREFIX}\\Library\\bin;%PATH%
@@ -38,21 +38,22 @@ SET PYTHONIOENCODING=utf-8
 SET PYTHONPATH=$libpath
 python %*
 EOF
-/usr/bin/chmod +x bin/symdiff_py3.bat
+chmod +x bin/symdiff_py3.bat
 
 # TCLLIBPATH must always use forward slashes
-libpath=`/usr/bin/cygpath -m $PWD/lib`
-/usr/bin/cat << EOF > bin/symdiff_tcl.bat
+cat << EOF > bin/symdiff_tcl.bat
 @setlocal
 @echo off
 SET PATH=${CONDA_PREFIX};${CONDA_PREFIX}\\Library\\bin;%PATH%
 SET TCLLIBPATH="$libpath" %TCLLIBPATH%
 tclsh %*
 EOF
-/usr/bin/chmod +x bin/symdiff_tcl.bat
+chmod +x bin/symdiff_tcl.bat
+
+
 
 # The // is so that MSYS does not consider it a path
-(cd $BUILDDIR && $CMAKE --build . --config Release -- //m //nologo //verbosity:minimal)
+(cd ${BUILDDIR} && ${CMAKE} --build . --config Release -- //m //nologo //verbosity:minimal)
 
-(cd ${BUILDDIR} && $CTEST --verbose)
+(cd ${BUILDDIR} && ${CTEST} --verbose)
 
