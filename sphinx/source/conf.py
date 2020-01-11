@@ -212,25 +212,25 @@ htmlhelp_basename = 'SYMDIFFdoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
-# The paper size ('letterpaper' or 'a4paper').
-'papersize': 'letterpaper',
+    # The paper size ('letterpaper' or 'a4paper').
+    'papersize': 'letterpaper',
 
-# The font size ('10pt', '11pt' or '12pt').
-'pointsize': '11pt',
+    # The font size ('10pt', '11pt' or '12pt').
+    'pointsize': '11pt',
 
-# make the chapter headings normal
-# http://www.sphinx-doc.org/en/stable/config.html#options-for-latex-output
-'fncychap' : '',
+    # make the chapter headings normal
+    # http://www.sphinx-doc.org/en/stable/config.html#options-for-latex-output
+    'fncychap' : '',
 
-# Additional stuff for the LaTeX preamble.
-#'preamble': '',
+    # Additional stuff for the LaTeX preamble.
+    #'preamble': '',
 
-# Latex figure (float) alignment
-#'figure_align': 'htbp',
+    # Latex figure (float) alignment
+    #'figure_align': 'htbp',
 
-# add listoffigures, listoftables
-# TODO: figure out how to put in frontmatter
-'tableofcontents' : r'''
+    # add listoffigures, listoftables
+    # TODO: figure out how to put in frontmatter
+    'tableofcontents' : r'''
 \renewcommand{\thepage}{\roman{page}}
 \tableofcontents
 \addcontentsline{toc}{chapter}{\contentsname}
