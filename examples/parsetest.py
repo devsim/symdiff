@@ -3,13 +3,13 @@ from symdiff import *
 # http://creativecommons.org/publicdomain/zero/1.0/
 
 def maptest(arg):
-  print("")
-  print(arg);
-  try:
-    out = symdiff(arg)
-  except SymdiffError as x:
-    out = x
-  print(out)
+    print("")
+    print(arg);
+    try:
+        out = symdiff(arg)
+    except SymdiffError as x:
+        out = x
+    print(out)
 
 maptest("a*x")
 maptest("simplify(a*a)")

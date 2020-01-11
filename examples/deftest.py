@@ -45,4 +45,4 @@ commands = [
 ]
 
 for i in commands:
-  print(symdiff(i))
+    print(symdiff(i))

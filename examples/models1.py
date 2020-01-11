@@ -12,13 +12,13 @@ print(ordered_list('y'))
 print(symdiff('define_model(x,y)'))
 # catch cycles
 try:
-  print(ordered_list('y'))
+    print(ordered_list('y'))
 except SymdiffError as x:
-  print(x)
+    print(x)
 
 for i in model_list():
-  print(i + ' ' + symdiff('model_value(%s)' % i))
-  symdiff('clear_model(%s)' % i)
+    print(i + ' ' + symdiff('model_value(%s)' % i))
+    symdiff('clear_model(%s)' % i)
 
 print("")
 print(symdiff('declare_model(x)'))
@@ -29,13 +29,13 @@ print(symdiff('model_value(y__x)'))
 print(symdiff('diff(model_value(y__x),z)'))
 
 for i in model_list():
-  print(i + ' ' + symdiff('model_value(%s)' % i))
+    print(i + ' ' + symdiff('model_value(%s)' % i))
 
 print("")
 symdiff('clear_model(x)')
 symdiff('clear_model(x__z)')
 
 for i in model_list():
-  print(i + ' ' + symdiff('model_value(%s)' % i))
-  symdiff('clear_model(%s)' % i)
+    print(i + ' ' + symdiff('model_value(%s)' % i))
+    symdiff('clear_model(%s)' % i)
 

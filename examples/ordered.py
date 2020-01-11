@@ -6,4 +6,4 @@ symdiff('define_model(b, a)')
 symdiff('define_model(d, b * c)')
 mylist = ordered_list('d');
 for i in mylist:
-  print(('%s' % i))
+    print(('%s' % i))

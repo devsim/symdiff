@@ -7,4 +7,4 @@ symdiff('define_model(z, y * z)')
 subexpression()
 l = model_list()
 for i in l:
-  print(("%s, %s" % (i, symdiff('model_value(%s)' % i))))
+    print(("%s, %s" % (i, symdiff('model_value(%s)' % i))))

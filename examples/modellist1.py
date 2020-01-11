@@ -6,4 +6,4 @@ symdiff('declare_model(x)')
 symdiff('declare_model(y)')
 l = model_list();
 for i in l:
-  print(('%s' % i))
+    print(('%s' % i))
