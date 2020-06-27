@@ -5,3 +5,9 @@ manual/*.out
 manual/*.ps
 manual/*.lot
 manual/*.toc
+osx_debug
+osx_release
+include
+bin
+lib
+
