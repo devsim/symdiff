@@ -212,6 +212,9 @@ htmlhelp_basename = 'SYMDIFFdoc'
 # -- Options for LaTeX output ---------------------------------------------
 
 latex_elements = {
+    # https://www.sphinx-doc.org/en/master/latex.html
+    'inputenc' : r'\usepackage[utf8x]{inputenc}',
+    'fontenc'  : r'\usepackage[LGR,T1]{fontenc}',
     # The paper size ('letterpaper' or 'a4paper').
     'papersize': 'letterpaper',
 
