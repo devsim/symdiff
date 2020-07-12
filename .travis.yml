@@ -20,7 +20,7 @@ before_install:
     sudo apt-get install tcl8.5 tcl8.5-dev tcl-dev python3 python3-dev cmake flex bison;
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-    (curl -O https://repo.continuum.io/miniconda/Miniconda3-latest-MacOSX-x86_64.sh  &&
+    (curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.sh  &&
      bash Miniconda3-latest-MacOSX-x86_64.sh -b -p $HOME/anaconda &&
      ${HOME}/anaconda/bin/conda create -y --name python37 python=3.7
     );
