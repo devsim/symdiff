@@ -84,12 +84,12 @@ clone_depth: 5                      # clone entire repository history if not def
 
 # this is how to allow failing jobs in the matrix
 #fast_finish: true     # set this flag to immediately finish build once one of the jobs fails.
-matrix:
-  allow_failures:
-    - platform: x64
-      configuration: Release
-    - platform: x86
-      configuration: Release
+#matrix:
+#  allow_failures:
+#    - platform: x64
+#      configuration: Release
+#    - platform: x86
+#      configuration: Release
 
 # build cache to preserve files/folders between builds
 #cache:
@@ -146,7 +146,7 @@ install:
 # to add several platforms to build matrix:
 platform:
   - x64
-  - x86
+#  - x86
 
 # build Configuration, i.e. Debug, Release, etc.
 configuration: Release
