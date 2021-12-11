@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/devsim/symdiff.svg?branch=master)](https://travis-ci.org/devsim/symdiff)
+[![Build Status](https://app.travis-ci.com/devsim/symdiff.svg?branch=main)](https://app.travis-ci.com/devsim/symdiff)
 [![Build status](https://ci.appveyor.com/api/projects/status/github/devsim/symdiff?branch=master&svg=true)](https://ci.appveyor.com/project/devsim/symdiff)
 [![DOI](https://zenodo.org/badge/7290478.svg)](https://zenodo.org/badge/latestdoi/7290478)
 
