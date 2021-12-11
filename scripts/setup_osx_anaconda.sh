@@ -3,7 +3,6 @@
 CMAKE="cmake"
 CMAKE_CXX_FLAGS=""
 CXX="/usr/bin/g++"
-CC="/usr/bin/gcc"
 TCL_ARCHIVE="/usr/lib/libtclstub8.5.a"
 TCL_INCLUDE="/usr/include"
 TCL_BIN="${HOME}/anaconda/bin/tclsh8.6"
@@ -18,10 +17,7 @@ for TYPE in debug release; do
         -DCMAKE_CXX_FLAGS:STRING="${CMAKE_CXX_FLAGS}" \
         -DCMAKE_BUILD_TYPE=${TYPE}  \
         -DCMAKE_CXX_COMPILER=${CXX}  \
-        -DCMAKE_C_COMPILER=${CC}  \
         -DPYTHON3_INCLUDE=${PYTHON3_INCLUDE}  \
-        -DPYTHON3_ARCHIVE=${PYTHON3_ARCHIVE}  \
-        -DPYTHON3_BIN=${PYTHON3_BIN}  \
         -DTCL_INCLUDE=${TCL_INCLUDE}  \
         -DTCL_ARCHIVE=${TCL_ARCHIVE}  \
         -DTCL_BIN=${TCL_BIN} \
