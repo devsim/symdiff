@@ -255,7 +255,7 @@ EqObjPtr Add::CombineAdd(std::vector<EqObjPtr> y)
    const size_t len = y.size();
    for (size_t i=0; i < len; ++i)
    {
-      Add *Y = dynamic_cast<Add *>(y[i].get());
+      Add *Y = static_cast<Add *>(y[i].get());
       const size_t len2 = (Y->values).size();
       for (size_t j=0; j < len2; ++j)
          tmp.push_back(Y->values[j]);

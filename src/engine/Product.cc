@@ -353,7 +353,7 @@ EqObjPtr Product::CombineProduct(std::vector<EqObjPtr> y)
    const size_t len = y.size();
    for (size_t i=0; i < len; ++i)
    {
-      Product *Y = dynamic_cast<Product *>(y[i].get());
+      Product *Y = static_cast<Product *>(y[i].get());
       const size_t len2 = (Y->values).size();
       for (size_t j=0; j < len2; ++j)
          tmp.push_back(Y->values[j]);
@@ -476,7 +476,7 @@ EqObjPtr Product::getUnsignedValue()
         EqObjPtr unscaled = this->getUnscaledValue();
         if (unscaled->getType() == CONST_OBJ)
         {
-            Constant *c = dynamic_cast<Constant *>(unscaled.get());
+            Constant *c = static_cast<Constant *>(unscaled.get());
             // We expect the value to be signed
                 if (c->dvalue < 0.0)
                 {
@@ -490,7 +490,7 @@ EqObjPtr Product::getUnsignedValue()
         else // This must be a product
         {
             EqObjPtr scaled = this->getScale();
-            Constant *s = dynamic_cast<Constant *>(scaled.get());
+            Constant *s = static_cast<Constant *>(scaled.get());
             const double val = s->getDoubleValue();
 
             EqObjPtr negval;
@@ -581,7 +581,7 @@ EqObjPtr Product::expand()
             tmp.push_back(values[i]->expand());
             
     }
-    EqObjPtr scale;
+    EqObjPtr scale = con(1);
     if (tmp.size() == 1)
     {
         scale = tmp[0];
@@ -599,8 +599,6 @@ EqObjPtr Product::expand()
     }
     else
     {
-        if (tmp.empty())
-            scale = con(1);
         std::vector<EqObjPtr> pout;
         // break out into separate function
         // do the expansion here

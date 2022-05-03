@@ -193,9 +193,7 @@ EqUnaryFuncPtr DLL_PUBLIC getUnaryFuncPtr(const std::string &str)
 
 std::string DLL_PUBLIC getName(Eqo::EqObjPtr x)
 {
-  std::string ret;
   return x->getName();
-  return ret;
 }
 
 std::string DLL_PUBLIC getType(Eqo::EqObjPtr x)
@@ -212,15 +210,13 @@ EqObjType DLL_PUBLIC getEnumeratedType(Eqo::EqObjPtr x)
 
 std::string DLL_PUBLIC getStringValue(Eqo::EqObjPtr x)
 {
-  std::string ret;
   return x->stringValue();
-  return ret;
 }
 
 double DLL_PUBLIC getDoubleValue(Eqo::EqObjPtr x)
 {
   assert(x->getType() == Eqo::CONST_OBJ);
-  return dynamic_cast<Eqo::Constant *>(x.get())->getDoubleValue();
+  return static_cast<Eqo::Constant *>(x.get())->getDoubleValue();
 }
 
 std::set<std::string> DLL_PUBLIC getReferencedType(Eqo::EqObjPtr x, EqObjType t)
