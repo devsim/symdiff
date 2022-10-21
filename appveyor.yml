@@ -245,7 +245,7 @@ test: off
 #  # pushing all *.nupkg files in directory
 #  - path: out\*.nupkg
 artifacts:
-  - path: *.whl
+  - path: \*.whl
 
 
 #---------------------------------#
