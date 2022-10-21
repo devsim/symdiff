@@ -59,7 +59,8 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: F2Cxh/mYSqsmCTsggWqD2frhUW5x94D2bl61zj2JHYyTUSU0KXyzFp8aQAaGzfyaoBlc9G5JlveozrwPFnJQK9Yh+IW5wj8yiDXA0s2hv/vhlmVQZ/PqOZBXDeHmmptnfZtRuMAFrZD/zm9BUwNi6/2czRFxn5JYKjb45SavV4Q=
+    secure: "CSbsmmDENyBIkZNU/gXGZvfHSw1BtLltddfseOmyKVUDDFZJOC/N/4J4Vgu01P+0lygk1xUMrlpZkXoMfhJjl4i03dWS0QMLk0T57AITMWGN1MgTO1YMJi11OFifINrG6r8SRGhS40/jiFtqhp4UDCpr9Z0pX2vaxj/N9IQA+6I="
+
   file_glob: true
   file:
     - "symdiff*.whl"
