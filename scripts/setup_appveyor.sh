@@ -9,11 +9,11 @@ CTEST=$(cygpath -w $(which ctest) )
 SYMDIFF_CONFIG="appveyor"
 
 if [ "$1" = x86 ]; then
-GENERATOR="Visual Studio 16 2019"
+GENERATOR="Visual Studio 17 2022"
 AOPTION="Win32"
 BUILDDIR="win32"
 elif [ "$1" = x64 ]; then
-GENERATOR="Visual Studio 16 2019"
+GENERATOR="Visual Studio 17 2022"
 AOPTION="x64"
 BUILDDIR="win64"
 else
@@ -58,3 +58,9 @@ chmod +x bin/symdiff_tcl.bat
 
 (cd ${BUILDDIR} && ${CTEST} --verbose)
 
+pacman -Su --noconfirm rsync
+(rsync -avP --exclude __pycache__ lib/symdiff bdist_wheel/)
+(rsync -avP --exclude __pycache__ LICENSE NOTICE README.md README examples doc bdist_wheel)
+pip install --upgrade wheel
+(cd bdist_wheel && pip wheel .)
+(mv bdist_wheel/*.whl .)

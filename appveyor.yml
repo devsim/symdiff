@@ -19,7 +19,7 @@ version: 1.{build}
 # development to be done on other branches
 branches:
   except:
-    - master
+    - main
 
 # branches to build
 #branches:
@@ -28,7 +28,8 @@ branches:
 #    - master
 
 # Do not build on tags (GitHub only)
-skip_tags: true
+#skip_tags: true
+skip_non_tags: true
 
 # Skipping commits with particular message or from user
 #skip_commits:
@@ -40,7 +41,7 @@ skip_tags: true
 #---------------------------------#
 
 # Operating system (build VM template)
-image: Visual Studio 2019
+image: Visual Studio 2022
 
 # scripts that are called at very beginning, before repo cloning
 init:
@@ -117,6 +118,7 @@ install:
   #- appveyor DownloadFile http://downloads.activestate.com/ActiveTcl/releases/8.5.18.0/ActiveTcl8.5.18.0.298892-win32-x86_64-threaded.exe
   #- ActiveTcl8.5.18.0.298892-win32-x86_64-threaded.exe --directory C:\Tcl
   # tcl libraries
+  - cd %APPVEYOR_BUILD_FOLDER%
   - IF "%PLATFORM%"=="x64" SET CONDA_BIN=c:\Miniconda37-x64\condabin\conda.bat
   - IF "%PLATFORM%"=="x86" SET CONDA_BIN=c:\Miniconda37\condabin\conda.bat
 
@@ -141,12 +143,9 @@ install:
 #---------------------------------#
 
 # build platform, i.e. x86, x64, Any CPU. This setting is optional.
-#platform: x64
-
-# to add several platforms to build matrix:
 platform:
   - x64
-#  - x86
+#  - msys
 
 # build Configuration, i.e. Debug, Release, etc.
 configuration: Release
@@ -224,7 +223,7 @@ build_script:
 #  - IF "%PLATFORM%"=="x86" cd win32 && ctest --verbose
 
 # to disable automatic tests 
-#test: off
+test: off
 
 
 #---------------------------------#
@@ -245,184 +244,24 @@ build_script:
 #
 #  # pushing all *.nupkg files in directory
 #  - path: out\*.nupkg
+artifacts:
+  - path: *.whl
 
 
 #---------------------------------#
 #     deployment configuration    #
 #---------------------------------#
 
-# providers: Local, FTP, WebDeploy, AzureCS, AzureBlob, S3, NuGet, Environment
-# provider names are case-sensitive!
-#deploy:
-#
-#    # FTP deployment provider settings
-#  - provider: FTP
-#    protocol: ftps
-#    host: ftp.myserver.com
-#    username: admin
-#    password:
-#      secure: eYKZKFkkEvFYWX6NfjZIVw==
-#    folder:
-#    application:
-#    active_mode: false
-#
-#    # Amazon S3 deployment provider settings
-#  - provider: S3
-#    access_key_id:
-#      secure: ABcd==
-#    secret_access_key:
-#      secure: ABcd==
-#    bucket: my_bucket
-#    folder:
-#    artifact:
-#    set_public: false
-#
-#    # Azure Blob storage deployment provider settings
-#  - provider: AzureBlob
-#    storage_account_name:
-#      secure: ABcd==
-#    storage_access_key:
-#      secure: ABcd==
-#    container: my_container
-#    folder:
-#    artifact:
-#
-#    # Web Deploy deployment provider settings
-#  - provider: WebDeploy
-#    server: http://www.deploy.com/myendpoint
-#    website: mywebsite
-#    username: user
-#    password:
-#      secure: eYKZKFkkEvFYWX6NfjZIVw==
-#    ntlm: false
-#    remove_files: false
-#    app_offline: false
-#    skip_dirs: \\App_Data
-#    skip_files: web.config
-#    on:
-#      branch: release
-#      platform: x86
-#      configuration: debug
-#
-#    # Deploying to Azure Cloud Service
-#  - provider: AzureCS
-#    subscription_id:
-#      secure: fjZIVw==
-#    subscription_certificate:
-#      secure: eYKZKFkkEv...FYWX6NfjZIVw==
-#    storage_account_name: my_storage
-#    storage_access_key:
-#      secure: ABcd==
-#    service: my_service
-#    slot: Production
-#    target_profile: Cloud
-#    artifact: MyPackage.cspkg
-#
-#    # Deploying to NuGet feed
-#  - provider: NuGet
-#    server: https://my.nuget.server/feed
-#    api_key:
-#      secure: FYWX6NfjZIVw==
-#    skip_symbols: false
-#    symbol_server: https://your.symbol.server/feed
-#    artifact: MyPackage.nupkg
-#
-#    # Deploy to GitHub Releases
-#  - provider: GitHub
-#    artifact: /.*\.nupkg/           # upload all NuGet packages to release assets
-#    draft: false
-#    prerelease: false
-#    on:
-#      branch: master                # release from master branch only
-#      appveyor_repo_tag: true       # deploy on tag push only
-#
-#    # Deploying to a named environment
-#  - provider: Environment
-#    name: staging
-#    on:
-#      branch: staging
-#      env_var1: value1
-#      env_var2: value2
-
-# scripts to run before deployment
-#before_deploy:
-
-# scripts to run after deployment
-#after_deploy:
-
-# to run your custom scripts instead of provider deployments
-#deploy_script:
-
-# to disable deployment
-#deploy: off
-
-#---------------------------------#
-#        global handlers          #
-#---------------------------------#
-
-# on successful build
-#on_success:
-#  - do something
-
-# on build failure
-#on_failure:
-#  - do something
-
-# after build failure or success
-#on_finish:
-#  - do something
-
-  
-#---------------------------------#
-#         notifications           #
-#---------------------------------#
-  
-#notifications:
-#
-#  # Email
-#  - provider: Email
-#    to:
-#      - user1@email.com
-#      - user2@email.com
-#    subject: 'Build {{status}}'                  # optional
-#    message: "{{message}}, {{commitId}}, ..."    # optional
-#    on_build_status_changed: true
-#
-#  # HipChat
-#  - provider: HipChat
-#    auth_token:
-#      secure: RbOnSMSFKYzxzFRrxM1+XA==
-#    room: ProjectA
-#    template: "{message}, {commitId}, ..."
-#
-#  # Slack
-#  - provider: Slack
-#    incoming_webhook: http://incoming-webhook-url
-#
-#  # ...or using auth token
-#
-#  - provider: Slack
-#    auth_token:
-#      secure: kBl9BlxvRMr9liHmnBs14A==
-#    channel: development
-#    template: "{message}, {commitId}, ..."
-#    
-#  # Campfire
-#  - provider: Campfire
-#    account: appveyor
-#    auth_token:
-#      secure: RifLRG8Vfyol+sNhj9u2JA==
-#    room: ProjectA
-#    template: "{message}, {commitId}, ..."
-#
-#  # Webhook
-#  - provider: Webhook
-#    url: http://www.myhook2.com
-#    headers:
-#      User-Agent: myapp 1.0
-#      Authorization:
-#        secure: GhD+5xhLz/tkYY6AO3fcfQ==
-#    on_build_success: false
-#    on_build_failure: true
-#    on_build_status_changed: true
+deploy:
+  # Deploy to GitHub Releases
+  - provider: GitHub
+    auth_token:
+      secure: 0m6oHpAf8S81oqWGm9ZAxh8qP3AvSqVXekTWdh4PL8O/BBRDyISCnhSGLPJRQ0ia # your encrypted token from GitHub
+    #artifact: dist\*.zip
+    draft: true
+    prerelease: false
+    force_update: true
+    on:
+      appveyor_repo_tag: true      # deploy on tag push only
+      #branch: main                # release from main branch only
 
