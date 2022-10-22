@@ -44,7 +44,7 @@ branches:
 
 before_script:
   # specifically for pypi deployment
-  - export README_BASE_URL="https://github.com/devsim/devsim/blob/${TRAVIS_TAG}"
+  - export README_BASE_URL="https://github.com/devsim/symdiff/blob/${TRAVIS_TAG}"
 
 script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
