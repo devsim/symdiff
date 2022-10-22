@@ -1,7 +1,7 @@
 
 [![Build Status](https://app.travis-ci.com/devsim/symdiff.svg?branch=main)](https://app.travis-ci.com/devsim/symdiff)
 [![Build status](https://ci.appveyor.com/api/projects/status/github/devsim/symdiff?branch=main&svg=true)](https://ci.appveyor.com/project/devsim/symdiff)
-[![DOI](https://zenodo.org/badge/7290478.svg)](https://zenodo.org/badge/latestdoi/7290478)
+[![DOI](https://zenodo.org/badge/7237276.svg)](https://zenodo.org/badge/latestdoi/7237276)
 
 
 
