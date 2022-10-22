@@ -42,7 +42,10 @@ branches:
 #    (bash scripts/setup_osx_anaconda.sh && cd osx_release && make -j2 && ctest --verbose);
 #    fi
 
-#### TODO: make sure to keep ctest from above
+before_script:
+  # specifically for pypi deployment
+  - export README_BASE_URL="https://github.com/devsim/devsim/blob/${TRAVIS_TAG}"
+
 script:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
       ./scripts/build_docker_manylinux2014.sh ${TRAVIS_TAG};
