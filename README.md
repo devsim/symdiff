@@ -18,10 +18,17 @@ It is licensed under the [Apache 2.0 License](http://www.apache.org/licenses/L
 * **Python** scripting interface
 * **Tcl** scripting interface
 
-Please see INSTALL file for installation instructions.  Please see 
-NOTICE and LICENSE files for copyright and license information.
+Please see NOTICE and LICENSE files for copyright and license information.
 
 Documentation available in doc/symdiff.pdf.
+
+## Install
+
+This software is available via ``pip`` from [https://pypi.org/project/symdiff/](https://pypi.org/project/symdiff/).
+
+```
+pip install symdiff
+```
 
 ## Citing This Work:
 

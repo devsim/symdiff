@@ -15,7 +15,7 @@ setup(
       },
       distclass=BinaryDistribution,
       data_files = [
-        ('symdiff_data',  ['LICENSE', 'NOTICE', 'README.md', 'README',]),
+        ('symdiff_data',  ['LICENSE', 'NOTICE', 'README.md',]),
         ('symdiff_data/doc', glob('doc/*.pdf')),
         ('symdiff_data/examples', glob('examples/*.*')),
       ],
