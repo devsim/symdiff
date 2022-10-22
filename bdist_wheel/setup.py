@@ -1,5 +1,8 @@
 from setuptools import setup, Distribution
 from glob import glob
+import os
+import re
+import html
 
 #https://stackoverflow.com/questions/35112511/pip-setup-py-bdist-wheel-no-longer-builds-forced-non-pure-wheels/36886459#36886459
 #https://stackoverflow.com/questions/24071491/how-can-i-make-a-python-wheel-from-an-existing-native-library/24793171#24793171
