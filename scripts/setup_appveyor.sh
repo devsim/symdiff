@@ -60,7 +60,7 @@ chmod +x bin/symdiff_tcl.bat
 
 pacman -Su --noconfirm rsync
 (rsync -avP --exclude __pycache__ lib/symdiff bdist_wheel/)
-(rsync -avP --exclude __pycache__ LICENSE NOTICE README.md README examples doc bdist_wheel)
+(rsync -avP --exclude __pycache__ LICENSE NOTICE README.md examples doc bdist_wheel)
 pip install --upgrade wheel
 (cd bdist_wheel && pip wheel .)
 (mv bdist_wheel/*.whl .)
