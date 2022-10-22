@@ -23,7 +23,7 @@ export PYTHON3_ARCHIVE=""
 # SYMDIFF build
 (bash scripts/symdiff_centos.sh && cd linux_x86_64_release && make -j2 && make test);
 (rsync -avP --exclude __pycache__ lib/symdiff bdist_wheel/)
-(rsync -avP --exclude __pycache__ LICENSE NOTICE README.md README examples doc bdist_wheel)
+(rsync -avP --exclude __pycache__ LICENSE NOTICE README.md examples doc bdist_wheel)
 (cd bdist_wheel && ${PIP_BIN} wheel .)
 (cd bdist_wheel && auditwheel repair *.whl)
 (mv bdist_wheel/wheelhouse/*.whl .)
