@@ -71,11 +71,20 @@ if [ ! -z "${ARCH}" ]
 then
   export ARCH_ARG="-DCMAKE_OSX_ARCHITECTURES=\"${ARCH}\""
 fi;
-(bash  scripts/symdiff_macos.sh && cd osx_release && make -j4 && make test)
+#TODO test arch
+(bash  scripts/symdiff_macos.sh && cd osx_release && make -j4)
+if [ $ARCH == $(uname -m) ]
+then
+(cd osx_release && make test)
+fi
+#(bash  scripts/symdiff_macos.sh && cd osx_release && make -j4 && make test)
 fi
 
 (rsync -avP --exclude __pycache__ lib/symdiff bdist_wheel/)
 (rsync -avP --exclude __pycache__ LICENSE NOTICE README.md examples doc bdist_wheel)
+FULL_PLAT_NAME=$(${PYTHON3_BIN} bdist_wheel/fix_macos_arch.py ${ARCH})
+echo PACKAGING $FULL_PLAT_NAME
+(cd bdist_wheel &&  perl -p -i -e "s/^#plat-name.*/plat-name = ${FULL_PLAT_NAME}/" setup.cfg)
 (cd bdist_wheel && ${PIP_BIN} wheel .)
 (mv bdist_wheel/*.whl .)
 
