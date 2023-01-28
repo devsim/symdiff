@@ -4,12 +4,23 @@ language: cpp
 matrix:
   include:
   - os: osx
-    env: COMPILER=clang
+    env:
+      - COMPILER=clang
+      - ARCH=arm64
     osx_image: xcode10.1
+  - os: osx
+    env:
+      - COMPILER=clang
+      - ARCH=arm64
+    osx_image: xcode14.2
   - os: linux
     sudo: required
     dist: trusty
     services: docker
+
+addons:
+  homebrew:
+    update: false
 
 #https://github.com/travis-ci/travis-ci/issues/6893
 if: tag IS present
@@ -43,6 +54,10 @@ branches:
 #    fi
 
 before_script:
+  - export HOMEBREW_NO_AUTO_UPDATE=1 HOMEBREW_NO_INSTALL_CLEANUP=1 
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+      brew install cmake;
+    fi
   # specifically for pypi deployment
   - export README_BASE_URL="https://github.com/devsim/symdiff/blob/${TRAVIS_TAG}"
 
@@ -51,7 +66,6 @@ script:
       ./scripts/build_docker_manylinux2014.sh ${TRAVIS_TAG};
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      source  ./scripts/install_miniconda_macos.sh;
       if [ "$COMPILER" == "gcc" ]; then
         ./scripts/build_macos.sh $COMPILER "${TRAVIS_TAG}";
       elif [ "$COMPILER" == "clang" ]; then

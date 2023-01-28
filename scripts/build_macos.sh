@@ -40,23 +40,26 @@ else
 fi
 
 
-#minimal conda environments to prevent linking against the wrong libraries
-if [ "${1}" = "gcc" ]
-then
-# now opt for explicit dll load of mkl
-conda create  -y --name python3_symdiff_build python=3 cmake nomkl
-fi
+##minimal conda environments to prevent linking against the wrong libraries
+#if [ "${1}" = "gcc" ]
+#then
+## now opt for explicit dll load of mkl
+#conda create  -y --name python3_symdiff_build python=3 cmake nomkl
+#fi
+#
+##This version does not use pardiso
+#if [ "${1}" = "clang" ]
+#then
+#conda create  -y --name python3_symdiff_build python=3 cmake nomkl
+#fi
+#source activate python3_symdiff_build
 
-#This version does not use pardiso
-if [ "${1}" = "clang" ]
-then
-conda create  -y --name python3_symdiff_build python=3 cmake nomkl
-fi
-source activate python3_symdiff_build
-
-export PYTHON3_BIN=python
-export PYTHON3_INCLUDE=$(python -c "from sysconfig import get_paths as gp; print(gp()['include'])")
+export PYTHON3_BIN=/usr/local/bin/python3
+export PIP_BIN=/usr/local/bin/pip3
+${PIP_BIN} install wheel
+export PYTHON3_INCLUDE=$(${PYTHON3_BIN} -c "from sysconfig import get_paths as gp; print(gp()['include'])")
 export PYTHON3_ARCHIVE=""
+
 
 # SYMDIFF build
 if [ "${1}" = "gcc" ]
@@ -64,12 +67,16 @@ then
 (bash scripts/symdiff_macos.sh && cd osx_release && make -j4 && make test)
 elif [ "${1}" = "clang" ]
 then
+if [ ! -z "${ARCH}" ]
+then
+  export ARCH_ARG="-DCMAKE_OSX_ARCHITECTURES=\"${ARCH}\""
+fi;
 (bash  scripts/symdiff_macos.sh && cd osx_release && make -j4 && make test)
 fi
 
 (rsync -avP --exclude __pycache__ lib/symdiff bdist_wheel/)
 (rsync -avP --exclude __pycache__ LICENSE NOTICE README.md examples doc bdist_wheel)
-(cd bdist_wheel && pip wheel .)
+(cd bdist_wheel && ${PIP_BIN} wheel .)
 (mv bdist_wheel/*.whl .)
 
 
