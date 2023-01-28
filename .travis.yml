@@ -6,7 +6,6 @@ matrix:
   - os: osx
     env:
       - COMPILER=clang
-      - ARCH=arm64
     osx_image: xcode10.1
   - os: osx
     env:
