@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 
 
 #include <memory>
-#include "import.hh"
+#include "SymdiffImport.hh"
 #include <vector>
 #include <map>
 #include <string>
@@ -34,7 +34,7 @@ typedef std::map<std::string, std::vector<size_t> > OrderedIndex_t;
 /**
 Creates a flat table by doing a depth first search.  Refactor other algorithms use this.
 */
-class DLL_PUBLIC ProcessOrderedTable {
+class DLL_PROTECTED ProcessOrderedTable {
   public:
     const std::vector<std::string> &GetErrors() const
     {

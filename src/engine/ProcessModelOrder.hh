@@ -12,7 +12,7 @@ SPDX-License-Identifier: Apache-2.0
 #include <list>
 
 #include <memory>
-#include "import.hh"
+#include "SymdiffImport.hh"
 
 
 namespace Eqo
@@ -26,7 +26,7 @@ typedef std::list<std::pair<std::string, Eqo::EqObjPtr> > ModelList_t;
 typedef std::vector<std::string> ModelNameVector_t;
 
 
-class DLL_PUBLIC ProcessModelOrder
+class DLL_PROTECTED ProcessModelOrder
 {
   public:
 //    ProcessModelOrder();

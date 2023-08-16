@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 #ifndef USER_FUNC_HH
 #define USER_FUNC_HH
 #include "EquationObject.hh"
-#include "import.hh"
+#include "SymdiffImport.hh"
 #include <string>
 #include <vector>
 #include <map>
@@ -17,8 +17,8 @@ namespace Eqo {
 typedef std::pair<std::string, Eqo::EqObjPtr> UserDiffInfo;
 typedef std::vector<UserDiffInfo>             UserDiffInfoVec;
 
-void DLL_PUBLIC SetUserFuncDiffs(std::string, UserDiffInfoVec &);
-void DLL_PUBLIC CreateUserFunc(std::string, size_t);
+void DLL_PROTECTED SetUserFuncDiffs(std::string, UserDiffInfoVec &);
+void DLL_PROTECTED CreateUserFunc(std::string, size_t);
 
 extern std::map<std::string, UserDiffInfoVec> UserFuncMap;
 

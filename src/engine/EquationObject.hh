@@ -8,7 +8,7 @@ SPDX-License-Identifier: Apache-2.0
 #define EQUATIONOBJECT_H
 
 #include <memory>
-#include "import.hh"
+#include "SymdiffImport.hh"
 #include <cassert>
 #include <iostream>
 #include <string>
@@ -170,7 +170,7 @@ class EquationObject : public std::enable_shared_from_this<EquationObject>
 /**
  * The following is to define macro variables
  */
-extern DLL_PUBLIC std::map<std::string, EqObjPtr> variableMap;
+extern DLL_PROTECTED std::map<std::string, EqObjPtr> variableMap;
 
 
 

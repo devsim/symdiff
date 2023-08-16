@@ -11,8 +11,8 @@ SET (TCL_SOURCES
 )
 
 IF(TCLMAIN)
-ADD_LIBRARY (symdiff_tcl SHARED ${TCL_SOURCES} $<TARGET_OBJECTS:symdiff_objects>)
-TARGET_LINK_LIBRARIES (symdiff_tcl ${TCL_ARCHIVE})
+ADD_LIBRARY (symdiff_tcl SHARED ${TCL_SOURCES})
+TARGET_LINK_LIBRARIES (symdiff_tcl ${TCL_ARCHIVE} symdiff_dynamic)
 #TARGET_LINK_LIBRARIES (symdiff_tcl symdiff ${TCL_ARCHIVE})
 #TARGET_LINK_LIBRARIES (symdiff_tcl $<TARGET_OBJECTS:symdiff_objects> ${TCL_ARCHIVE})
 SET_TARGET_PROPERTIES(symdiff_tcl PROPERTIES OUTPUT_NAME "symdifftcl")

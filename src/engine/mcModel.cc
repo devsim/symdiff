@@ -62,7 +62,7 @@ std::string Model::createStringValue() const
     return value;
 }
 
-extern Eqo::EqObjPtr DLL_PUBLIC default_derivative_rule(Eqo::EqObjPtr self, Eqo::EqObjPtr foo)
+extern Eqo::EqObjPtr DLL_PROTECTED default_derivative_rule(Eqo::EqObjPtr self, Eqo::EqObjPtr foo)
 {
     Context &context = Context::GetInstance();
     const std::string &value = self->stringValue();

@@ -176,56 +176,56 @@ EqBinaryFuncPtr getBinaryFuncPtr(const std::string &str)
   return Eqo::getBinaryFuncPtr(str);
 }
 
-EqUnaryFuncPtr DLL_PUBLIC getUnaryFuncPtr(const std::string &str)
+EqUnaryFuncPtr DLL_PROTECTED getUnaryFuncPtr(const std::string &str)
 {
   return Eqo::getUnaryFuncPtr(str);
 }
 
-std::string DLL_PUBLIC getName(Eqo::EqObjPtr x)
+std::string DLL_PROTECTED getName(Eqo::EqObjPtr x)
 {
   return x->getName();
 }
 
-std::string DLL_PUBLIC getType(Eqo::EqObjPtr x)
+std::string DLL_PROTECTED getType(Eqo::EqObjPtr x)
 {
   std::string ret;
   ret = Eqo::EqObjNames[x->getType()];
   return ret;
 }
 
-EqObjType DLL_PUBLIC getEnumeratedType(Eqo::EqObjPtr x)
+EqObjType DLL_PROTECTED getEnumeratedType(Eqo::EqObjPtr x)
 {
   return EqObjType(x->getType());
 }
 
-std::string DLL_PUBLIC getStringValue(Eqo::EqObjPtr x)
+std::string DLL_PROTECTED getStringValue(Eqo::EqObjPtr x)
 {
   return x->stringValue();
 }
 
-double DLL_PUBLIC getDoubleValue(Eqo::EqObjPtr x)
+double DLL_PROTECTED getDoubleValue(Eqo::EqObjPtr x)
 {
   assert(x->getType() == Eqo::CONST_OBJ);
   return static_cast<Eqo::Constant *>(x.get())->getDoubleValue();
 }
 
-std::set<std::string> DLL_PUBLIC getReferencedType(Eqo::EqObjPtr x, EqObjType t)
+std::set<std::string> DLL_PROTECTED getReferencedType(Eqo::EqObjPtr x, EqObjType t)
 {
   return x->getReferencedType(Eqo::EqObjType(t));
 }
 
-std::vector<Eqo::EqObjPtr> DLL_PUBLIC getArgs(Eqo::EqObjPtr x)
+std::vector<Eqo::EqObjPtr> DLL_PROTECTED getArgs(Eqo::EqObjPtr x)
 {
   return x->getArgs();
 }
 
-void DLL_PUBLIC SetModelListCallBack(inModelListCallback_ptr x)
+void DLL_PROTECTED SetModelListCallBack(inModelListCallback_ptr x)
 {
   Context &context = Context::GetInstance();
   context.SetModelListCallBack(x);
 }
 
-void DLL_PUBLIC SetDerivativeRule(modelDerivativeRule_ptr x)
+void DLL_PROTECTED SetDerivativeRule(modelDerivativeRule_ptr x)
 {
   Context &context = Context::GetInstance();
   context.SetDerivativeRule(x);

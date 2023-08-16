@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 #ifndef EQUATION_FUNCTIONS_HH
 #define EQUATION_FUNCTIONS_HH
 #include <memory>
-#include "import.hh"
+#include "SymdiffImport.hh"
 #include <string>
 #include <utility>
 
@@ -23,7 +23,7 @@ struct ret_data {
 };
 
 typedef std::pair<bool, ret_data> ret_pair;
-DLL_PUBLIC ret_pair SymdiffEval(const std::string &);
+DLL_PROTECTED ret_pair SymdiffEval(const std::string &);
 }
 
 #endif

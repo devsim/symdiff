@@ -38,8 +38,12 @@ INCLUDE_DIRECTORIES (
 
 ADD_LIBRARY(symdiff_objects OBJECT ${CXX_SRCS} ${MC_SRCS})
 set_property(TARGET symdiff_objects PROPERTY POSITION_INDEPENDENT_CODE ON)
+
+ADD_LIBRARY(symdiff_objects_private OBJECT ${CXX_SRCS} ${MC_SRCS})
+set_target_properties(symdiff_objects_private PROPERTIES POSITION_INDEPENDENT_CODE ON COMPILE_DEFINITIONS SYMDIFF_NO_EXTERN_SYMBOLS)
+
 ADD_LIBRARY(symdiff_static STATIC ${CXX_SRCS} ${MC_SRCS})
-ADD_LIBRARY(symdiff_dynamic STATIC $<TARGET_OBJECTS:symdiff_objects>)
+ADD_LIBRARY(symdiff_dynamic STATIC $<TARGET_OBJECTS:symdiff_objects_private>)
 ADD_LIBRARY(symdiff SHARED $<TARGET_OBJECTS:symdiff_objects>)
 
 
@@ -71,7 +75,7 @@ ADD_CUSTOM_COMMAND(TARGET symdiff
           COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_LIBRARY_DIR}
           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:symdiff> ${PROJECT_LIBRARY_DIR}/.
           COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_INCLUDE_DIR}
-          COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/import.hh ${PROJECT_INCLUDE_DIR}/.
+          COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/SymdiffImport.hh ${PROJECT_INCLUDE_DIR}/.
           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/EngineAPI.hh ${PROJECT_INCLUDE_DIR}/.
           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/parseexpr.hh ${PROJECT_INCLUDE_DIR}/.
 )

@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 ***/
 
 #include <tcl.h>
-#include "import.hh"
+#include "SymdiffImport.hh"
 #include "TclCommands.hh"
 
 #if 0

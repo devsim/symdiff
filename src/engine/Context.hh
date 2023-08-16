@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 #include <map>
 #include <string>
 #include <memory>
-#include "import.hh"
+#include "SymdiffImport.hh"
 
 namespace Eqo
 {
@@ -23,7 +23,7 @@ typedef Eqo::EqObjPtr (*modelDerivativeRule_ptr)(Eqo::EqObjPtr, Eqo::EqObjPtr);
 
 namespace Eqo
 {
-extern Eqo::EqObjPtr DLL_PUBLIC default_derivative_rule(Eqo::EqObjPtr, Eqo::EqObjPtr);
+extern Eqo::EqObjPtr DLL_PROTECTED default_derivative_rule(Eqo::EqObjPtr, Eqo::EqObjPtr);
 }
 
 //// Be able to store rules in the future.
@@ -44,7 +44,7 @@ class ContextData {
     const ContextData &operator=(const ContextData &);
 };
 
-class DLL_PUBLIC Context {
+class DLL_PROTECTED Context {
   public:
     static Context &GetInstance();
 

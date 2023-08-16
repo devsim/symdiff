@@ -7,7 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 #ifndef SUBEXPR_HH
 #define SUBEXPR_HH
 #include <memory>
-#include "import.hh"
+#include "SymdiffImport.hh"
 
 #include <string>
 #include <map>
@@ -53,7 +53,7 @@ class SubExprData
 };
 
 /// Creates sub expressions on the fly
-class DLL_PUBLIC SubExpr
+class DLL_PROTECTED SubExpr
 {
   public:
     SubExpr();
