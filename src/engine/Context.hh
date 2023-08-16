@@ -47,6 +47,7 @@ class ContextData {
 class DLL_PROTECTED Context {
   public:
     static Context &GetInstance();
+    static void DestroyInstance();
 
     Eqo::EqObjPtr EvaluateModelDerivative(Eqo::EqObjPtr, Eqo::EqObjPtr);
     Eqo::EqObjPtr FindInModelList(const std::string &);

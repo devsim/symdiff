@@ -97,5 +97,7 @@ void DLL_PROTECTED SetModelListCallBack(inModelListCallback_ptr);
 
 typedef Eqo::EqObjPtr (*modelDerivativeRule_ptr)(Eqo::EqObjPtr, Eqo::EqObjPtr);
 void DLL_PROTECTED SetDerivativeRule(modelDerivativeRule_ptr);
+
+void DLL_PROTECTED ResetAllData();
 }
 #endif

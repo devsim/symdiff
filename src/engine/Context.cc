@@ -11,6 +11,10 @@ Context::Context()
 {
 }
 
+Context::~Context()
+{
+}
+
 ModelMap_t &Context::GetModelMap()
 {
   return context_data_.model_list_;
@@ -18,12 +22,17 @@ ModelMap_t &Context::GetModelMap()
 
 Context &Context::GetInstance()
 {
-  //// Not thread safe
   if (!instance_)
   {
     instance_ = new Context();
   }
   return *instance_;
+}
+
+void Context::DestroyInstance()
+{
+  delete instance_;
+  instance_ = nullptr;
 }
 
 

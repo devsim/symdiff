@@ -9,6 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 #include "Functions.hh"
 #include "Context.hh"
 #include "mcModel.hh"
+#include "UserFunc.hh"
 
 namespace EngineAPI {
 Eqo::EqObjPtr createUnaryLogical(const std::string &unaryOp, Eqo::EqObjPtr arg)
@@ -229,6 +230,13 @@ void DLL_PROTECTED SetDerivativeRule(modelDerivativeRule_ptr x)
 {
   Context &context = Context::GetInstance();
   context.SetDerivativeRule(x);
+}
+
+void DLL_PROTECTED ResetAllData()
+{
+  Eqo::variableMap.clear();
+  Eqo::UserFuncMap.clear();
+  Context::DestroyInstance();
 }
 }
 
