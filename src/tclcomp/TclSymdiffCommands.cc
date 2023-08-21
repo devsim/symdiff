@@ -38,13 +38,13 @@ symdiffCmd(ClientData clientData, Tcl_Interp *interp,
   int error = TCL_OK;
 
   std::string errorString;
-  symdiffHelper::ret_pair result;
+  sdHelp::ret_pair result;
   result.first = false;
 
   if (objc == 2)
   {
     const std::string &expr = Tcl_GetStringFromObj(objv[1], nullptr);
-    result = symdiffHelper::SymdiffEval(expr);
+    result = sdHelp::SymdiffEval(expr);
 
     if (!result.first)
     {
@@ -81,13 +81,13 @@ symdiffTableCmd(ClientData clientData, Tcl_Interp *interp,
   int error = TCL_OK;
 
   std::string errorString;
-  symdiffHelper::ret_pair result;
+  sdHelp::ret_pair result;
   result.first = false;
 
   if (objc == 2)
   {
     const std::string &expr = Tcl_GetStringFromObj(objv[1], nullptr);
-    result = symdiffHelper::SymdiffEval(expr);
+    result = sdHelp::SymdiffEval(expr);
 
     if (!result.first)
     {
@@ -156,7 +156,7 @@ modelListCmd(ClientData clientData, Tcl_Interp *interp,
   int error = TCL_OK;
 
   std::string errorString;
-  symdiffHelper::ret_pair result;
+  sdHelp::ret_pair result;
   result.first = false;
 
   if (objc == 1)
@@ -196,7 +196,7 @@ subexpressionCmd(ClientData clientData, Tcl_Interp *interp,
   int error = TCL_OK;
 
   std::string errorString;
-  symdiffHelper::ret_pair result;
+  sdHelp::ret_pair result;
   result.first = false;
 
   if (objc == 1)
@@ -237,7 +237,7 @@ removeZerosCmd(ClientData clientData, Tcl_Interp *interp,
   int error = TCL_OK;
 
   std::string errorString;
-  symdiffHelper::ret_pair result;
+  sdHelp::ret_pair result;
   result.first = false;
 
   if (objc == 1)
