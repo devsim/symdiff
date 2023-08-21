@@ -44,9 +44,9 @@ static struct module_state _state;
 
 /// Visual C++ does not allow c++ return values in extern "C"
 /// There will be a python error unless there is only 1 argument
-static dsHelper::ret_pair GetStringArgument(PyObject *args)
+static symdiffHelper::ret_pair GetStringArgument(PyObject *args)
 {
-  dsHelper::ret_pair result;
+  symdiffHelper::ret_pair result;
   result.first = false;
   const char *fromPython;
   if (PyArg_Parse(args, "(s)", &fromPython))
@@ -153,13 +153,13 @@ symdiffCmd(PyObject *, PyObject *args)
   PyObject *returnObj = nullptr;
   std::string errorString;
 
-  dsHelper::ret_pair tret  = GetStringArgument(args);
+  symdiffHelper::ret_pair tret  = GetStringArgument(args);
   
   if (tret.first)
   {
-    dsHelper::ret_pair result;
+    symdiffHelper::ret_pair result;
     result.first = false;
-    result = dsHelper::SymdiffEval(tret.second.string_);
+    result = symdiffHelper::SymdiffEval(tret.second.string_);
     if (!result.first)
     {
       errorString += result.second.string_;
@@ -181,13 +181,13 @@ symdiffTableCmd(PyObject *, PyObject *args)
   PyObject *returnObj = nullptr;
   std::string errorString;
 
-  dsHelper::ret_pair tret  = GetStringArgument(args);
+  symdiffHelper::ret_pair tret  = GetStringArgument(args);
   
   if (tret.first)
   {
-    dsHelper::ret_pair result;
+    symdiffHelper::ret_pair result;
     result.first = false;
-    result = dsHelper::SymdiffEval(tret.second.string_);
+    result = symdiffHelper::SymdiffEval(tret.second.string_);
     if (!result.first)
     {
       errorString += result.second.string_;
@@ -284,7 +284,7 @@ subexpressionCmd(PyObject *, PyObject *args)
 {
   PyObject *returnObj = nullptr;
   std::string errorString;
-  dsHelper::ret_pair result;
+  symdiffHelper::ret_pair result;
   result.first = false;
 
   if (HasZeroArguments(args))

@@ -10,7 +10,7 @@ SPDX-License-Identifier: Apache-2.0
 #include "Context.hh"
 
 #include <sstream>
-namespace dsHelper {
+namespace symdiffHelper {
 
 
 ret_pair SymdiffEval(const std::string &expr)

@@ -16,7 +16,7 @@ class EquationObject;
 typedef std::shared_ptr<EquationObject> EqObjPtr;
 }
 
-namespace dsHelper {
+namespace symdiffHelper {
 struct ret_data {
   std::string   string_;
   Eqo::EqObjPtr eqptr_;
