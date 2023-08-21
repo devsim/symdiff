@@ -6,7 +6,7 @@ SET (MC_SRCS
     ${CMAKE_CURRENT_BINARY_DIR}/mcScanner.cc
     mcModelCompiler.cc
     mcTest.cc
-    EquationFunctions.cc
+    EquationFunc.cc
     parseexpr.cc
     Context.cc
     SubExpr.cc
