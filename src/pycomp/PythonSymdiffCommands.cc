@@ -13,7 +13,7 @@ SPDX-License-Identifier: Apache-2.0
 #include "Python.h"
 #include "import.h"
 
-#include "EquationFunctions.hh"
+#include "EquationFunc.hh"
 #include "Context.hh"
 #include "SubExpr.hh"
 #include "ProcessModelOrder.hh"

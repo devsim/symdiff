@@ -6,7 +6,7 @@ SPDX-License-Identifier: Apache-2.0
 
 #include "TclSymdiffCommands.hh"
 
-#include "EquationFunctions.hh"
+#include "EquationFunc.hh"
 #include "Context.hh"
 #include "SubExpr.hh"
 #include "ProcessModelOrder.hh"

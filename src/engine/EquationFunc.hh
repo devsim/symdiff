@@ -4,8 +4,8 @@ Copyright 2012 DEVSIM LLC
 SPDX-License-Identifier: Apache-2.0
 ***/
 
-#ifndef EQUATION_FUNCTIONS_HH
-#define EQUATION_FUNCTIONS_HH
+#ifndef EQUATION_FUNC_HH
+#define EQUATION_FUNC_HH
 #include <memory>
 #include "SymdiffImport.hh"
 #include <string>

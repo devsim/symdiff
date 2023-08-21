@@ -3,7 +3,7 @@ Copyright 2012 DEVSIM LLC
 
 SPDX-License-Identifier: Apache-2.0
 ***/
-#include "EquationFunctions.hh"
+#include "EquationFunc.hh"
 #include "EquationObject.hh"
 #include "mcModelCompiler.hh"
 #include "parseexpr.hh"
