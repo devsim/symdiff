@@ -80,11 +80,11 @@ ADD_CUSTOM_COMMAND(TARGET symdiff
           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/parseexpr.hh ${PROJECT_INCLUDE_DIR}/.
 )
 
-ADD_CUSTOM_COMMAND(TARGET symdiff_static
-          POST_BUILD
-          COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_LIBRARY_DIR}
-          COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:symdiff_static> ${PROJECT_LIBRARY_DIR}/.
-)
+#ADD_CUSTOM_COMMAND(TARGET symdiff_static
+#          POST_BUILD
+#          COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_LIBRARY_DIR}
+#          COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:symdiff_static> ${PROJECT_LIBRARY_DIR}/.
+#)
 
 ADD_CUSTOM_COMMAND(TARGET symdiff_dynamic
           POST_BUILD
