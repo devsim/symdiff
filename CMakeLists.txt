@@ -3,6 +3,11 @@ cmake_minimum_required(VERSION 3.9)
 
 OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
 OPTION(PYTHON3      "Build Python 3 Interpreter" ON)
+OPTION(STATICONLY    "Build static only" OFF)
+
+IF (STATICONLY AND (TCLMAIN OR PYTHON3))
+MESSAGE(FATAL_ERROR "STATICONLY not implemented for TCLMAIN and PYTHON3")
+ENDIF()
 
 set (CMAKE_CXX_STANDARD 17)
 

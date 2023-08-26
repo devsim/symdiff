@@ -44,7 +44,9 @@ set_target_properties(symdiff_objects_private PROPERTIES POSITION_INDEPENDENT_CO
 
 #ADD_LIBRARY(symdiff_static STATIC ${CXX_SRCS} ${MC_SRCS})
 ADD_LIBRARY(symdiff_dynamic STATIC $<TARGET_OBJECTS:symdiff_objects_private>)
+IF (NOT STATICONLY)
 ADD_LIBRARY(symdiff SHARED $<TARGET_OBJECTS:symdiff_objects>)
+ENDIF ()
 
 
 
@@ -70,6 +72,7 @@ ADD_CUSTOM_COMMAND(
     DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/mcParser.y EquationObject.hh UserFunc.hh mcTest.hh mcModelCompiler.hh mcModel.hh
 )
 
+IF (NOT STATICONLY)
 ADD_CUSTOM_COMMAND(TARGET symdiff
           POST_BUILD
           COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_LIBRARY_DIR}
@@ -79,6 +82,7 @@ ADD_CUSTOM_COMMAND(TARGET symdiff
           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/EngineAPI.hh ${PROJECT_INCLUDE_DIR}/.
           COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/parseexpr.hh ${PROJECT_INCLUDE_DIR}/.
 )
+ENDIF ()
 
 #ADD_CUSTOM_COMMAND(TARGET symdiff_static
 #          POST_BUILD
@@ -90,8 +94,13 @@ ADD_CUSTOM_COMMAND(TARGET symdiff_dynamic
           POST_BUILD
           COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_LIBRARY_DIR}
           COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:symdiff_dynamic> ${PROJECT_LIBRARY_DIR}/.
+          COMMAND ${CMAKE_COMMAND} -E make_directory ${PROJECT_INCLUDE_DIR}
+          COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/SymdiffImport.hh ${PROJECT_INCLUDE_DIR}/.
+          COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/EngineAPI.hh ${PROJECT_INCLUDE_DIR}/.
+          COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_CURRENT_SOURCE_DIR}/parseexpr.hh ${PROJECT_INCLUDE_DIR}/.
 )
 
+IF (NOT STATICONLY)
 IF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 SET_TARGET_PROPERTIES(symdiff PROPERTIES INSTALL_RPATH "\$ORIGIN/")
 ENDIF (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
@@ -99,5 +108,5 @@ IF (APPLE)
 #SET_TARGET_PROPERTIES(symdiff PROPERTIES INSTALL_RPATH "@loader_path/")
 SET_TARGET_PROPERTIES(symdiff PROPERTIES LINK_FLAGS " -flat_namespace")
 ENDIF (APPLE)
-
+ENDIF ()
 
