@@ -14,7 +14,9 @@ SPDX-License-Identifier: Apache-2.0
 #endif
 #endif
 
-#if defined(SYMDIFF_NO_EXTERN_SYMBOLS)
+#if defined _WIN32
+#define DLL_PROTECTED DLL_PUBLIC
+#elif defined(SYMDIFF_NO_EXTERN_SYMBOLS)
 #define DLL_PROTECTED DLL_LOCAL
 #else
 #define DLL_PROTECTED DLL_PUBLIC
