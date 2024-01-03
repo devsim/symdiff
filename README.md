@@ -18,6 +18,8 @@ It is licensed under the [Apache 2.0 License](http://www.apache.org/licenses/L
 * **Python** scripting interface
 * **Tcl** scripting interface
 
+Recent changes are available in [CHANGES.md](CHANGES.md).
+
 Please see NOTICE and LICENSE files for copyright and license information.
 
 Documentation available in doc/symdiff.pdf.
