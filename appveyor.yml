@@ -254,7 +254,7 @@ deploy:
   # Deploy to GitHub Releases
   - provider: GitHub
     auth_token:
-      secure: Mq6AiAmkNKIT5ebIBkJplM/wBVkxNIVDl5ijUUEEhMP441Z1KYbKvFcECo6Ecs83
+      secure: e7c0MigGN/P/WSO6O+MkEf1UnqV2sert9hxSrYNd/UhUWNWfothgSN/UcV8hgwfb
     #artifact: dist\*.zip
     draft: true
     prerelease: false

@@ -81,7 +81,7 @@ script:
 deploy:
   provider: releases
   api_key:
-    secure: "aiV5b5x4m1u3OuaxZ94Ox6mmZmijwGi4T1xEdB27w2h+NdUcj4+MNjJIfF6B7+gvVBspgMz5M37L6q+xsu7uALANRPfHiVkJE2GXQDm1hc9Khk2apq7hDcM0HCpzXLy+F/oFnkW905amwH0sPMKTSscQZooOxyD8yOkK8H0nao4="
+    secure: "UrKCvZVvVCY51kbF31AKQiS2LSPNCkTeFGUTuP5XIvwWuupJockT/FVJXxdlBPjc1ALQr1or2ObPvOdp3XBbcoEWRCG9pFhQOuAh3HKntC1sxitudY3Djvn9g4iwlzBVzyzJoRo9Tra2zybjcwN8Q3HdXFeHzP3A1L3uatViTiE="
 
   file_glob: true
   file:
