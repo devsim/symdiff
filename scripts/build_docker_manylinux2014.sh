@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
-docker run -it -d --name manylinux2014 quay.io/pypa/manylinux2014_x86_64 &&
+set -u
+export DEVSIM_ARCH=$(uname -m)
+docker run -it -d --name manylinux2014 quay.io/pypa/manylinux2014_${DEVSIM_ARCH} &&
 (cd .. && tar czf symdiff.tgz symdiff && docker cp symdiff.tgz manylinux2014:/root/) &&
 docker exec manylinux2014 bash -c "git config --global --add safe.directory /root/symdiff"
 docker exec manylinux2014 bash -c "cd /root && tar xzf symdiff.tgz";

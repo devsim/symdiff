@@ -1,13 +1,8 @@
 #!/bin/bash
 set -e
+set -u
+export DEVSIM_ARCH=$(uname -m)
 
-# Centos Specific
-#https://fedoraproject.org/wiki/EPEL
-#yum install -y git bison flex zlib-static zlib-devel sqlite-devel python3 python3-devel
-#yum install -y centos-release-scl
-#yum install -y devtoolset-9-gcc devtoolset-9-gcc-c++ devtoolset-9-libquadmath-devel devtoolset-9-gcc-gfortran make
-#yum install -y epel-release
-#yum install -y cmake3
 yum install -y bison flex rsync
 
 export CMAKE="cmake"
@@ -21,7 +16,7 @@ export PYTHON3_INCLUDE=$(${PYTHON3_BIN} -c "from sysconfig import get_paths as g
 export PYTHON3_ARCHIVE=""
 
 # SYMDIFF build
-(bash scripts/symdiff_centos.sh && cd linux_x86_64_release && make -j2 && make test);
+(bash scripts/symdiff_centos.sh && cd linux_${DEVSIM_ARCH}_release && make -j2 && make test);
 (rsync -avP --exclude __pycache__ lib/symdiff bdist_wheel/)
 (rsync -avP --exclude __pycache__ LICENSE NOTICE README.md examples doc bdist_wheel)
 (cd bdist_wheel && ${PIP_BIN} wheel .)

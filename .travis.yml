@@ -14,9 +14,13 @@ matrix:
       - ARCH=arm64
     osx_image: xcode14.2
   - os: linux
-    sudo: required
-    dist: trusty
+    dist: focal
     services: docker
+    arch: amd64
+  - os: linux
+    dist: focal
+    services: docker
+    arch: arm64
 
 addons:
   homebrew:
