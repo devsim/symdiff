@@ -6,11 +6,6 @@ matrix:
   - os: osx
     env:
       - COMPILER=clang
-      - ARCH=x86_64
-    osx_image: xcode10.1
-  - os: osx
-    env:
-      - COMPILER=clang
       - ARCH=arm64
     osx_image: xcode14.2
   - os: linux
@@ -71,11 +66,7 @@ script:
       ./scripts/build_docker_manylinux2014.sh ${TRAVIS_TAG};
     fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
-      if [ "$COMPILER" == "gcc" ]; then
-        ./scripts/build_macos.sh $COMPILER "${TRAVIS_TAG}";
-      elif [ "$COMPILER" == "clang" ]; then
-        ./scripts/build_macos.sh $COMPILER "clang_${TRAVIS_TAG}";
-      fi
+      ./scripts/build_macos.sh "${TRAVIS_TAG}";
     fi
 
 deploy:
