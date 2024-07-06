@@ -1,3 +1,6 @@
+# 1.2.9
+
+Move to RHEL 8 compatible `manylinux_2_28`.
 
 # 1.2.8
 
