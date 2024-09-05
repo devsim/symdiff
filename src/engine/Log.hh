@@ -9,55 +9,49 @@ SPDX-License-Identifier: Apache-2.0
 #include "EquationObject.hh"
 namespace Eqo {
 class Log : public EquationObject {
-    public:
-        Log(EqObjPtr);
+ public:
+  Log(EqObjPtr);
 
-        EqObjPtr Derivative(EqObjPtr);
-        EqObjPtr Simplify();
+  EqObjPtr Derivative(EqObjPtr);
+  EqObjPtr Simplify();
 
-        EqObjPtr CombineProduct(std::vector<EqObjPtr>);
-        EqObjPtr CombineAdd(std::vector<EqObjPtr>);
+  EqObjPtr CombineProduct(std::vector<EqObjPtr>);
+  EqObjPtr CombineAdd(std::vector<EqObjPtr>);
 
-        bool isZero();
-        bool isOne();
+  bool isZero();
+  bool isOne();
 
-        EqObjPtr getScale();
-        EqObjPtr getUnscaledValue();
+  EqObjPtr getScale();
+  EqObjPtr getUnscaledValue();
 
-        double getSign();
-        EqObjPtr getUnsignedValue();
+  double getSign();
+  EqObjPtr getUnsignedValue();
 
-        EqObjPtr clone();
-        EqObjPtr subst(const std::string &, EqObjPtr);
+  EqObjPtr clone();
+  EqObjPtr subst(const std::string &, EqObjPtr);
 
-        EqObjPtr expand();
+  EqObjPtr expand();
 
-        bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal();
-        std::set<std::string> getReferencedType(Eqo::EqObjType rt)
-        {
-            return value->getReferencedType(rt);
-        }
+  bool hasReciprocal() { return false; }
+  EqObjPtr getReciprocal();
+  std::set<std::string> getReferencedType(Eqo::EqObjType rt)
+  {
+    return value->getReferencedType(rt);
+  }
 
-        friend class Exponent;
+  friend class Exponent;
 
-        std::vector<EqObjPtr> getArgs() {
-          return createArgs(value);
-        }
+  std::vector<EqObjPtr> getArgs() { return createArgs(value); }
 
-        std::string getName() const
-        {
-          return "log";
-        }
+  std::string getName() const { return "log"; }
 
-    private:
-        std::string createStringValue() const;
+ private:
+  std::string createStringValue() const;
 
-        Log(const Log &);
-        Log operator=(const Log &);
+  Log(const Log &);
+  Log operator=(const Log &);
 
-        const EqObjPtr value;
+  const EqObjPtr value;
 };
-}
+}  // namespace Eqo
 #endif
-

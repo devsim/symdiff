@@ -12,7 +12,6 @@ SPDX-License-Identifier: Apache-2.0
 #include <sstream>
 namespace sdHelp {
 
-
 ret_pair SymdiffEval(const std::string &expr)
 {
   bool ret = false;
@@ -26,7 +25,8 @@ ret_pair SymdiffEval(const std::string &expr)
   {
     std::ostringstream os;
     os << "While evaluating expression \"" << expr << "\"\n";
-    for (EvalExpr::error_t::iterator it = terrors.begin(); it != terrors.end(); ++it)
+    for (EvalExpr::error_t::iterator it = terrors.begin(); it != terrors.end();
+         ++it)
     {
       os << *it << "\n";
     }
@@ -36,12 +36,11 @@ ret_pair SymdiffEval(const std::string &expr)
   else
   {
     data.string_ = testeq->stringValue();
-    data.eqptr_  = testeq;
+    data.eqptr_ = testeq;
     ret = true;
   }
 
   return std::make_pair(ret, data);
 }
 
-}
-
+}  // namespace sdHelp

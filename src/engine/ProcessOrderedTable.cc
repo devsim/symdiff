@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 #include "ProcessOrderedTable.hh"
 #include "EquationObject.hh"
 
-
 void ProcessOrderedTable::run(Eqo::EqObjPtr eq)
 {
   errors_.clear();
@@ -30,7 +29,8 @@ void ProcessOrderedTable::run(Eqo::EqObjPtr eq)
      it should be noted that the existence of 2 different instances
      of the string value in the index means there is a type mismatch
   */
-  for (OrderedIndex_t::const_iterator it = orderedIndex_.begin(); it != orderedIndex_.end(); ++it)
+  for (OrderedIndex_t::const_iterator it = orderedIndex_.begin();
+       it != orderedIndex_.end(); ++it)
   {
     if (it->second.size() > 1)
     {
@@ -72,7 +72,9 @@ bool CompareRows(const OrderedTableData &r1, const OrderedTableData &r2)
   return ret;
 }
 
-size_t FindMatchedRow(const OrderedTable_t &table, const std::vector<size_t> &indexes, OrderedTableData &newrow)
+size_t FindMatchedRow(const OrderedTable_t &table,
+                      const std::vector<size_t> &indexes,
+                      OrderedTableData &newrow)
 {
   size_t ret = size_t(-1);
   size_t len = indexes.size();
@@ -86,12 +88,13 @@ size_t FindMatchedRow(const OrderedTable_t &table, const std::vector<size_t> &in
   }
   return ret;
 }
-}
+}  // namespace
 
 /* make this return the indexes of the args processed */
 /* does not handle when sub types (model/variable) have different types */
 /* looks like it also handles subexpression elimination as well */
-size_t ProcessOrderedTable::processOrderedTable(Eqo::EqObjPtr eq) {
+size_t ProcessOrderedTable::processOrderedTable(Eqo::EqObjPtr eq)
+{
   /* are we already in the table */
   const std::string &value = eq->stringValue();
 
@@ -102,7 +105,7 @@ size_t ProcessOrderedTable::processOrderedTable(Eqo::EqObjPtr eq) {
 
   OrderedTableData newrow;
   newrow.value_ = value;
-  newrow.ptr_   = eq;
+  newrow.ptr_ = eq;
 
   // This first test just does a pointer match
   myindex = FindMatchedRow(orderedTable_, myindexes, newrow);
@@ -113,7 +116,8 @@ size_t ProcessOrderedTable::processOrderedTable(Eqo::EqObjPtr eq) {
     const std::vector<Eqo::EqObjPtr> &args = eq->getArgs();
     newrow.indexes_.reserve(args.size());
     // This is our current index
-    for (std::vector<Eqo::EqObjPtr>::const_iterator it = args.begin(); it != args.end(); ++it)
+    for (std::vector<Eqo::EqObjPtr>::const_iterator it = args.begin();
+         it != args.end(); ++it)
     {
       newrow.indexes_.push_back(processOrderedTable(*it));
     }
@@ -129,4 +133,3 @@ size_t ProcessOrderedTable::processOrderedTable(Eqo::EqObjPtr eq) {
   }
   return myindex;
 }
-

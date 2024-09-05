@@ -9,105 +9,94 @@ SPDX-License-Identifier: Apache-2.0
 #include "EquationObject.hh"
 
 namespace Eqo {
-class IfObj : public EquationObject
-{
-    public:
-        IfObj(EqObjPtr /*test*/, EqObjPtr /*result*/);
-        ~IfObj() {};
+class IfObj : public EquationObject {
+ public:
+  IfObj(EqObjPtr /*test*/, EqObjPtr /*result*/);
+  ~IfObj() {};
 
-        EqObjPtr Derivative(EqObjPtr);
-        EqObjPtr Simplify();
+  EqObjPtr Derivative(EqObjPtr);
+  EqObjPtr Simplify();
 
-        EqObjPtr CombineProduct(std::vector<EqObjPtr>);
-        EqObjPtr CombineAdd(std::vector<EqObjPtr>);
+  EqObjPtr CombineProduct(std::vector<EqObjPtr>);
+  EqObjPtr CombineAdd(std::vector<EqObjPtr>);
 
-        bool isZero();
-        bool isOne();
+  bool isZero();
+  bool isOne();
 
-        EqObjPtr getScale();
-        EqObjPtr getUnscaledValue();
+  EqObjPtr getScale();
+  EqObjPtr getUnscaledValue();
 
-        double getSign();
-        EqObjPtr getUnsignedValue();
+  double getSign();
+  EqObjPtr getUnsignedValue();
 
-        EqObjPtr clone();
-        EqObjPtr subst(const std::string &, EqObjPtr);
+  EqObjPtr clone();
+  EqObjPtr subst(const std::string &, EqObjPtr);
 
-        EqObjPtr expand();
+  EqObjPtr expand();
 
-        std::vector<EqObjPtr> getArgs() {
-          return createArgs(test, arg);
-        }
+  std::vector<EqObjPtr> getArgs() { return createArgs(test, arg); }
 
-        bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal();
+  bool hasReciprocal() { return false; }
+  EqObjPtr getReciprocal();
 
-        std::set<std::string> getReferencedType(Eqo::EqObjType rt);
+  std::set<std::string> getReferencedType(Eqo::EqObjType rt);
 
-        std::string getName() const
-        {
-          return "if";
-        }
+  std::string getName() const { return "if"; }
 
-    private:
-        std::string createStringValue() const;
+ private:
+  std::string createStringValue() const;
 
-        IfObj(const IfObj &);
-        IfObj operator=(const IfObj &);
+  IfObj(const IfObj &);
+  IfObj operator=(const IfObj &);
 
-        const EqObjPtr test;
-        const EqObjPtr arg;
+  const EqObjPtr test;
+  const EqObjPtr arg;
 };
 
-class IfElseObj : public EquationObject
-{
-    public:
-        IfElseObj(EqObjPtr /*test*/, EqObjPtr /*left*/, EqObjPtr /*right*/);
-        ~IfElseObj() {};
+class IfElseObj : public EquationObject {
+ public:
+  IfElseObj(EqObjPtr /*test*/, EqObjPtr /*left*/, EqObjPtr /*right*/);
+  ~IfElseObj() {};
 
-        EqObjPtr Derivative(EqObjPtr);
-        EqObjPtr Simplify();
+  EqObjPtr Derivative(EqObjPtr);
+  EqObjPtr Simplify();
 
-        EqObjPtr CombineProduct(std::vector<EqObjPtr>);
-        EqObjPtr CombineAdd(std::vector<EqObjPtr>);
+  EqObjPtr CombineProduct(std::vector<EqObjPtr>);
+  EqObjPtr CombineAdd(std::vector<EqObjPtr>);
 
-        bool isZero();
-        bool isOne();
+  bool isZero();
+  bool isOne();
 
-        EqObjPtr getScale();
-        EqObjPtr getUnscaledValue();
+  EqObjPtr getScale();
+  EqObjPtr getUnscaledValue();
 
-        double getSign();
-        EqObjPtr getUnsignedValue();
+  double getSign();
+  EqObjPtr getUnsignedValue();
 
-        EqObjPtr clone();
-        EqObjPtr subst(const std::string &, EqObjPtr);
+  EqObjPtr clone();
+  EqObjPtr subst(const std::string &, EqObjPtr);
 
-        EqObjPtr expand();
+  EqObjPtr expand();
 
-        std::vector<EqObjPtr> getArgs() {
-          return createArgs(test, arg1, arg2);
-        }
+  std::vector<EqObjPtr> getArgs() { return createArgs(test, arg1, arg2); }
 
-        bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal();
+  bool hasReciprocal() { return false; }
+  EqObjPtr getReciprocal();
 
-        std::set<std::string> getReferencedType(Eqo::EqObjType rt);
+  std::set<std::string> getReferencedType(Eqo::EqObjType rt);
 
-        std::string getName() const
-        {
-          return "ifelse";
-        }
-    private:
-        std::string createStringValue() const;
+  std::string getName() const { return "ifelse"; }
 
-        IfElseObj(const IfElseObj &);
-        IfElseObj operator=(const IfElseObj &);
+ private:
+  std::string createStringValue() const;
 
-        EqObjPtr test;
-        EqObjPtr arg1;
-        EqObjPtr arg2;
+  IfElseObj(const IfElseObj &);
+  IfElseObj operator=(const IfElseObj &);
+
+  EqObjPtr test;
+  EqObjPtr arg1;
+  EqObjPtr arg2;
 };
-}
+}  // namespace Eqo
 
 #endif

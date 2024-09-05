@@ -16,13 +16,14 @@ int main(int argc, char * argv[])
 }
 #endif
 extern "C" {
-int DLL_PUBLIC
-Symdifftcl_Init(Tcl_Interp *interp)
+int DLL_PUBLIC Symdifftcl_Init(Tcl_Interp *interp)
 {
-  if (Tcl_InitStubs(interp, TCL_VERSION, 0) == nullptr) {
+  if (Tcl_InitStubs(interp, TCL_VERSION, 0) == nullptr)
+  {
     return TCL_ERROR;
   }
-  if (Tcl_PkgProvide(interp, "symdifftcl", "1.0") == TCL_ERROR) {
+  if (Tcl_PkgProvide(interp, "symdifftcl", "1.0") == TCL_ERROR)
+  {
     return TCL_ERROR;
   }
   dsTcl::Commands_Init(interp);
@@ -32,9 +33,4 @@ Symdifftcl_Init(Tcl_Interp *interp)
 DLL_PUBLIC Tcl_PackageInitProc *Symdifftcl_SafeInit = Symdifftcl_Init;
 DLL_PUBLIC Tcl_PackageUnloadProc *Symdifftcl_SafeUnload = nullptr;
 DLL_PUBLIC Tcl_PackageUnloadProc *Symdifftcl_Unload = nullptr;
-
-
 }
-
-
-

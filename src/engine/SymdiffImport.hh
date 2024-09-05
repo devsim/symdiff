@@ -6,7 +6,8 @@ SPDX-License-Identifier: Apache-2.0
 #ifndef SYMDIFF_IMPORT_HH
 #define SYMDIFF_IMPORT_HH
 #if defined _WIN32
-#define DLL_PUBLIC __declspec(dllexport) // Note: actually gcc seems to also supports this syntax.
+#define DLL_PUBLIC __declspec(dllexport)  // Note: actually gcc seems to also supports this
+                         // syntax.
 #define DLL_LOCAL __declspec(dllimport)
 #else
 #define DLL_PUBLIC __attribute__ ((visibility("default")))
@@ -21,4 +22,3 @@ SPDX-License-Identifier: Apache-2.0
 #else
 #define DLL_PROTECTED DLL_PUBLIC
 #endif
-

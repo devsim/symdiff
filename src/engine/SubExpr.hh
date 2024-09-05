@@ -13,80 +13,63 @@ SPDX-License-Identifier: Apache-2.0
 #include <map>
 #include <vector>
 
-
-
-namespace Eqo
-{
+namespace Eqo {
 class EquationObject;
 typedef std::shared_ptr<EquationObject> EqObjPtr;
-}
+}  // namespace Eqo
 
 typedef std::vector<std::string> ModelNameVector_t;
-typedef std::map<std::string, Eqo::EqObjPtr > ModelMap_t;
-
+typedef std::map<std::string, Eqo::EqObjPtr> ModelMap_t;
 
 class SubExpr;
 
-class SubExprData
-{
-  public:
-    SubExprData() : refcount(0) {}
-    explicit SubExprData(Eqo::EqObjPtr x);
+class SubExprData {
+ public:
+  SubExprData() : refcount(0) {}
+  explicit SubExprData(Eqo::EqObjPtr x);
 
-    void addCount()
-    {
-      ++refcount;
-    }
-    size_t getCount() const
-    {
-      return refcount;
-    }
+  void addCount() { ++refcount; }
+  size_t getCount() const { return refcount; }
 
-    Eqo::EqObjPtr getEquation() const;
+  Eqo::EqObjPtr getEquation() const;
 
-    const std::string &getName(SubExpr &subexpr) const;
+  const std::string &getName(SubExpr &subexpr) const;
 
-  private:
-    size_t refcount;
-    Eqo::EqObjPtr equation;
-    mutable std::string name;
+ private:
+  size_t refcount;
+  Eqo::EqObjPtr equation;
+  mutable std::string name;
 };
 
 /// Creates sub expressions on the fly
-class DLL_PROTECTED SubExpr
-{
-  public:
-    SubExpr();
+class DLL_PROTECTED SubExpr {
+ public:
+  SubExpr();
 
-    std::string GetUniqueName();
+  std::string GetUniqueName();
 
-    const std::string &GetErrorString() const
-    {
-      return errorString_;
-    }
+  const std::string &GetErrorString() const { return errorString_; }
 
-    void CreateSubexpressions(ModelMap_t &);
-    void RemoveZeros(ModelMap_t &);
+  void CreateSubexpressions(ModelMap_t &);
+  void RemoveZeros(ModelMap_t &);
 
-  private:
-    bool removeZeros(ModelMap_t &);
-    void scanSubexpression(Eqo::EqObjPtr &);
-    void createSubexpressions(ModelMap_t &);
+ private:
+  bool removeZeros(ModelMap_t &);
+  void scanSubexpression(Eqo::EqObjPtr &);
+  void createSubexpressions(ModelMap_t &);
 
-    enum ProcessStatus_t {UNTOUCHED = 0, PROCESSING, DONE};
+  enum ProcessStatus_t { UNTOUCHED = 0, PROCESSING, DONE };
 
-    /// Use this for detecting cycles
-    std::map<std::string, ProcessStatus_t> processStatusMap_;
+  /// Use this for detecting cycles
+  std::map<std::string, ProcessStatus_t> processStatusMap_;
 
-    /// report errors if there is a problem
-    std::string errorString_;
+  /// report errors if there is a problem
+  std::string errorString_;
 
-    std::map<std::string, SubExprData> SubExprMap;
-    std::vector<std::string>       SubExprOrdered;
+  std::map<std::string, SubExprData> SubExprMap;
+  std::vector<std::string> SubExprOrdered;
 
-    size_t unique_counter_;
+  size_t unique_counter_;
 };
 
-
 #endif
-

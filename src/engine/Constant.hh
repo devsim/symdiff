@@ -9,66 +9,55 @@ SPDX-License-Identifier: Apache-2.0
 #include "EquationObject.hh"
 namespace Eqo {
 class Constant : public EquationObject {
-    public:
-        Constant(double);
-        ~Constant() {};
+ public:
+  Constant(double);
+  ~Constant() {};
 
+  EqObjPtr Derivative(EqObjPtr);
+  EqObjPtr Simplify();
 
-        EqObjPtr Derivative(EqObjPtr);
-        EqObjPtr Simplify();
+  EqObjPtr CombineProduct(std::vector<EqObjPtr>);
+  EqObjPtr CombineAdd(std::vector<EqObjPtr>);
 
-        EqObjPtr CombineProduct(std::vector<EqObjPtr>);
-        EqObjPtr CombineAdd(std::vector<EqObjPtr>);
+  bool isZero();
+  bool isOne();
 
-        bool isZero();
-        bool isOne();
+  EqObjPtr getScale();
+  EqObjPtr getUnscaledValue();
 
-        EqObjPtr getScale();
-        EqObjPtr getUnscaledValue();
+  double getSign();
+  EqObjPtr getUnsignedValue();
 
-        double getSign();
-        EqObjPtr getUnsignedValue();
+  EqObjPtr clone();
+  EqObjPtr subst(const std::string &, EqObjPtr);
 
-        EqObjPtr clone();
-        EqObjPtr subst(const std::string &, EqObjPtr);
+  EqObjPtr expand();
 
-        EqObjPtr expand();
+  bool hasReciprocal() { return !(this->isZero()); }
 
-        bool hasReciprocal()
-        {
-          return !(this->isZero());
-        }
+  EqObjPtr getReciprocal();
 
-        EqObjPtr getReciprocal();
+  double getDoubleValue() { return dvalue; }
 
-        double getDoubleValue()
-        {
-          return dvalue;
-        }
+  std::set<std::string> getReferencedType(Eqo::EqObjType rt)
+  {
+    return CreateSetIfThisType(rt);
+  }
 
-        std::set<std::string> getReferencedType(Eqo::EqObjType rt) {
-            return CreateSetIfThisType(rt);
-        }
+  friend class Pow;
+  friend class Product;
 
-        friend class Pow;
-        friend class Product;
+  std::vector<EqObjPtr> getArgs() { return std::vector<EqObjPtr>(); }
 
-        std::vector<EqObjPtr> getArgs() {
-          return std::vector<EqObjPtr>();
-        }
+  std::string getName() const { return EquationObject::stringValue(); }
 
-        std::string getName() const
-        {
-          return EquationObject::stringValue();
-        }
-    private:
-        std::string createStringValue() const;
+ private:
+  std::string createStringValue() const;
 
-        Constant(const Constant &);
-        Constant operator=(const Constant &);
+  Constant(const Constant &);
+  Constant operator=(const Constant &);
 
-        const double dvalue;
+  const double dvalue;
 };
-}
+}  // namespace Eqo
 #endif
-

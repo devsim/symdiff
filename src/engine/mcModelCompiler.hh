@@ -16,4 +16,3 @@ Eqo::EqObjPtr GetModelValue(const std::string &);
 
 Eqo::EqObjPtr DefineModel(const std::string &, Eqo::EqObjPtr);
 #endif
-

@@ -9,15 +9,13 @@ SPDX-License-Identifier: Apache-2.0
 #include <sstream>
 
 namespace Eqo {
-Exponent::Exponent(EqObjPtr var) : EquationObject(EXPONENT_OBJ), value(var)
-{
-}
+Exponent::Exponent(EqObjPtr var) : EquationObject(EXPONENT_OBJ), value(var) {}
 
 std::string Exponent::createStringValue() const
 {
-    std::ostringstream os;
-    os << "exp(" << value << ")";
-    return std::string(os.str());
+  std::ostringstream os;
+  os << "exp(" << value << ")";
+  return std::string(os.str());
 }
 
 EqObjPtr Exponent::Derivative(EqObjPtr foo)
@@ -28,22 +26,21 @@ EqObjPtr Exponent::Derivative(EqObjPtr foo)
   }
   else
   {
-     return value->Derivative(foo)*exp(value);
+    return value->Derivative(foo) * exp(value);
   }
 }
 
 EqObjPtr Exponent::Simplify()
 {
-   if (value->isZero())
-      return con(1);
+  if (value->isZero()) return con(1);
 
-   if (value->getType() == LOG_OBJ)
-   {
-      Log *Y = dynamic_cast<Log *>(value.get());
-      return (Y->value);
-   }
+  if (value->getType() == LOG_OBJ)
+  {
+    Log *Y = dynamic_cast<Log *>(value.get());
+    return (Y->value);
+  }
 
-   return exp(value->Simplify());
+  return exp(value->Simplify());
 }
 
 /**
@@ -51,79 +48,56 @@ EqObjPtr Exponent::Simplify()
  */
 EqObjPtr Exponent::CombineProduct(std::vector<EqObjPtr> y)
 {
-   std::vector<EqObjPtr> tmp;
-   tmp.push_back(value);
-   const size_t len = y.size();
-   for (size_t i=0; i < len; ++i)
-   {
-      Exponent *Y = dynamic_cast<Exponent *>(y[i].get());
-      tmp.push_back(Y->value);
-   }
-   return EqObjPtr(new Exponent(EqObjPtr(new Add(tmp))));
+  std::vector<EqObjPtr> tmp;
+  tmp.push_back(value);
+  const size_t len = y.size();
+  for (size_t i = 0; i < len; ++i)
+  {
+    Exponent *Y = dynamic_cast<Exponent *>(y[i].get());
+    tmp.push_back(Y->value);
+  }
+  return EqObjPtr(new Exponent(EqObjPtr(new Add(tmp))));
 }
 
 EqObjPtr Exponent::CombineAdd(std::vector<EqObjPtr> y)
 {
-   if (y.empty())
-      return shared_from_this();
+  if (y.empty()) return shared_from_this();
 
-   y.push_back(EqObjPtr(new Exponent(value)));
-   return EqObjPtr(new Add(y));
+  y.push_back(EqObjPtr(new Exponent(value)));
+  return EqObjPtr(new Add(y));
 }
 
-bool Exponent::isZero()
-{
-   return false;
-}
+bool Exponent::isZero() { return false; }
 
-bool Exponent::isOne()
-{
-   return false;
-}
+bool Exponent::isOne() { return false; }
 
-EqObjPtr Exponent::getScale()
-{
-   return con(1.0);
-}
+EqObjPtr Exponent::getScale() { return con(1.0); }
 
-EqObjPtr Exponent::getUnscaledValue()
-{
-   return shared_from_this();
-}
+EqObjPtr Exponent::getUnscaledValue() { return shared_from_this(); }
 
-double Exponent::getSign()
-{
-    return 1.0;
-}
+double Exponent::getSign() { return 1.0; }
 
-EqObjPtr Exponent::getUnsignedValue()
-{
-   return shared_from_this();
-}
+EqObjPtr Exponent::getUnsignedValue() { return shared_from_this(); }
 
 EqObjPtr Exponent::clone()
 {
-    EquationObject *n = new Exponent(value->clone());
-    return EqObjPtr(n);
+  EquationObject *n = new Exponent(value->clone());
+  return EqObjPtr(n);
 }
 
 EqObjPtr Exponent::subst(const std::string &str, EqObjPtr eqo)
 {
-    if (str == this->stringValue())
-        return eqo;
-    else
-        return exp(value->subst(str, eqo));
+  if (str == this->stringValue())
+    return eqo;
+  else
+    return exp(value->subst(str, eqo));
 }
 
-EqObjPtr Exponent::expand()
-{
-    return exp(value->expand());
-}
+EqObjPtr Exponent::expand() { return exp(value->expand()); }
 
 EqObjPtr Exponent::getReciprocal()
 {
   assert(false);
   return con(0);
 }
-}
-
+}  // namespace Eqo

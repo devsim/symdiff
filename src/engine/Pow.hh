@@ -9,57 +9,52 @@ SPDX-License-Identifier: Apache-2.0
 #include "EquationObject.hh"
 namespace Eqo {
 class Pow : public EquationObject {
-    public:
-        Pow(EqObjPtr, EqObjPtr);
+ public:
+  Pow(EqObjPtr, EqObjPtr);
 
-        EqObjPtr Derivative(EqObjPtr);
-        EqObjPtr Simplify();
+  EqObjPtr Derivative(EqObjPtr);
+  EqObjPtr Simplify();
 
-        EqObjPtr CombineProduct(std::vector<EqObjPtr>);
-        EqObjPtr CombineAdd(std::vector<EqObjPtr>);
+  EqObjPtr CombineProduct(std::vector<EqObjPtr>);
+  EqObjPtr CombineAdd(std::vector<EqObjPtr>);
 
-        bool isZero();
-        bool isOne();
+  bool isZero();
+  bool isOne();
 
-        EqObjPtr getScale();
-        EqObjPtr getUnscaledValue();
+  EqObjPtr getScale();
+  EqObjPtr getUnscaledValue();
 
-        double getSign();
-        EqObjPtr getUnsignedValue();
+  double getSign();
+  EqObjPtr getUnsignedValue();
 
-        EqObjPtr clone();
-        EqObjPtr subst(const std::string &, EqObjPtr);
+  EqObjPtr clone();
+  EqObjPtr subst(const std::string &, EqObjPtr);
 
-        EqObjPtr expand();
+  EqObjPtr expand();
 
-        bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal();
-        std::set<std::string> getReferencedType(Eqo::EqObjType rt)
-        {
-            return UniteReferencedType(rt, base, exponent);
-        }
+  bool hasReciprocal() { return false; }
+  EqObjPtr getReciprocal();
+  std::set<std::string> getReferencedType(Eqo::EqObjType rt)
+  {
+    return UniteReferencedType(rt, base, exponent);
+  }
 
-        friend class Log;
-        friend class Product;
+  friend class Log;
+  friend class Product;
 
-        std::vector<EqObjPtr> getArgs() {
-          return createArgs(base, exponent);
-        }
+  std::vector<EqObjPtr> getArgs() { return createArgs(base, exponent); }
 
-        std::string getName() const
-        {
-          return "pow";
-        }
-    private:
-        std::string createStringValue() const;
+  std::string getName() const { return "pow"; }
 
-        Pow(const Pow &);
-        Pow operator=(const Pow &);
+ private:
+  std::string createStringValue() const;
 
-        const EqObjPtr base;
-        const EqObjPtr exponent;
+  Pow(const Pow &);
+  Pow operator=(const Pow &);
+
+  const EqObjPtr base;
+  const EqObjPtr exponent;
 };
 
-}
+}  // namespace Eqo
 #endif
-

@@ -9,56 +9,51 @@ SPDX-License-Identifier: Apache-2.0
 #include "EquationObject.hh"
 namespace Eqo {
 class Exponent : public EquationObject {
-    public:
-        Exponent(EqObjPtr);
+ public:
+  Exponent(EqObjPtr);
 
-        EqObjPtr Derivative(EqObjPtr);
-        EqObjPtr Simplify();
+  EqObjPtr Derivative(EqObjPtr);
+  EqObjPtr Simplify();
 
-        EqObjPtr CombineProduct(std::vector<EqObjPtr>);
-        EqObjPtr CombineAdd(std::vector<EqObjPtr>);
+  EqObjPtr CombineProduct(std::vector<EqObjPtr>);
+  EqObjPtr CombineAdd(std::vector<EqObjPtr>);
 
-        bool isZero();
-        bool isOne();
+  bool isZero();
+  bool isOne();
 
-        EqObjPtr getScale();
-        EqObjPtr getUnscaledValue();
+  EqObjPtr getScale();
+  EqObjPtr getUnscaledValue();
 
-        double getSign();
-        EqObjPtr getUnsignedValue();
+  double getSign();
+  EqObjPtr getUnsignedValue();
 
-        EqObjPtr clone();
-        EqObjPtr subst(const std::string &, EqObjPtr);
+  EqObjPtr clone();
+  EqObjPtr subst(const std::string &, EqObjPtr);
 
-        EqObjPtr expand();
+  EqObjPtr expand();
 
-        bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal();
+  bool hasReciprocal() { return false; }
+  EqObjPtr getReciprocal();
 
-        std::set<std::string> getReferencedType(Eqo::EqObjType rt)
-        {
-            return value->getReferencedType(rt);
-        }
+  std::set<std::string> getReferencedType(Eqo::EqObjType rt)
+  {
+    return value->getReferencedType(rt);
+  }
 
-        std::vector<EqObjPtr> getArgs() {
-          return createArgs(value);
-        }
+  std::vector<EqObjPtr> getArgs() { return createArgs(value); }
 
-        std::string getName() const
-        {
-          return "exp";
-        }
+  std::string getName() const { return "exp"; }
 
-        friend class Log;
-    private:
-        std::string createStringValue() const;
+  friend class Log;
 
-        Exponent(const Exponent &);
-        Exponent operator=(const Exponent &);
+ private:
+  std::string createStringValue() const;
 
-        const EqObjPtr value;
+  Exponent(const Exponent &);
+  Exponent operator=(const Exponent &);
+
+  const EqObjPtr value;
 };
 
-}
+}  // namespace Eqo
 #endif
-

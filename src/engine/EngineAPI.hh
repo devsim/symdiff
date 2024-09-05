@@ -14,30 +14,51 @@ SPDX-License-Identifier: Apache-2.0
 namespace Eqo {
 class EquationObject;
 typedef std::shared_ptr<EquationObject> EqObjPtr;
-}
+}  // namespace Eqo
 
 namespace EngineAPI {
-enum EqObjType {CONST_OBJ=0, VARIABLE_OBJ, ADD_OBJ, PRODUCT_OBJ, EXPONENT_OBJ, POW_OBJ, LOG_OBJ, MODEL_OBJ, USERFUNC_OBJ, BLOGICAL_OBJ, ULOGICAL_OBJ, IF_OBJ, IFELSE_OBJ, NUM_TYPES};
+enum EqObjType {
+  CONST_OBJ = 0,
+  VARIABLE_OBJ,
+  ADD_OBJ,
+  PRODUCT_OBJ,
+  EXPONENT_OBJ,
+  POW_OBJ,
+  LOG_OBJ,
+  MODEL_OBJ,
+  USERFUNC_OBJ,
+  BLOGICAL_OBJ,
+  ULOGICAL_OBJ,
+  IF_OBJ,
+  IFELSE_OBJ,
+  NUM_TYPES
+};
 
-typedef Eqo::EqObjPtr (*EqUnaryFuncPtr) (Eqo::EqObjPtr);
-typedef Eqo::EqObjPtr (*EqBinaryFuncPtr) (Eqo::EqObjPtr, Eqo::EqObjPtr);
+typedef Eqo::EqObjPtr (*EqUnaryFuncPtr)(Eqo::EqObjPtr);
+typedef Eqo::EqObjPtr (*EqBinaryFuncPtr)(Eqo::EqObjPtr, Eqo::EqObjPtr);
 
-Eqo::EqObjPtr DLL_PROTECTED createUnaryLogical(const std::string &/*unaryOp*/, Eqo::EqObjPtr /*arg*/);
-Eqo::EqObjPtr DLL_PROTECTED createBinaryLogical(const std::string &/*unaryOp*/, Eqo::EqObjPtr /*arg*/, Eqo::EqObjPtr /*arg*/);
-Eqo::EqObjPtr DLL_PROTECTED createIfObj(Eqo::EqObjPtr /*test*/, Eqo::EqObjPtr /*result*/);
-Eqo::EqObjPtr DLL_PROTECTED createIfElseObj(Eqo::EqObjPtr /*test*/, Eqo::EqObjPtr /*left*/, Eqo::EqObjPtr /*right*/);
+Eqo::EqObjPtr DLL_PROTECTED createUnaryLogical(const std::string & /*unaryOp*/,
+                                               Eqo::EqObjPtr /*arg*/);
+Eqo::EqObjPtr DLL_PROTECTED createBinaryLogical(const std::string & /*unaryOp*/,
+                                                Eqo::EqObjPtr /*arg*/,
+                                                Eqo::EqObjPtr /*arg*/);
+Eqo::EqObjPtr DLL_PROTECTED createIfObj(Eqo::EqObjPtr /*test*/,
+                                        Eqo::EqObjPtr /*result*/);
+Eqo::EqObjPtr DLL_PROTECTED createIfElseObj(Eqo::EqObjPtr /*test*/,
+                                            Eqo::EqObjPtr /*left*/,
+                                            Eqo::EqObjPtr /*right*/);
 /// Non member functions for intuitive math operations
-Eqo::EqObjPtr DLL_PROTECTED operator* (Eqo::EqObjPtr x, Eqo::EqObjPtr y);
-Eqo::EqObjPtr DLL_PROTECTED pow (Eqo::EqObjPtr x, Eqo::EqObjPtr y);
-Eqo::EqObjPtr DLL_PROTECTED operator/ (Eqo::EqObjPtr x, Eqo::EqObjPtr y);
-Eqo::EqObjPtr DLL_PROTECTED operator+ (Eqo::EqObjPtr x, Eqo::EqObjPtr y);
-Eqo::EqObjPtr DLL_PROTECTED operator- (Eqo::EqObjPtr x, Eqo::EqObjPtr y);
+Eqo::EqObjPtr DLL_PROTECTED operator*(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
+Eqo::EqObjPtr DLL_PROTECTED pow(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
+Eqo::EqObjPtr DLL_PROTECTED operator/(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
+Eqo::EqObjPtr DLL_PROTECTED operator+(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
+Eqo::EqObjPtr DLL_PROTECTED operator-(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
 
-Eqo::EqObjPtr DLL_PROTECTED exp (Eqo::EqObjPtr x);
+Eqo::EqObjPtr DLL_PROTECTED exp(Eqo::EqObjPtr x);
 
-Eqo::EqObjPtr DLL_PROTECTED pow (Eqo::EqObjPtr x, Eqo::EqObjPtr y);
+Eqo::EqObjPtr DLL_PROTECTED pow(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
 
-Eqo::EqObjPtr DLL_PROTECTED log (Eqo::EqObjPtr x);
+Eqo::EqObjPtr DLL_PROTECTED log(Eqo::EqObjPtr x);
 
 Eqo::EqObjPtr DLL_PROTECTED diff(Eqo::EqObjPtr x, Eqo::EqObjPtr y);
 
@@ -56,7 +77,7 @@ Eqo::EqObjPtr DLL_PROTECTED sqrt(Eqo::EqObjPtr x);
 Eqo::EqObjPtr DLL_PROTECTED reciprocal_sqrt(Eqo::EqObjPtr x);
 
 /// how we print things
-std::ostream & operator<< (std::ostream &os, Eqo::EqObjPtr foo);
+std::ostream &operator<<(std::ostream &os, Eqo::EqObjPtr foo);
 
 /// keeps simplifying expression until string value doesn't change
 Eqo::EqObjPtr DLL_PROTECTED Simplify(Eqo::EqObjPtr x);
@@ -74,7 +95,8 @@ Eqo::EqObjPtr DLL_PROTECTED getSign(Eqo::EqObjPtr x);
 /// Sorts in order of constants, variables, then other objects
 void SortEqVector(std::vector<Eqo::EqObjPtr> &v1);
 
-Eqo::EqObjPtr DLL_PROTECTED subst(Eqo::EqObjPtr a, Eqo::EqObjPtr b, Eqo::EqObjPtr c);
+Eqo::EqObjPtr DLL_PROTECTED subst(Eqo::EqObjPtr a, Eqo::EqObjPtr b,
+                                  Eqo::EqObjPtr c);
 
 Eqo::EqObjPtr DLL_PROTECTED getNegation(Eqo::EqObjPtr x);
 
@@ -86,7 +108,8 @@ EqUnaryFuncPtr DLL_PROTECTED getUnaryFuncPtr(const std::string &);
 
 std::string DLL_PROTECTED getName(Eqo::EqObjPtr x);
 std::string DLL_PROTECTED getType(Eqo::EqObjPtr x);
-std::set<std::string> DLL_PROTECTED getReferencedType(Eqo::EqObjPtr x, EqObjType t);
+std::set<std::string> DLL_PROTECTED getReferencedType(Eqo::EqObjPtr x,
+                                                      EqObjType t);
 double DLL_PROTECTED getDoubleValue(Eqo::EqObjPtr x);
 std::string DLL_PROTECTED getStringValue(Eqo::EqObjPtr x);
 EqObjType DLL_PROTECTED getEnumeratedType(Eqo::EqObjPtr x);
@@ -99,5 +122,5 @@ typedef Eqo::EqObjPtr (*modelDerivativeRule_ptr)(Eqo::EqObjPtr, Eqo::EqObjPtr);
 void DLL_PROTECTED SetDerivativeRule(modelDerivativeRule_ptr);
 
 void DLL_PROTECTED ResetAllData();
-}
+}  // namespace EngineAPI
 #endif

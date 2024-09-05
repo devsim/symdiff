@@ -9,57 +9,52 @@ SPDX-License-Identifier: Apache-2.0
 #include "EquationObject.hh"
 namespace Eqo {
 class Product : public EquationObject {
-    public:
-        friend class Pow;
-        Product(EqObjPtr, EqObjPtr);
-        Product(std::vector<EqObjPtr>);
+ public:
+  friend class Pow;
+  Product(EqObjPtr, EqObjPtr);
+  Product(std::vector<EqObjPtr>);
 
-        EqObjPtr Derivative(EqObjPtr);
-        EqObjPtr Simplify();
+  EqObjPtr Derivative(EqObjPtr);
+  EqObjPtr Simplify();
 
-        EqObjPtr CombineProduct(std::vector<EqObjPtr>);
-        EqObjPtr CombineAdd(std::vector<EqObjPtr>);
+  EqObjPtr CombineProduct(std::vector<EqObjPtr>);
+  EqObjPtr CombineAdd(std::vector<EqObjPtr>);
 
-        bool isZero();
-        bool isOne();
+  bool isZero();
+  bool isOne();
 
-        EqObjPtr getScale();
-        EqObjPtr getUnscaledValue();
+  EqObjPtr getScale();
+  EqObjPtr getUnscaledValue();
 
-        double getSign();
-        EqObjPtr getUnsignedValue();
+  double getSign();
+  EqObjPtr getUnsignedValue();
 
-        EqObjPtr clone();
-        EqObjPtr subst(const std::string &, EqObjPtr);
+  EqObjPtr clone();
+  EqObjPtr subst(const std::string &, EqObjPtr);
 
-        EqObjPtr expand();
+  EqObjPtr expand();
 
-        void ProductVecSimplify(std::vector<EqObjPtr> &);
+  void ProductVecSimplify(std::vector<EqObjPtr> &);
 
-        bool hasReciprocal() {return false;}
-        EqObjPtr getReciprocal();
+  bool hasReciprocal() { return false; }
+  EqObjPtr getReciprocal();
 
-        std::set<std::string> getReferencedType(Eqo::EqObjType rt)
-        {
-            return UniteReferencedType(rt, values);
-        }
+  std::set<std::string> getReferencedType(Eqo::EqObjType rt)
+  {
+    return UniteReferencedType(rt, values);
+  }
 
-        std::vector<EqObjPtr> getArgs() {
-          return createArgs(values);
-        }
+  std::vector<EqObjPtr> getArgs() { return createArgs(values); }
 
-        std::string getName() const
-        {
-          return "*";
-        }
+  std::string getName() const { return "*"; }
 
-    private:
-        std::string createStringValue() const;
+ private:
+  std::string createStringValue() const;
 
-        Product(const Product &);
-        Product operator=(const Product &);
+  Product(const Product &);
+  Product operator=(const Product &);
 
-        std::vector<EqObjPtr> values;
+  std::vector<EqObjPtr> values;
 };
-}
+}  // namespace Eqo
 #endif

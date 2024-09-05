@@ -12,9 +12,9 @@ SPDX-License-Identifier: Apache-2.0
 #include <string>
 
 namespace Eqo {
-    class EquationObject;
-    typedef std::shared_ptr<EquationObject> EqObjPtr;
-};
+class EquationObject;
+typedef std::shared_ptr<EquationObject> EqObjPtr;
+};  // namespace Eqo
 
 namespace EvalExpr {
 typedef std::list<std::string> error_t;
@@ -23,7 +23,6 @@ typedef std::list<std::string> error_t;
 void clearVariableMap();
 
 Eqo::EqObjPtr DLL_PROTECTED evaluateExpression(const std::string &, error_t &);
-}
+}  // namespace EvalExpr
 
 #endif
-

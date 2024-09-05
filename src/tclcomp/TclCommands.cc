@@ -13,12 +13,10 @@ SPDX-License-Identifier: Apache-2.0
 
 namespace dsTcl {
 
-int 
-CmdDispatch(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+int CmdDispatch(ClientData clientData, Tcl_Interp *interp, int objc,
+                Tcl_Obj *CONST objv[])
 {
   int myerror = TCL_OK;
-
 
   try
   {
@@ -43,19 +41,18 @@ CmdDispatch(ClientData clientData, Tcl_Interp *interp,
 
 void AddCommands(Tcl_Interp *interp, Commands *clist)
 {
-  for ( ; (clist->name) != nullptr; ++clist)
+  for (; (clist->name) != nullptr; ++clist)
   {
     void *cdata = dsClientData::CreateData(clist->name, clist->command);
 
-    Tcl_CreateObjCommand(interp, clist->name, CmdDispatch,
-            (ClientData) cdata, (Tcl_CmdDeleteProc *) dsClientData::DeleteData);
+    Tcl_CreateObjCommand(interp, clist->name, CmdDispatch, (ClientData)cdata,
+                         (Tcl_CmdDeleteProc *)dsClientData::DeleteData);
   }
 }
 
-int 
-Commands_Init(Tcl_Interp *interp) {
-    AddCommands(interp, TclSymdiffCommands);
-    return TCL_OK;
+int Commands_Init(Tcl_Interp *interp)
+{
+  AddCommands(interp, TclSymdiffCommands);
+  return TCL_OK;
 }
-}
-
+}  // namespace dsTcl

@@ -12,8 +12,7 @@ SPDX-License-Identifier: Apache-2.0
 namespace Eqo {
 namespace {
 //// order by CONST_OBJ, the VARIABLE_OBJ, then everything else see enum
-struct EqVecCompare
-{
+struct EqVecCompare {
   bool operator()(EqObjPtr x, EqObjPtr y)
   {
     const EqObjType xtype = x->getType();
@@ -37,12 +36,11 @@ struct EqVecCompare
   }
 };
 
-}
+}  // namespace
 /// Sorts in order of constants, variables, then other objects
 void SortEqVector(std::vector<EqObjPtr> &v1)
 {
   std::sort(v1.begin(), v1.end(), EqVecCompare());
 }
 
-}
-
+}  // namespace Eqo

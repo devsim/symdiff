@@ -53,4 +53,3 @@ Eqo::EqObjPtr GetModelValue(const std::string &s)
 
   return ret;
 }
-

@@ -14,16 +14,16 @@ SPDX-License-Identifier: Apache-2.0
 namespace Eqo {
 class EquationObject;
 typedef std::shared_ptr<EquationObject> EqObjPtr;
-}
+}  // namespace Eqo
 
 namespace sdHelp {
 struct ret_data {
-  std::string   string_;
+  std::string string_;
   Eqo::EqObjPtr eqptr_;
 };
 
 typedef std::pair<bool, ret_data> ret_pair;
 DLL_PROTECTED ret_pair SymdiffEval(const std::string &);
-}
+}  // namespace sdHelp
 
 #endif

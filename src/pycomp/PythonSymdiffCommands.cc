@@ -5,7 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 ***/
 
 /* removes Python_d.lib from any contention */
-//#undef _DEBUG
+// #undef _DEBUG
 #ifdef _WIN32
 /* remove warning on windows for function we do not use */
 #define HAVE_ROUND
@@ -25,7 +25,7 @@ SPDX-License-Identifier: Apache-2.0
 #include <sstream>
 
 namespace {
-  PyObject *symdiff_exception = nullptr;
+PyObject *symdiff_exception = nullptr;
 };
 
 namespace {
@@ -40,7 +40,7 @@ struct module_state {
 #define GETSTATE(m) (&_state)
 static struct module_state _state;
 #endif
-}
+}  // namespace
 
 /// Visual C++ does not allow c++ return values in extern "C"
 /// There will be a python error unless there is only 1 argument
@@ -51,12 +51,12 @@ static sdHelp::ret_pair GetStringArgument(PyObject *args)
   const char *fromPython;
   if (PyArg_Parse(args, "(s)", &fromPython))
   {
-    result.first  = true;
+    result.first = true;
     result.second.string_ = fromPython;
   }
   else
   {
-    result.first  = false;
+    result.first = false;
   }
   return result;
 }
@@ -86,10 +86,7 @@ static PyObject *returnString(const std::string &s)
   return Py_BuildValue("s", s.c_str());
 }
 
-static PyObject *returnLong(size_t i)
-{
-  return PyLong_FromSsize_t(i);
-}
+static PyObject *returnLong(size_t i) { return PyLong_FromSsize_t(i); }
 
 static PyObject *returnTupleLong(const std::vector<size_t> &index)
 {
@@ -103,7 +100,6 @@ static PyObject *returnTupleLong(const std::vector<size_t> &index)
   }
   return returnObj;
 }
-
 
 static bool GetStringArguments(PyObject *args, StringVector_t &result)
 {
@@ -126,13 +122,12 @@ static bool GetStringArguments(PyObject *args, StringVector_t &result)
       break;
     }
   }
-  
+
   return ret;
 }
 
 static void SetErrorString(const std::string &errorString)
 {
-
   if (!errorString.empty())
   {
     std::ostringstream os;
@@ -142,19 +137,16 @@ static void SetErrorString(const std::string &errorString)
   }
 }
 
-
-
 /**
 Takes one argument, which is the command to evaluate
 */
-static PyObject *
-symdiffCmd(PyObject *, PyObject *args)
+static PyObject *symdiffCmd(PyObject *, PyObject *args)
 {
   PyObject *returnObj = nullptr;
   std::string errorString;
 
-  sdHelp::ret_pair tret  = GetStringArgument(args);
-  
+  sdHelp::ret_pair tret = GetStringArgument(args);
+
   if (tret.first)
   {
     sdHelp::ret_pair result;
@@ -175,14 +167,13 @@ symdiffCmd(PyObject *, PyObject *args)
   return returnObj;
 }
 
-static PyObject *
-symdiffTableCmd(PyObject *, PyObject *args)
+static PyObject *symdiffTableCmd(PyObject *, PyObject *args)
 {
   PyObject *returnObj = nullptr;
   std::string errorString;
 
-  sdHelp::ret_pair tret  = GetStringArgument(args);
-  
+  sdHelp::ret_pair tret = GetStringArgument(args);
+
   if (tret.first)
   {
     sdHelp::ret_pair result;
@@ -196,7 +187,7 @@ symdiffTableCmd(PyObject *, PyObject *args)
     {
       ProcessOrderedTable pot;
       pot.run(result.second.eqptr_);
-//      returnObj = returnString(result.second.string_);
+      //      returnObj = returnString(result.second.string_);
       OrderedTable_t table = pot.GetOrderedTable();
       if (table.empty())
       {
@@ -249,13 +240,12 @@ symdiffTableCmd(PyObject *, PyObject *args)
   return returnObj;
 }
 
-static PyObject *
-modelListCmd(PyObject *, PyObject *args)
+static PyObject *modelListCmd(PyObject *, PyObject *args)
 {
   PyObject *returnObj = nullptr;
   if (HasZeroArguments(args))
   {
-    const ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+    const ModelMap_t &model_list = Context::GetInstance().GetModelMap();
     if (model_list.empty())
     {
       //// Return none
@@ -265,7 +255,8 @@ modelListCmd(PyObject *, PyObject *args)
     {
       returnObj = PyTuple_New(model_list.size());
       Py_ssize_t i = 0;
-      for (ModelMap_t::const_iterator it = model_list.begin(); it != model_list.end(); ++it)
+      for (ModelMap_t::const_iterator it = model_list.begin();
+           it != model_list.end(); ++it)
       {
         const std::string &model_name = (it->first);
         PyObject *subobj = returnString(model_name);
@@ -279,8 +270,7 @@ modelListCmd(PyObject *, PyObject *args)
   return returnObj;
 }
 
-static PyObject *
-subexpressionCmd(PyObject *, PyObject *args)
+static PyObject *subexpressionCmd(PyObject *, PyObject *args)
 {
   PyObject *returnObj = nullptr;
   std::string errorString;
@@ -290,7 +280,7 @@ subexpressionCmd(PyObject *, PyObject *args)
   if (HasZeroArguments(args))
   {
     SubExpr subexpr;
-    ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+    ModelMap_t &model_list = Context::GetInstance().GetModelMap();
     subexpr.CreateSubexpressions(model_list);
     errorString = subexpr.GetErrorString();
     returnObj = returnNone();
@@ -301,22 +291,20 @@ subexpressionCmd(PyObject *, PyObject *args)
   return returnObj;
 }
 
-static PyObject *
-removeZerosCmd(PyObject *, PyObject *args)
+static PyObject *removeZerosCmd(PyObject *, PyObject *args)
 {
   PyObject *returnObj = nullptr;
   if (HasZeroArguments(args))
   {
     SubExpr subexpr;
-    ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+    ModelMap_t &model_list = Context::GetInstance().GetModelMap();
     subexpr.RemoveZeros(model_list);
     returnObj = returnNone();
   }
   return returnObj;
 }
 
-static PyObject *
-orderedListCmd(PyObject *, PyObject *args)
+static PyObject *orderedListCmd(PyObject *, PyObject *args)
 {
   std::string errorString;
   PyObject *returnObj = nullptr;
@@ -324,9 +312,10 @@ orderedListCmd(PyObject *, PyObject *args)
   if (GetStringArguments(args, model_vector_in))
   {
     ProcessModelOrder process;
-    const ModelMap_t &model_list = Context::GetInstance().GetModelMap(); 
+    const ModelMap_t &model_list = Context::GetInstance().GetModelMap();
 
-    const ModelNameVector_t &model_vector_out = process.GetModelVector(model_list, model_vector_in);
+    const ModelNameVector_t &model_vector_out =
+        process.GetModelVector(model_list, model_vector_in);
     errorString = process.GetErrorString();
 
     if (errorString.empty())
@@ -335,7 +324,8 @@ orderedListCmd(PyObject *, PyObject *args)
       {
         returnObj = PyTuple_New(model_vector_out.size());
         Py_ssize_t i = 0;
-        for (ModelNameVector_t::const_iterator it = model_vector_out.begin(); it != model_vector_out.end(); ++it)
+        for (ModelNameVector_t::const_iterator it = model_vector_out.begin();
+             it != model_vector_out.end(); ++it)
         {
           const std::string &model_name = *it;
           PyObject *subobj = returnString(model_name);
@@ -357,42 +347,38 @@ orderedListCmd(PyObject *, PyObject *args)
 }
 
 static struct PyMethodDef symdiff_methods[] = {
-  {"symdiff",       symdiffCmd,       METH_VARARGS},
-  {"symdiff_table", symdiffTableCmd,  METH_VARARGS},
-  {"model_list",    modelListCmd,     METH_VARARGS},
-  {"subexpression", subexpressionCmd, METH_VARARGS},
-  {"remove_zeros",  removeZerosCmd,   METH_VARARGS},
-  {"ordered_list",  orderedListCmd,   METH_VARARGS},
-  {nullptr, nullptr, 0}
-};
-
-
+    {"symdiff", symdiffCmd, METH_VARARGS},
+    {"symdiff_table", symdiffTableCmd, METH_VARARGS},
+    {"model_list", modelListCmd, METH_VARARGS},
+    {"subexpression", subexpressionCmd, METH_VARARGS},
+    {"remove_zeros", removeZerosCmd, METH_VARARGS},
+    {"ordered_list", orderedListCmd, METH_VARARGS},
+    {nullptr, nullptr, 0}};
 
 extern "C" {
-//http://docs.python.org/2/extending/extending.html
+// http://docs.python.org/2/extending/extending.html
 #if PY_MAJOR_VERSION >= 3
-static int symdiff_traverse(PyObject *m, visitproc visit, void *arg) {
-    Py_VISIT(GETSTATE(m)->error);
-    return 0;
+static int symdiff_traverse(PyObject *m, visitproc visit, void *arg)
+{
+  Py_VISIT(GETSTATE(m)->error);
+  return 0;
 }
 
-static int symdiff_clear(PyObject *m) {
-    Py_CLEAR(GETSTATE(m)->error);
-    return 0;
+static int symdiff_clear(PyObject *m)
+{
+  Py_CLEAR(GETSTATE(m)->error);
+  return 0;
 }
 
-
-static struct PyModuleDef moduledef = {
-        PyModuleDef_HEAD_INIT,
-        "symdiff_py3",
-        nullptr,
-        sizeof(struct module_state),
-        symdiff_methods,
-        nullptr,
-        symdiff_traverse,
-        symdiff_clear,
-        nullptr
-};
+static struct PyModuleDef moduledef = {PyModuleDef_HEAD_INIT,
+                                       "symdiff_py3",
+                                       nullptr,
+                                       sizeof(struct module_state),
+                                       symdiff_methods,
+                                       nullptr,
+                                       symdiff_traverse,
+                                       symdiff_clear,
+                                       nullptr};
 
 #define INITERROR return nullptr
 
@@ -411,14 +397,16 @@ void DLL_PUBLIC initsymdiff_py2()
   {
     INITERROR;
   }
-  symdiff_exception = PyErr_NewException(const_cast<char *>("symdiff.SymdiffError"), nullptr, nullptr);
+  symdiff_exception = PyErr_NewException(
+      const_cast<char *>("symdiff.SymdiffError"), nullptr, nullptr);
   Py_INCREF(symdiff_exception);
   PyModule_AddObject(m, "SymdiffError", symdiff_exception);
 
-  //https://www.python.org/dev/peps/pep-0396/
-  PyDict_SetItemString(PyModule_GetDict(m), "__version__", PyUnicode_FromString(SYMDIFF_VERSION_STRING));
+  // https://www.python.org/dev/peps/pep-0396/
+  PyDict_SetItemString(PyModule_GetDict(m), "__version__",
+                       PyUnicode_FromString(SYMDIFF_VERSION_STRING));
 
-#if PY_MAJOR_VERSION >=3
+#if PY_MAJOR_VERSION >= 3
   return m;
 #endif
 }
@@ -431,5 +419,3 @@ static struct _inittab symdiffinittab[] =
   {(char *)nullptr, nullptr}
 };
 #endif
-
-

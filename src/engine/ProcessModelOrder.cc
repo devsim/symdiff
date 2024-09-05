@@ -8,15 +8,17 @@ SPDX-License-Identifier: Apache-2.0
 #include "EquationObject.hh"
 #include <set>
 
-const ModelNameVector_t &ProcessModelOrder::GetModelVector(const ModelMap_t &model_list, const ModelNameVector_t &input_list)
+const ModelNameVector_t &ProcessModelOrder::GetModelVector(
+    const ModelMap_t &model_list, const ModelNameVector_t &input_list)
 {
   processedList_.clear();
   processedList_.reserve(input_list.size());
   processStatusMap_.clear();
-  for (ModelNameVector_t::const_iterator it = input_list.begin(); it != input_list.end(); ++it)
+  for (ModelNameVector_t::const_iterator it = input_list.begin();
+       it != input_list.end(); ++it)
   {
     const std::string &model_name = *it;
-    const ProcessStatus_t status  = processStatusMap_[model_name];
+    const ProcessStatus_t status = processStatusMap_[model_name];
 
     ModelMap_t::const_iterator mit = model_list.find(model_name);
 
@@ -26,7 +28,6 @@ const ModelNameVector_t &ProcessModelOrder::GetModelVector(const ModelMap_t &mod
     else if (mit == model_list.end())
     {
       errorString_ += model_name + " was not declared or defined as a model\n";
-
     }
     else if (!(mit->second))
     {
@@ -35,7 +36,6 @@ const ModelNameVector_t &ProcessModelOrder::GetModelVector(const ModelMap_t &mod
     //// impossible for this model to be in processing
     else if (status == UNTOUCHED)
     {
-
       processModelVector(model_list, mit->second);
     }
 
@@ -50,7 +50,8 @@ const ModelNameVector_t &ProcessModelOrder::GetModelVector(const ModelMap_t &mod
   Only print equations
   Called recursively.  Refactor, if possible, using iteration.
 */
-void ProcessModelOrder::processModelVector(const ModelMap_t &model_list, Eqo::EqObjPtr eq)
+void ProcessModelOrder::processModelVector(const ModelMap_t &model_list,
+                                           Eqo::EqObjPtr eq)
 {
   std::set<std::string> mset;
 
@@ -61,7 +62,7 @@ void ProcessModelOrder::processModelVector(const ModelMap_t &model_list, Eqo::Eq
     const ProcessStatus_t status = processStatusMap_[mname];
     if (status == DONE)
     {
-       return;
+      return;
     }
     else if (status == PROCESSING)
     {
@@ -82,23 +83,22 @@ void ProcessModelOrder::processModelVector(const ModelMap_t &model_list, Eqo::Eq
         mset = (mit->second)->getReferencedType(Eqo::MODEL_OBJ);
       }
     }
-
   }
   else
   {
-     //// Get all models referenced by this object
-     mset = eq->getReferencedType(Eqo::MODEL_OBJ);
+    //// Get all models referenced by this object
+    mset = eq->getReferencedType(Eqo::MODEL_OBJ);
   }
 
-  std::set<std::string>::iterator it =mset.begin();
-  std::set<std::string>::iterator end=mset.end();
-  for ( ; it != end; ++it)
+  std::set<std::string>::iterator it = mset.begin();
+  std::set<std::string>::iterator end = mset.end();
+  for (; it != end; ++it)
   {
     const std::string &sname = *it;
     // Model was processed, we are done
     if (processStatusMap_[sname] == DONE)
     {
-       continue;
+      continue;
     }
 
     ModelMap_t::const_iterator mit = model_list.find(sname);
@@ -112,7 +112,6 @@ void ProcessModelOrder::processModelVector(const ModelMap_t &model_list, Eqo::Eq
       }
       processedList_.push_back(sname);
       processStatusMap_[sname] = DONE;
-
     }
   }
 
@@ -124,4 +123,3 @@ void ProcessModelOrder::processModelVector(const ModelMap_t &model_list, Eqo::Eq
     processStatusMap_[mname] = DONE;
   }
 }
-
