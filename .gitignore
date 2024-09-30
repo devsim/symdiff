@@ -9,5 +9,5 @@ osx_debug
 osx_release
 include
 bin
-lib
+#lib
 

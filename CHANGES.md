@@ -2,6 +2,20 @@
 
 Use the clang compiler on the windows platform.
 
+update examples in documentation
+
+update docstrings
+
+start work on `input_table`
+
+start work on `diff_callback`
+
+start work on api returning objects
+
+TODO: maybe just use tables to store all info or create classes
+
+TODO: test for SymdiffError
+
 # 1.2.9
 
 Move to RHEL 8 compatible `manylinux_2_28`.

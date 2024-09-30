@@ -5,6 +5,7 @@ INCLUDE_DIRECTORIES (
 
 SET (PYTHON_SRCS
   PythonSymdiffCommands.cc
+  SYMDIFFapi.cc
 )
 
 #SET(PYVERSION symdiff_py2)
