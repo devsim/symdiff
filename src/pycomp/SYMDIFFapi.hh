@@ -26,6 +26,7 @@ extern "C" DLL_PUBLIC void * SYMDIFF_clone(void *);
 extern "C" DLL_PUBLIC void * SYMDIFF_simplify(void *);
 extern "C" DLL_PUBLIC void * SYMDIFF_model(const char *);
 extern "C" DLL_PUBLIC void * SYMDIFF_var(const char *);
+extern "C" DLL_PUBLIC void * SYMDIFF_subst(void *, void *);
 */
 
 #endif
