@@ -12,18 +12,25 @@ if [ "$1" = x86 ]; then
 GENERATOR="Visual Studio 17 2022"
 AOPTION="Win32"
 BUILDDIR="win32"
+TOOLSET="v143"
 elif [ "$1" = x64 ]; then
 GENERATOR="Visual Studio 17 2022"
 AOPTION="x64"
 BUILDDIR="win64"
+TOOLSET="v143"
+elif [ "$1" = clangx64 ]; then
+GENERATOR="Visual Studio 17 2022"
+AOPTION="x64"
+BUILDDIR="clangwin64"
+TOOLSET="ClangCL"
 else
-echo "Must specify x86 or x64"
+echo "Must specify x86 or x64 or clangx64"
 exit -1
 fi
 
 
 mkdir -p ${BUILDDIR}
-(cd ${BUILDDIR}; "${CMAKE}" -G "${GENERATOR}" -A "${AOPTION}" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON -DPYTHON3=ON -DANACONDA_PATH="${CONDA_PREFIX}" ..)
+(cd ${BUILDDIR}; "${CMAKE}" -G "${GENERATOR}" -A "${AOPTION}" -T "${TOOLSET}" -DSYMDIFF_CONFIG=${SYMDIFF_CONFIG} -DTCLMAIN=ON -DPYTHON3=ON -DANACONDA_PATH="${CONDA_PREFIX}" ..)
 
 libpath=`cygpath -w ${PWD}/lib`
 
