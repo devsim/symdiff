@@ -118,6 +118,7 @@ install:
   - SET README_BASE_URL=https://github.com/devsim/symdiff/blob/%TRAVIS_TAG%
   - cd %APPVEYOR_BUILD_FOLDER%
   - IF "%PLATFORM%"=="x64" SET CONDA_BIN=c:\Miniconda37-x64\condabin\conda.bat
+  - IF "%PLATFORM%"=="clangx64" SET CONDA_BIN=c:\Miniconda37-x64\condabin\conda.bat
   - IF "%PLATFORM%"=="x86" SET CONDA_BIN=c:\Miniconda37\condabin\conda.bat
 
 # enable patching of AssemblyInfo.* files
@@ -142,8 +143,8 @@ install:
 
 # build platform, i.e. x86, x64, Any CPU. This setting is optional.
 platform:
-   - clangx64
-#  - x64
+  - x64
+#  - clangx64
 #  - msys
 
 # build Configuration, i.e. Debug, Release, etc.
