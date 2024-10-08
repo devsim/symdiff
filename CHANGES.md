@@ -1,3 +1,7 @@
+# 1.2.10
+
+Use the clang compiler on the windows platform.
+
 # 1.2.9
 
 Move to RHEL 8 compatible `manylinux_2_28`.
