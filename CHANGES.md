@@ -1,3 +1,7 @@
+# 1.2.11
+
+Drop support for `x86_64` on `macOS`. 
+
 # 1.2.10
 
 Use the clang compiler on the windows platform.
