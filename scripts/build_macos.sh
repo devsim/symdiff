@@ -30,11 +30,11 @@ export ARCH_ARG="-DCMAKE_OSX_ARCHITECTURES=arm64"
 (rsync -avP --exclude __pycache__ lib/symdiff dist/)
 (rsync -avP --exclude __pycache__ LICENSE NOTICE README.md examples doc dist)
 
-FULL_PLAT_NAME=arm64
-echo PACKAGING $FULL_PLAT_NAME
-if [[ -n "$FULL_PLAT_NAME" ]]; then
-(cd dist &&  perl -p -i -e "s/^#plat-name.*/plat-name = ${FULL_PLAT_NAME}/" setup.cfg);
-fi
+#FULL_PLAT_NAME=arm64
+#echo PACKAGING $FULL_PLAT_NAME
+#if [[ -n "$FULL_PLAT_NAME" ]]; then
+#(cd dist &&  perl -p -i -e "s/^#plat-name.*/plat-name = ${FULL_PLAT_NAME}/" setup.cfg);
+#fi
 (cd dist && ${PIP_BIN} wheel .)
 (mv dist/*.whl .)
 
