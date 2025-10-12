@@ -9,7 +9,6 @@ on:
     #  - "r2.9.2"
 
 #TODO: handle common code in build steps
-#TODO: use specific submodules for platform
 
 jobs:
   create_release_tag:
@@ -53,16 +52,16 @@ jobs:
       - name: compilation
         shell: cmd
         run: |
-          scripts\build_appveyor.bat %PLATFORM% %CONDA_BIN% %TAG%
+          scripts\build_appveyor.bat %PLATFORM% %CONDA_BIN%
       - name: Upload Release Asset ${{ runner.os }} ${{ runner.arch }}
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "$TAG" dist/*.whl
+          gh release upload "$TAG" *.whl
           echo "Asset uploaded to release $TAG."
   build_linux:
-    if: false
+    if: true
     name: Build on Linux or macOS
     needs: create_release_tag
     strategy:
@@ -82,9 +81,9 @@ jobs:
       - name: build ${{ runner.os }} ${{ runner.arch }}
         run:   |
                if [ "$RUNNER_OS" == "Linux" ]; then
-                    bash ./scripts/build_docker_manylinux_2_28.sh test_tag;
+                    bash ./scripts/build_docker_manylinux_2_28.sh ${TAG};
                elif [ "$RUNNER_OS" == "macOS" ]; then
-                    bash ./scripts/build_macos.sh test_tag;
+                    bash ./scripts/build_macos.sh ${TAG};
                else
                     echo "$RUNNER_OS not supported"
                     exit 1
@@ -93,5 +92,5 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload "$TAG" dist/*.whl
+          gh release upload "$TAG" *.whl
           echo "Asset uploaded to release $TAG."
