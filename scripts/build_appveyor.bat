@@ -1,11 +1,11 @@
-
 @echo off
 @SETLOCAL
 SET BASEDIR=%cd%
-
 SET CONDA_BIN=%2
 
-call %CONDA_BIN% create -y -n symdiff_build python=3.7
+c:\msys64\usr\bin\pacman -Su --noconfirm rsync zip bison flex git
+
+call %CONDA_BIN% create -y -n symdiff_build python=3
 if %errorlevel% neq 0 exit /b %errorlevel%
 
 call %CONDA_BIN% install -y -n symdiff_build cmake tk

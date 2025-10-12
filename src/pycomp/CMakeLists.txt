@@ -41,7 +41,7 @@ TARGET_LINK_LIBRARIES (symdiff_py3 ${PYTHON3_ARCHIVE})
 ELSE(WIN32)
 # macOS and Linux do not need to dynamically link against python
 ENDIF(WIN32)
-target_compile_definitions(symdiff_py3 PRIVATE -DPy_LIMITED_API=0x03030000)
+target_compile_definitions(symdiff_py3 PRIVATE -DPy_LIMITED_API=0x03090000)
 #TARGET_LINK_LIBRARIES (symdiff_py3 symdiff ${PYTHON3_ARCHIVE})
 ENDIF (PYTHON3)
 
