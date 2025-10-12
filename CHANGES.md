@@ -1,5 +1,8 @@
-# 1.2.11
+# 1.3.0
 
+Update to minimum Python 3.9.
+
+# 1.2.12
 Drop support for `x86_64` on `macOS`. 
 
 # 1.2.10

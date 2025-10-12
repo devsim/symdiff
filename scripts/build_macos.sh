@@ -7,14 +7,15 @@ export CMAKE_CXX_FLAGS=""
 export CC=clang;
 export CXX=clang++;
 export F77="";
-
 export PYTHON3_BIN=python3
-export PIP_BIN=pip3
+export PIP_BIN=pip
+
+${PYTHON3_BIN} -mvenv venv
+source venv/bin/activate
+
 ${PIP_BIN} install wheel
 export PYTHON3_INCLUDE=$(${PYTHON3_BIN} -c "from sysconfig import get_paths as gp; print(gp()['include'])")
 export PYTHON3_ARCHIVE=""
-
-export MACOSX_DEPLOYMENT_TARGET=12.0
 
 # SYMDIFF build
 export ARCH_ARG="-DCMAKE_OSX_ARCHITECTURES=arm64"
