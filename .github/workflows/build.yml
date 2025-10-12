@@ -30,7 +30,7 @@ jobs:
             --generate-notes # Automatically generate release notes based on commits
           echo "Release $TAG created successfully."
   build_windows:
-    if: false
+    if: true
     name: Build on Windows
     runs-on: windows-2025
     needs: create_release_tag
@@ -66,8 +66,7 @@ jobs:
     needs: create_release_tag
     strategy:
       matrix:
-        #os: [ubuntu-24.04, ubuntu-24.04-arm, macos-14]
-        os: [macos-14]
+        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-14]
     runs-on: ${{matrix.os}}
     steps:
       - name: Checkout repository

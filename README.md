@@ -1,6 +1,6 @@
 
-[![Build Status](https://app.travis-ci.com/devsim/symdiff.svg?branch=main)](https://app.travis-ci.com/devsim/symdiff)
-[![Build status](https://ci.appveyor.com/api/projects/status/github/devsim/symdiff?branch=main&svg=true)](https://ci.appveyor.com/project/devsim/symdiff)
+[![PyPI](https://img.shields.io/pypi/v/symdiff)](https://pypi.org/project/symdiff/)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # SYMDIFF
 
