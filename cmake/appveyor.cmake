@@ -17,7 +17,7 @@ SET (CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} /fp:strict /wd4251 /wd4005 /wd4996")
 #SET(TCL_ARCHIVE "c:/Tcl/lib/tclstub85.lib")
 
 SET(TCL_INCLUDE "${ANACONDA_PATH}/Library/include")
-SET(TCL_ARCHIVE "${ANACONDA_PATH}/Library/lib/tclstub86.lib")
+SET(TCL_ARCHIVE "${ANACONDA_PATH}/Library/lib/tclstub.lib")
 SET(TCL_BIN     "${ANACONDA_PATH}/Library/bin/tclsh.exe")
 SET (PYTHON3_ARCHIVE ${ANACONDA_PATH}/libs/python3.lib)
 SET (PYTHON3_INCLUDE ${ANACONDA_PATH}/include)

@@ -15,7 +15,7 @@ namespace dsTcl {
 
 int 
 CmdDispatch(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+          int objc, Tcl_Obj *const objv[])
 {
   int myerror = TCL_OK;
 

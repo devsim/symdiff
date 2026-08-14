@@ -9,7 +9,7 @@ SPDX-License-Identifier: Apache-2.0
 #include <tcl.h>
 namespace dsTcl {
 typedef int (*tclcmd) (ClientData clientData, Tcl_Interp *interp,
-      int objc, Tcl_Obj *CONST objv[]);
+      int objc, Tcl_Obj *const objv[]);
 
 struct Commands
 {

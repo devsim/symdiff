@@ -2,6 +2,8 @@
 
 Update to C++ 20.
 
+Do not build Tcl package.
+
 # 1.3.0
 
 Update to minimum Python 3.9.

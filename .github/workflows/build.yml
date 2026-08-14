@@ -24,6 +24,7 @@ jobs:
         run: |
           TAG=${GITHUB_REF#refs/tags/} # Extract the tag name from the ref
           gh release create "$TAG" \
+            --draft \
             --prerelease \
             --title "Release $TAG" \
             --notes "Automated release for $TAG." \

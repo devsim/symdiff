@@ -33,7 +33,7 @@ Takes one argument, which is the command to evaluate
 */
 static int 
 symdiffCmd(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+          int objc, Tcl_Obj *const objv[])
 {
   int error = TCL_OK;
 
@@ -76,7 +76,7 @@ symdiffCmd(ClientData clientData, Tcl_Interp *interp,
 
 static int 
 symdiffTableCmd(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+          int objc, Tcl_Obj *const objv[])
 {
   int error = TCL_OK;
 
@@ -151,7 +151,7 @@ symdiffTableCmd(ClientData clientData, Tcl_Interp *interp,
 
 static int
 modelListCmd(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+          int objc, Tcl_Obj *const objv[])
 {
   int error = TCL_OK;
 
@@ -191,7 +191,7 @@ modelListCmd(ClientData clientData, Tcl_Interp *interp,
 
 static int
 subexpressionCmd(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+          int objc, Tcl_Obj *const objv[])
 {
   int error = TCL_OK;
 
@@ -232,7 +232,7 @@ subexpressionCmd(ClientData clientData, Tcl_Interp *interp,
 
 static int
 removeZerosCmd(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+          int objc, Tcl_Obj *const objv[])
 {
   int error = TCL_OK;
 
@@ -266,7 +266,7 @@ removeZerosCmd(ClientData clientData, Tcl_Interp *interp,
 
 static int
 orderedListCmd(ClientData clientData, Tcl_Interp *interp,
-          int objc, Tcl_Obj *CONST objv[])
+          int objc, Tcl_Obj *const objv[])
 {
   int error = TCL_OK;
 

@@ -1,5 +1,5 @@
-PROJECT (SYMDIFF CXX)
 cmake_minimum_required(VERSION 3.10)
+PROJECT (SYMDIFF CXX)
 
 OPTION(TCLMAIN      "Build with TCL Interpreter" ON)
 OPTION(PYTHON3      "Build Python 3 Interpreter" ON)
