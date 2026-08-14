@@ -1,3 +1,7 @@
+# 1.3.1
+
+Update to C++ 20.
+
 # 1.3.0
 
 Update to minimum Python 3.9.
