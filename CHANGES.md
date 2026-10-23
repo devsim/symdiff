@@ -1,3 +1,11 @@
+# 1.3.2
+
+Upload to PyPI using Trusted Publishing.
+
+Fix Windows path to `python3.lib` on newer Anaconda Python.
+
+Add CITATION.cff
+
 # 1.3.1
 
 Update to C++ 20.
