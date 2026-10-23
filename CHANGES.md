@@ -6,6 +6,8 @@ Fix Windows path to `python3.lib` on newer Anaconda Python.
 
 Add CITATION.cff
 
+Due to the deprecation of the macOS 14 image on GitHub Actions, the software is now built on macOS 15 Sequoia.
+
 # 1.3.1
 
 Update to C++ 20.

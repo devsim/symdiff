@@ -12,6 +12,7 @@ docker run -it -d --name manylinux_2_28 quay.io/pypa/manylinux_2_28_${DEVSIM_ARC
 docker exec manylinux_2_28 bash -c "git config --global --add safe.directory /root/symdiff"
 docker exec manylinux_2_28 bash -c "cd /root && tar xzf symdiff.tgz";
 docker exec manylinux_2_28 bash -c "cd /root/symdiff && bash scripts/build_manylinux_2_28.sh";
-(for i in $(docker exec manylinux_2_28 bash -c "ls /root/symdiff/*.whl"); do docker cp manylinux_2_28:${i} .; done)
+mkdir -p dist
+(for i in $(docker exec manylinux_2_28 bash -c "ls /root/symdiff/*.whl"); do docker cp manylinux_2_28:${i} dist/; done)
 docker stop manylinux_2_28
 

@@ -36,7 +36,4 @@ export ARCH_ARG="-DCMAKE_OSX_ARCHITECTURES=arm64"
 #(cd dist &&  perl -p -i -e "s/^#plat-name.*/plat-name = ${FULL_PLAT_NAME}/" setup.cfg);
 #fi
 (cd dist && ${PIP_BIN} wheel .)
-(mv dist/*.whl .)
-
-
 
