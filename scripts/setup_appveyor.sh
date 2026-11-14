@@ -6,8 +6,10 @@ set -e
 set -u
 set -x
 export PATH="/mingw64/bin:/usr/bin:${PATH}"
-CMAKE=$(cygpath -w $(which cmake) )
-CTEST=$(cygpath -w $(which ctest) )
+#CMAKE=$(cygpath -w $(which cmake) )
+#CTEST=$(cygpath -w $(which ctest) )
+CMAKE=cmake
+CTEST=ctest
 SYMDIFF_CONFIG="appveyor"
 
 if [ "$1" = x64 ]; then
