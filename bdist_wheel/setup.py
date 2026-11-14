@@ -48,7 +48,7 @@ with open('README.md', 'r') as ifile:
 setup(
       distclass=BinaryDistribution,
       data_files = [
-        ('symdiff_data',  ['LICENSE', 'NOTICE', 'README.md',]),
+        ('symdiff_data',  [path for path in glob('*') if os.path.isfile(path)]),
         ('symdiff_data/doc', glob('doc/*.pdf')),
         ('symdiff_data/examples', glob('examples/*.*')),
       ],

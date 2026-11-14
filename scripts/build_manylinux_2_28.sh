@@ -26,7 +26,7 @@ export PYTHON3T_ARCHIVE=${PYTHON3T_ARCHIVE:-}
 mkdir -p stage/symdiff
 cp lib/symdiff/__init__.py stage/symdiff
 rsync -aP bdist_wheel/ stage
-rsync -aP LICENSE NOTICE README.md examples doc stage
+rsync -aP CHANGES.md CITATION.cff CITATION.md doc examples LICENSE NOTICE README.md stage
 
 mkdir -p dist
 for ABI in abi3 abi3t; do
