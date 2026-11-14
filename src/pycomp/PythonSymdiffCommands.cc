@@ -23,23 +23,18 @@ SPDX-License-Identifier: Apache-2.0
 #include <vector>
 #include <string>
 #include <sstream>
+#include <mutex>
 
 namespace {
-  PyObject *symdiff_exception = nullptr;
+  std::mutex symdiff_command_mutex;
 };
 
 namespace {
 struct module_state {
-  module_state() : error(nullptr) {};
   PyObject *error;
 };
 
-#if PY_MAJOR_VERSION >= 3
 #define GETSTATE(m) ((struct module_state*)PyModule_GetState(m))
-#else
-#define GETSTATE(m) (&_state)
-static struct module_state _state;
-#endif
 }
 
 /// Visual C++ does not allow c++ return values in extern "C"
@@ -130,7 +125,7 @@ static bool GetStringArguments(PyObject *args, StringVector_t &result)
   return ret;
 }
 
-static void SetErrorString(const std::string &errorString)
+static void SetErrorString(PyObject *exception, const std::string &errorString)
 {
 
   if (!errorString.empty())
@@ -138,7 +133,7 @@ static void SetErrorString(const std::string &errorString)
     std::ostringstream os;
     os << "While calling symdiff interpreter\n";
     std::string temp_string = os.str() + errorString;
-    PyErr_SetString(symdiff_exception, temp_string.c_str());
+    PyErr_SetString(exception, temp_string.c_str());
   }
 }
 
@@ -148,8 +143,9 @@ static void SetErrorString(const std::string &errorString)
 Takes one argument, which is the command to evaluate
 */
 static PyObject *
-symdiffCmd(PyObject *, PyObject *args)
+symdiffCmd(PyObject *self, PyObject *args)
 {
+  std::lock_guard<std::mutex> lock(symdiff_command_mutex);
   PyObject *returnObj = nullptr;
   std::string errorString;
 
@@ -170,14 +166,15 @@ symdiffCmd(PyObject *, PyObject *args)
     }
   }
 
-  SetErrorString(errorString);
+  SetErrorString(GETSTATE(self)->error, errorString);
 
   return returnObj;
 }
 
 static PyObject *
-symdiffTableCmd(PyObject *, PyObject *args)
+symdiffTableCmd(PyObject *self, PyObject *args)
 {
+  std::lock_guard<std::mutex> lock(symdiff_command_mutex);
   PyObject *returnObj = nullptr;
   std::string errorString;
 
@@ -244,7 +241,7 @@ symdiffTableCmd(PyObject *, PyObject *args)
     }
   }
 
-  SetErrorString(errorString);
+  SetErrorString(GETSTATE(self)->error, errorString);
 
   return returnObj;
 }
@@ -252,6 +249,7 @@ symdiffTableCmd(PyObject *, PyObject *args)
 static PyObject *
 modelListCmd(PyObject *, PyObject *args)
 {
+  std::lock_guard<std::mutex> lock(symdiff_command_mutex);
   PyObject *returnObj = nullptr;
   if (HasZeroArguments(args))
   {
@@ -280,8 +278,9 @@ modelListCmd(PyObject *, PyObject *args)
 }
 
 static PyObject *
-subexpressionCmd(PyObject *, PyObject *args)
+subexpressionCmd(PyObject *self, PyObject *args)
 {
+  std::lock_guard<std::mutex> lock(symdiff_command_mutex);
   PyObject *returnObj = nullptr;
   std::string errorString;
   sdHelp::ret_pair result;
@@ -296,7 +295,7 @@ subexpressionCmd(PyObject *, PyObject *args)
     returnObj = returnNone();
   }
 
-  SetErrorString(errorString);
+  SetErrorString(GETSTATE(self)->error, errorString);
 
   return returnObj;
 }
@@ -304,6 +303,7 @@ subexpressionCmd(PyObject *, PyObject *args)
 static PyObject *
 removeZerosCmd(PyObject *, PyObject *args)
 {
+  std::lock_guard<std::mutex> lock(symdiff_command_mutex);
   PyObject *returnObj = nullptr;
   if (HasZeroArguments(args))
   {
@@ -316,8 +316,9 @@ removeZerosCmd(PyObject *, PyObject *args)
 }
 
 static PyObject *
-orderedListCmd(PyObject *, PyObject *args)
+orderedListCmd(PyObject *self, PyObject *args)
 {
+  std::lock_guard<std::mutex> lock(symdiff_command_mutex);
   std::string errorString;
   PyObject *returnObj = nullptr;
   StringVector_t model_vector_in;
@@ -351,7 +352,7 @@ orderedListCmd(PyObject *, PyObject *args)
     }
   }
 
-  SetErrorString(errorString);
+  SetErrorString(GETSTATE(self)->error, errorString);
 
   return returnObj;
 }
@@ -368,9 +369,6 @@ static struct PyMethodDef symdiff_methods[] = {
 
 
 
-extern "C" {
-//http://docs.python.org/2/extending/extending.html
-#if PY_MAJOR_VERSION >= 3
 static int symdiff_traverse(PyObject *m, visitproc visit, void *arg) {
     Py_VISIT(GETSTATE(m)->error);
     return 0;
@@ -381,7 +379,7 @@ static int symdiff_clear(PyObject *m) {
     return 0;
 }
 
-
+#ifndef SYMDIFF_PYTHON3T
 static struct PyModuleDef moduledef = {
         PyModuleDef_HEAD_INIT,
         "symdiff_py3",
@@ -393,43 +391,93 @@ static struct PyModuleDef moduledef = {
         symdiff_clear,
         nullptr
 };
-
-#define INITERROR return nullptr
-
-DLL_PUBLIC PyObject *PyInit_symdiff_py3(void)
-#else
-#define INITERROR return
-void DLL_PUBLIC initsymdiff_py2()
 #endif
+
+static int symdiff_exec(PyObject *m)
 {
-#if PY_MAJOR_VERSION >= 3
-  PyObject *m = PyModule_Create(&moduledef);
+  module_state *state = GETSTATE(m);
+  Py_CLEAR(state->error);
+
+  state->error = PyErr_NewException(const_cast<char *>("symdiff.SymdiffError"), nullptr, nullptr);
+  if (state->error == nullptr)
+  {
+    return -1;
+  }
+#ifdef SYMDIFF_PYTHON3T
+  if (PyModule_AddObjectRef(m, "SymdiffError", state->error) < 0)
+  {
+    return -1;
+  }
 #else
-  PyObject *m = Py_InitModule("symdiff_py2", symdiff_methods);
+  Py_INCREF(state->error);
+  if (PyModule_AddObject(m, "SymdiffError", state->error) < 0)
+  {
+    Py_DECREF(state->error);
+    return -1;
+  }
 #endif
+
+  PyObject *version = PyUnicode_FromString(SYMDIFF_VERSION_STRING);
+  if (version == nullptr)
+  {
+    return -1;
+  }
+#ifdef SYMDIFF_PYTHON3T
+  int result = PyModule_AddObjectRef(m, "__version__", version);
+  Py_DECREF(version);
+  return result;
+#else
+  if (PyModule_AddObject(m, "__version__", version) < 0)
+  {
+    Py_DECREF(version);
+    return -1;
+  }
+
+  return 0;
+#endif
+}
+
+#ifdef SYMDIFF_PYTHON3T
+PyABIInfo_VAR(abi_info);
+
+static PySlot symdiff_module_slots[] = {
+  PySlot_DATA(Py_mod_gil, Py_MOD_GIL_NOT_USED),
+  PySlot_DATA(Py_mod_multiple_interpreters, Py_MOD_MULTIPLE_INTERPRETERS_NOT_SUPPORTED),
+  PySlot_FUNC(Py_mod_exec, symdiff_exec),
+  PySlot_END
+};
+
+static PySlot symdiff_export_slots[] = {
+  PySlot_STATIC_DATA(Py_mod_abi, &abi_info),
+  PySlot_STATIC_DATA(Py_mod_name, const_cast<char *>("symdiff_py3")),
+  PySlot_SIZE(Py_mod_state_size, sizeof(module_state)),
+  PySlot_STATIC_DATA(Py_mod_methods, symdiff_methods),
+  PySlot_STATIC_DATA(Py_mod_slots, symdiff_module_slots),
+  PySlot_FUNC(Py_mod_state_traverse, symdiff_traverse),
+  PySlot_FUNC(Py_mod_state_clear, symdiff_clear),
+  PySlot_END
+};
+
+PyMODEXPORT_FUNC
+PyModExport_symdiff_py3(void)
+{
+  return symdiff_export_slots;
+}
+#else
+extern "C" DLL_PUBLIC PyObject *PyInit_symdiff_py3(void)
+{
+  PyObject *m = PyModule_Create(&moduledef);
   if (m == nullptr)
   {
-    INITERROR;
+    return nullptr;
   }
-  symdiff_exception = PyErr_NewException(const_cast<char *>("symdiff.SymdiffError"), nullptr, nullptr);
-  Py_INCREF(symdiff_exception);
-  PyModule_AddObject(m, "SymdiffError", symdiff_exception);
-
-  //https://www.python.org/dev/peps/pep-0396/
-  PyDict_SetItemString(PyModule_GetDict(m), "__version__", PyUnicode_FromString(SYMDIFF_VERSION_STRING));
-
-#if PY_MAJOR_VERSION >=3
+  if (symdiff_exec(m) < 0)
+  {
+    Py_DECREF(m);
+    return nullptr;
+  }
   return m;
-#endif
 }
-}
-
-#if 0
-static struct _inittab symdiffinittab[] =
-{
-  {(char *)"symdiff", initsymdiff},
-  {(char *)nullptr, nullptr}
-};
 #endif
 
 

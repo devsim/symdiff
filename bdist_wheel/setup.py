@@ -1,14 +1,35 @@
-from setuptools import setup, Distribution
-from glob import glob
 import os
 import re
+from glob import glob
+from setuptools import Distribution, setup
 
 #https://stackoverflow.com/questions/35112511/pip-setup-py-bdist-wheel-no-longer-builds-forced-non-pure-wheels/36886459#36886459
 #https://stackoverflow.com/questions/24071491/how-can-i-make-a-python-wheel-from-an-existing-native-library/24793171#24793171
+
+wheel_abi = os.environ.get("SYMDIFF_WHEEL_ABI", "abi3")
+if wheel_abi not in ("abi3", "abi3t"):
+    raise ValueError(f"Unsupported SYMDIFF_WHEEL_ABI: {wheel_abi}")
+
+cmdclass = {}
+if wheel_abi == "abi3t":
+    from setuptools.command.bdist_wheel import bdist_wheel
+
+    class Abi3tWheel(bdist_wheel):
+        def get_tag(self):
+            _, _, platform = super().get_tag()
+            return "cp315", "abi3t", platform
+
+    cmdclass["bdist_wheel"] = Abi3tWheel
+
+
 class BinaryDistribution(Distribution):
     """Distribution which always forces a binary package with platform name"""
     def has_ext_modules(foo):
         return True
+
+    def is_pure(self):
+        return False
+
 
 def fix_readme(text):
     regex = re.compile('\[([^]]+)\]+\((?!http[s]:\/\/)([^)]+)\)')
@@ -25,10 +46,6 @@ with open('README.md', 'r') as ifile:
     text = fix_readme(text)
 
 setup(
-      packages=['symdiff',],
-      package_data={
-        'symdiff' : ['./*.so', './*.dll', './*.dylib', './*.pyd',],
-      },
       distclass=BinaryDistribution,
       data_files = [
         ('symdiff_data',  ['LICENSE', 'NOTICE', 'README.md',]),
@@ -37,4 +54,6 @@ setup(
       ],
       long_description = text,
       long_description_content_type="text/markdown",
+      cmdclass=cmdclass,
+      options={"bdist_wheel": {"py_limited_api": "cp39" if wheel_abi == "abi3" else "cp315"}},
     )

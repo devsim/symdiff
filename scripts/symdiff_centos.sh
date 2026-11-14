@@ -9,8 +9,10 @@ ARCH=`uname -m`
         -DCMAKE_CXX_FLAGS:STRING="${CMAKE_CXX_FLAGS}" \
         -DCMAKE_BUILD_TYPE=${TYPE} \
         -DCMAKE_CXX_COMPILER=${CXX} \
-        -DPYTHON3_INCLUDE=${PYTHON3_INCLUDE} \
         -DPYTHON3=ON \
+        -DPYTHON3_INCLUDE=${PYTHON3_INCLUDE} \
+        -DPYTHON3T=ON \
+        -DPYTHON3T_INCLUDE=${PYTHON3T_INCLUDE} \
         -DTCLMAIN=OFF \
         ..)
 #  done
