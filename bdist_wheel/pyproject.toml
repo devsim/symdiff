@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "symdiff"
-version = "1.3.3"
+version = "1.4.0"
 description = "SYMDIFF: Symbolic differentation of algebraic expressions"
 authors = [{ name = "DEVSIM LLC", email = "info@devsim.com" }]
 license = "Apache-2.0"

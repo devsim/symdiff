@@ -1,4 +1,10 @@
-# 1.3.3
+# 1.4.0
+
+Add thread safety to the Python bindings by serializing command execution.
+
+Build wheels for free-threaded Python 3.15.
+
+Move wheel package metadata to `pyproject.toml`.
 
 # 1.3.2
 
